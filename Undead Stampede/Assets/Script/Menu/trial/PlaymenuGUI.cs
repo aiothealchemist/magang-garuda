@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class mainmenu : MonoBehaviour {
+public class PlaymenuGUI : MonoBehaviour {
 
 	int height, width;
 	public Texture menuBG;
@@ -13,7 +13,7 @@ public class mainmenu : MonoBehaviour {
 	void Start () {
 		height = Screen.height;
 		width = Screen.width;
-		menuButtons = new string[] { "Play", "Settings", "Credits", "Exit" };
+		menuButtons = new string[] { "View Garage", "Achievements", "Gem Shop"};
 	}
 	
 	// Update is called once per frame
@@ -23,8 +23,13 @@ public class mainmenu : MonoBehaviour {
 
 	void OnGUI () {
 		GUI.Box (new Rect (0, height / 8, width / 3, height * 3 / 4), menuBG, GUIStyle.none);
+
+		if (GUI.Button(new Rect(0, height/8,width/7,height*3/16),"Back")){
+			
+		}
+
 		selectedButton = GUI.SelectionGrid (
-			new Rect (0, height / 8, width / 3, height * 3 / 4), 
+			new Rect (0, height * 3 / 16, width / 3, height * 3 / 4), 
 			selectedButton, menuButtons, 1);
 
 		// If the user clicked a new Toolbar button this frame, we'll process their input
@@ -36,8 +41,6 @@ public class mainmenu : MonoBehaviour {
 			case 1:
 				break;
 			case 2:
-				break;
-			case 3:
 				break;
 			default:
 				break;

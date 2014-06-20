@@ -3,11 +3,14 @@ using System.Collections;
 
 public class DLC {
 
-	private string name;
-	private string currency;
-	private int price;
+	public string description { get; private set; }
+	public string name { get; private set; }
+	public Hashtable pricing { get; private set; }
 
 	public DLC(string toParse){
-
+		pricing = new Hashtable ();
+		pricing.Add ("rp", 20);
+		pricing.Add ("gem", 20);
+		pricing.Add ("coin", 20);
 	}
 }
