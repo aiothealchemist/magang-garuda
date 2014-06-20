@@ -14,7 +14,6 @@ public class DestroyZombieOffscreen : MonoBehaviour {
 	}
 
 	void OnBecameInvisible(){
-		Debug.Log ("zombie out of screen");
 		DestroyObject (gameObject);
 	}
 }
