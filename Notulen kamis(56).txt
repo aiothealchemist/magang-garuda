@@ -1,0 +1,23 @@
+TODO:
+	Game Desain:
+	-[Interface Layout] [inGame] ada area bebas zombie
+	-[Prize] Unlockables (per level, dll)
+	-[Prize] Achievement
+	-[Enemy] zombie dan varietas (kekuatan maupun visual)
+	-[inGame] [Enemy] desain total kekuatan per wave plus detail
+	-[Prize] [inGame] special area (bonus) > beda gameplay, beda UX
+	
+	*-[inGame] [Tower] turret > bisa dijual, ga ada timeout, satu arah
+	
+	GDD:
+	-tabel zombie (species, strength, health, speed)
+	-Achievement list
+	-storyboard
+	-diagram element (desain level & visual)
+	-task breakdown dari storyboard
+	
+	Direction:
+	-animasi nonfungsional (splash screen, transition)
+	
+	Kodingan:
+	-cari framework yg udah ada (kalo bisa opensource)
