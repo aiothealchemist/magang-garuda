@@ -3,10 +3,11 @@ using System.Collections;
 
 public class Spawner : MonoBehaviour {
 
-	public System.Collections.Generic.List<Transform> zombiePrefabs;
+	private System.Collections.Generic.List<Transform> zombiePrefabs;
 	public float koreksiPosisiAwal;
 	public float xMax = -6;
 	public int maxDelayTime = 60;
+	public Stack waves;
 
 	private int countdown;
 
@@ -14,20 +15,27 @@ public class Spawner : MonoBehaviour {
 	void Start () {
 		koreksiPosisiAwal = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth, Camera.main.pixelHeight, 0)).y;
 		Random.seed = (int)System.DateTime.Now.Ticks;
+		zombiePrefabs = new System.Collections.Generic.List<Transform> ();
 		startTick ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (zombiePrefabs.Count == 0) {
-			//win signal
-		}
-
 		if (countdown > 0) {
 			--countdown;
 		} else {
 			spawnZombie ();
 			startTick ();
+		}
+
+		//check the remaining zombie in the field
+		if (zombiePrefabs.Count == 0) {
+			GameObject[] enemyChecker = GameObject.FindGameObjectsWithTag("zombie");
+			if (enemyChecker.Length == 0) {
+				//win signal
+				//Debug.Log("no zombie");
+				zombiePrefabs = GameObject.Find("zombiePermutator").GetComponent<level>().pop();
+			}
 		}
 	}
 
@@ -50,7 +58,6 @@ public class Spawner : MonoBehaviour {
 			//zombieInstance.Translate(  xMax , 0, 0 );
 			zombiePrefabs.RemoveAt (i);
 		} else {
-				
 		}
 	}
 }

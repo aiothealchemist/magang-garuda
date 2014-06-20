@@ -47,7 +47,6 @@ public class ZombieController : MonoBehaviour {
 	{
 		if (coll.gameObject.tag == "vehicle") {
 						moveSpeed = 0;
-						Debug.Log ("zombie collided with vehicle");
 				}
 	}
 }
