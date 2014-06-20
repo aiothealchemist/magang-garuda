@@ -24,9 +24,11 @@ public class BaseShopGUI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Touch touch = (Input.touchCount > 0 ? Input.touches[0] : null);
-		if (touch != null && touch.phase == TouchPhase.Moved)
-			viewVector.y += touch.deltaPosition.y;
+		if (Input.touchCount > 0) {
+			Touch touch = Input.touches[0];
+			if (touch.phase == TouchPhase.Moved)
+				viewVector.y += touch.deltaPosition.y;
+		}
 	}
 
 	void OnGUI () {
@@ -50,8 +52,9 @@ public class BaseShopGUI : MonoBehaviour {
 	}
 
 	void dlcButton(DLC obj, int countSoFar){
+		objImage = null;
 		objDesc = obj.description;
-		objPrice = obj.pricing ["gem"];
+		objPrice = (int) obj.pricing ["gem"];
 		if (GUI.Button (new Rect (width * 13 / 15, height / 9, width / 15, height / 18), obj.name)) { //DLC button
 			//Destroy (gameObject);
 		}

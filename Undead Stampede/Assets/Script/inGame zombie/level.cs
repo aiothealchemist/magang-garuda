@@ -27,10 +27,10 @@ public class level : MonoBehaviour
 
 	public List<Transform> pop(){
 		if (arrofarrofzombie.Count != 0) {
-						return arrofarrofzombie.Pop ();
-				} else {
-					//wave cleared
-				}
+			return arrofarrofzombie.Pop ();
+		} else {
+			return new List<Transform>();
+		}
 	}
 
 	public void fillWave(){
