@@ -822,6 +822,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zombiePrefabs:
   - {fileID: 400000, guid: d3dd740db2a9db54ba5443a3146554e5, type: 2}
+  - {fileID: 400000, guid: d3dd740db2a9db54ba5443a3146554e5, type: 2}
+  - {fileID: 400000, guid: d3dd740db2a9db54ba5443a3146554e5, type: 2}
   koreksiPosisiAwal: 675
   xMax: 0
   maxDelayTime: 0
@@ -965,6 +967,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 11400000, guid: f20e844c833769649badfbe51c15eb18, type: 2}
+      propertyPath: zombiePrefabs.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f20e844c833769649badfbe51c15eb18, type: 2}
       propertyPath: m_LocalPosition.x
       value: -5.33068752
@@ -993,6 +999,14 @@ Prefab:
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: f20e844c833769649badfbe51c15eb18, type: 2}
+      propertyPath: zombiePrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 400000, guid: d3dd740db2a9db54ba5443a3146554e5, type: 2}
+    - target: {fileID: 11400000, guid: f20e844c833769649badfbe51c15eb18, type: 2}
+      propertyPath: zombiePrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 400000, guid: d3dd740db2a9db54ba5443a3146554e5, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f20e844c833769649badfbe51c15eb18, type: 2}
   m_RootGameObject: {fileID: 1695815887}

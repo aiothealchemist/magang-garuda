@@ -17,9 +17,13 @@ public class PlaceWeapon : MonoBehaviour {
 	private GameObject[] grid;
 	private GameObject[] quads;
 	private bool isMustDelete = true;
+	private string searchTag = "zombie";
+	private float searchFrequency = 1.0f;
+	private Transform target;
 
 	public void Start(){
-
+		//invoke searching target for turret
+		InvokeRepeating ("ScanForTarget", 0, searchFrequency);
 	}
 
 	public void OnMouseDown() {
@@ -57,7 +61,6 @@ public class PlaceWeapon : MonoBehaviour {
 				//check if grid already has content
 				if (quad.GetComponent<PlacementGridDisp>().isHaveContent){
 					//grid has content, delete turret on Update
-					Debug.Log("this grid is full");
 				}
 				else{
 					//grid has no content, snap weapon on Update
@@ -69,6 +72,31 @@ public class PlaceWeapon : MonoBehaviour {
 		}
 	}
 
+	public void ScanForTarget(){
+		target = GetNearestTargetObject ();
+	}
+
+	public Transform GetNearestTargetObject(){
+		//find the nearest target with certain tag
+		float nearestDistanceSqr = Mathf.Infinity;
+		GameObject[] taggedGameObject = GameObject.FindGameObjectsWithTag (searchTag);
+		Transform nearestObject = null;
+
+		// loop through each tagged object, remembering nearest one found
+		foreach (GameObject target in taggedGameObject) {
+			Vector3 objectPos = target.transform.position;	
+			float distanceSqr = (objectPos - transform.position).sqrMagnitude;
+
+			if(distanceSqr < nearestDistanceSqr){
+				Debug.Log("new target set");
+				nearestObject = target.transform;
+				nearestDistanceSqr = distanceSqr;
+			}
+		}
+
+		return nearestObject;
+	}
+
 	public void Update(){
 		//shoot a bullet while placed
 		if (!isPlaced && isNotChosen) {
@@ -78,28 +106,30 @@ public class PlaceWeapon : MonoBehaviour {
 					DestroyObject(gameObject);
 				}
 				else {
-					// Point the cannon at the zombie.
+					// Point the cannon at the zombie that already liste on the target variable.
 					target_pos.z = 0.0f; 
 					object_pos = gameObject.transform.position;
-					try{
-					//for apa
-						//cari paling deket
-					//endfor
-						target_pos.x = GameObject.FindGameObjectWithTag("zombie").transform.position.x - object_pos.x;
-						target_pos.y = GameObject.FindGameObjectWithTag("zombie").transform.position.y - object_pos.y;
-						angle = Mathf.Atan2(target_pos.y, target_pos.x) * Mathf.Rad2Deg - 180;
-						Vector3 rotationVector = new Vector3 (0, 0, angle);
-						transform.rotation = Quaternion.Euler(rotationVector);
-						
-						// Fire a bullet.	
-						if(Time.time > lastFireTime + burstDelay){
-							bullet = Instantiate(ammo, transform.position, transform.rotation) as GameObject;
-							bullet.rigidbody2D.AddForce(bullet.transform.right * bulletSpeed * -1);
-							lastFireTime = Time.time;
-						}
+					if(target != null){
+						try{
+							target_pos.x = target.transform.position.x - object_pos.x;
+							target_pos.y = target.transform.position.y - object_pos.y;
+							angle = Mathf.Atan2(target_pos.y, target_pos.x) * Mathf.Rad2Deg - 180;
+							Vector3 rotationVector = new Vector3 (0, 0, angle);
+							transform.rotation = Quaternion.Euler(rotationVector);
+							
+							// Fire a bullet.	
+							if(Time.time > lastFireTime + burstDelay){
+								bullet = Instantiate(ammo, transform.position, transform.rotation) as GameObject;
+								bullet.rigidbody2D.AddForce(bullet.transform.right * bulletSpeed * -1);
+								lastFireTime = Time.time;
+							}
 						}catch{
 							Debug.Log("zombie not found");
 						}
+					}
+					else{
+						//do nothing
+					}
 				}	
 		}
 	}
