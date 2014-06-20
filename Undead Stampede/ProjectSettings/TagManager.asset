@@ -44,14 +44,6 @@ TagManager:
     userID: 0
     uniqueID: 0
     locked: 0
-  - name: Cats
-    userID: 1
-    uniqueID: 3240346085
-    locked: 0
-  - name: Enemies
-    userID: 2
-    uniqueID: 1024123047
-    locked: 0
   - name: Zombies
     userID: 3
     uniqueID: 1664783857
@@ -59,4 +51,32 @@ TagManager:
   - name: Bullets
     userID: 4
     uniqueID: 53497509
+    locked: 0
+  - name: background
+    userID: 5
+    uniqueID: 2324965139
+    locked: 0
+  - name: menu pad
+    userID: 1
+    uniqueID: 106923147
+    locked: 0
+  - name: menu button
+    userID: 2
+    uniqueID: 1655133189
+    locked: 0
+  - name: scrollable pad
+    userID: 6
+    uniqueID: 4125425859
+    locked: 0
+  - name: scrollable button
+    userID: 7
+    uniqueID: 670236115
+    locked: 0
+  - name: prompt dialog
+    userID: 8
+    uniqueID: 743957983
+    locked: 0
+  - name: prompt button
+    userID: 9
+    uniqueID: 1480021009
     locked: 0
