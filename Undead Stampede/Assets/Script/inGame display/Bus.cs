@@ -10,7 +10,7 @@ public class Bus : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Transform bgCamera = GameObject.Find ("BG Camera");
+		Transform bgCamera = GameObject.Find ("BG Camera").transform;
 		fore = bgCamera.FindChild ("Foreground Quad").GetComponent<ScrollingBackground>();
 		parFore = bgCamera.FindChild ("Paralaks foreground Quad").GetComponent<ScrollingBackground>();
 		parBack = bgCamera.FindChild ("Paralaks background Quad").GetComponent<ScrollingBackground>();
