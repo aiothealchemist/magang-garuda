@@ -6,6 +6,8 @@ public class DLC {
 	public string description { get; private set; }
 	public string name { get; private set; }
 	public Hashtable pricing { get; private set; }
+	public Texture buttonImage;
+	public Sprite ingameImage;
 
 	public DLC(string toParse){
 		pricing = new Hashtable ();

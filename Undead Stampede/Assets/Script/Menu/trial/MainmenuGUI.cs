@@ -31,13 +31,16 @@ public class MainmenuGUI : MonoBehaviour {
 		if (GUI.changed)
 		{
 			switch (selectedButton) {
-			case 0:
+			case 0:	//play
+				gameObject.AddComponent<PlaymenuGUI>();
+				Destroy (this);
 				break;
-			case 1:
+			case 1:	//settings
+				gameObject.AddComponent<SettingsGUI>();
 				break;
-			case 2:
+			case 2:	//credits
 				break;
-			case 3:
+			case 3:	//exit
 				break;
 			default:
 				break;

@@ -7,19 +7,23 @@ public class BaseShopGUI : MonoBehaviour {
 	public Texture menuBG;
 	public DLC[] dlcs;
 
+	int dlcButtonHeight, viewHeight, viewWidth;
 	Vector2 viewVector;
+	string currency;
 	Texture objImage;
 	string objDesc;
 	int objPrice;
 
-
 	// Use this for initialization
 	void Start () {
-		viewVector = Vector2.zero;
-		dlcs = new DLC[0];
-
 		height = Screen.height;
 		width = Screen.width;
+
+		viewVector = Vector2.zero;
+		dlcButtonHeight = height;
+		viewHeight = height;
+		viewWidth = width;
+		currency = "";
 	}
 	
 	// Update is called once per frame
@@ -33,30 +37,30 @@ public class BaseShopGUI : MonoBehaviour {
 
 	void OnGUI () {
 		GUI.Box (new Rect (width * 2 / 5, height / 9, width * 8 / 15, height * 7 / 9), menuBG);
-		if (GUI.Button (new Rect (width * 13 / 15, height / 9, width / 15, height / 18), "Back")) { //back
-			Destroy (gameObject);
-		}
+
 		// Begin the ScrollView
-		viewVector = GUI.BeginScrollView (new Rect (25, 25, 100, 100), viewVector, new Rect (0, 0, 90, dlcs.Length * 100));
+		viewVector = GUI.BeginScrollView (new Rect (25, 25, viewWidth, viewHeight), 
+		                                  viewVector, new Rect (0, 0, viewWidth, dlcs.Length * dlcButtonHeight));
 		for (int i = 0; i < dlcs.Length; i++) {
-			dlcButton(dlcs[i], i);
+			if (GUI.Button (new Rect (0 , dlcButtonHeight * i, viewWidth, viewHeight),
+			                dlcs[i].buttonImage, GUIStyle.none)) { //DLC button
+				objImage = dlcs[i].buttonImage;
+				objDesc = dlcs[i].description;
+				objPrice = (int) dlcs[i].pricing [currency];
+			}
 		}
 		// End the ScrollView
 		GUI.EndScrollView();
 
+		// DLC description
 		GUI.DrawTexture (new Rect (width / 2, height / 4, width / 15, width / 15), objImage);
 		GUI.Box (new Rect (width / 2, height / 4, width / 15, width / 15), objDesc);
 		if (GUI.Button (new Rect (width * 13 / 15, height / 9, width / 15, height / 18), "Buy for " + objPrice)) { //buy
-			//Destroy (gameObject);
+			// TODO Prompt
 		}
-	}
 
-	void dlcButton(DLC obj, int countSoFar){
-		objImage = null;
-		objDesc = obj.description;
-		objPrice = (int) obj.pricing ["gem"];
-		if (GUI.Button (new Rect (width * 13 / 15, height / 9, width / 15, height / 18), obj.name)) { //DLC button
-			//Destroy (gameObject);
+		if (GUI.Button (new Rect (width * 13 / 15, height / 9, width / 15, height / 18), "Back")) { //back
+			Destroy (this);
 		}
 	}
 }
