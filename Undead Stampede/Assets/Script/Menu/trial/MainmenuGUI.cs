@@ -31,7 +31,7 @@ public class MainmenuGUI : BasemenuGUI {
 				setShowcase(gameObject.AddComponent<SettingsGUI>());
 				break;
 			case 2:	//credits
-				setShowcase(gameObject.AddComponent<BaseShopGUI>());
+				setShowcase(gameObject.AddComponent<CreditsGUI>());
 				break;
 			case 3:	//exit
 				createPrompt(new delegatedMethod[] { new delegatedMethod(exit), null },

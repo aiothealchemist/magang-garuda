@@ -18,7 +18,7 @@ public class BaseShopGUI : BasemenuGUI {
 		dlcs = new DLC[3];
 
 		viewVector = Vector2.zero;
-		currency = "";
+		currency = "gem";
 	}
 	
 	// Update is called once per frame
@@ -56,7 +56,8 @@ public class BaseShopGUI : BasemenuGUI {
 		GUI.Box (new Rect (width * 12 / 30, height * 12 / 15, width * 2 / 15, height * 0.115f), "Price\n" + num);
 		if (GUI.Button (new Rect (width * 16 / 30, height * 12 / 15, width * 2 / 15, height * 0.115f), "Buy for " + objPrice)) { //buy
 			// TODO Prompt
-			createPrompt(new delegatedMethod[] { new delegatedMethod(buy), null }, new string[3]);
+			createPrompt(new delegatedMethod[] { new delegatedMethod(buy), null }, 
+					new string[] { "Do you want to buy this for "+objPrice+" "+currency+"?", "Accept", "Decline" });
 		}
 
 		if (GUI.Button (new Rect (width * 27 / 30, height / 18, width / 15, height / 18), "Back")) { //back
