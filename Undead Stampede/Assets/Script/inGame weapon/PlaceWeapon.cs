@@ -15,7 +15,6 @@ public class PlaceWeapon : MonoBehaviour {
 	private float lastFireTime = 0;	
 	private float burstDelay = 0.5f;
 	private GameObject[] grid;
-	private GameObject[] quads;
 	private bool isMustDelete = true;
 	private string searchTag = "zombie";
 	private float searchFrequency = 1.0f;
