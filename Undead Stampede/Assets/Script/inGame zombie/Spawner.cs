@@ -34,7 +34,7 @@ public class Spawner : MonoBehaviour {
 			if (enemyChecker.Length == 0) {
 				//win signal
 				//Debug.Log("no zombie");
-				zombiePrefabs = GameObject.Find("zombiePermutator").GetComponent<level>().pop();
+				zombiePrefabs = GameObject.FindObjectOfType<level>().pop();
 			}
 		}
 	}
