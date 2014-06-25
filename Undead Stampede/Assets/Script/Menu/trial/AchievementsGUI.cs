@@ -1,26 +1,18 @@
 using UnityEngine;
 using System.Collections;
 
-public class AchievementsGUI : MonoBehaviour {
+public class AchievementsGUI : BasemenuGUI {
 	
-	int height, width;
-	public Texture menuBG;
 	Vector2 viewVector;
 
 	string[] menuButtons;
-	
-	// Use this for initialization
-	void Start () {
-		height = Screen.height;
-		width = Screen.width;
+
+	protected override void Start () {
+		base.Start ();
+		menuType = type.showcase;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-	
-	void OnGUI () {
+
+	protected override void updateGUI () {
 		GUI.Box (new Rect (width * 2 / 5, height / 9, width * 8 / 15, height * 7 / 9), menuBG);
 
 		// Begin the ScrollView

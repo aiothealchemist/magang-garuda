@@ -3,19 +3,19 @@ using System.Collections;
 
 public class PromptScript : Menu {
 
-	utils.delegatedMethod yesMethod, noMethod;
+	delegatedMethod yesMethod, noMethod;
 
 	Menu parentScript;
 
 	// Use this for initialization
 	protected override void Start (){ }
 
-	public void setVar(Menu parentMenu, string[] dialog, utils.delegatedMethod[] method){
+	public void setVar(Menu parentMenu, string[] dialog, delegatedMethod[] method){
 		parentScript = parentMenu;
 		if (dialog.Length != 3) {
 			Debug.Log ("Wrong string array size (exact 3: dialog box, yes button, no button).");
 		} else if (method == null || (method.Length != 1 && method.Length != 2)) {
-			Debug.Log("Wrong utils.delegatedMethod size (max 2: yesMethod, noMethod).");
+			Debug.Log("Wrong delegatedMethod size (max 2: yesMethod, noMethod).");
 		} else {
 			//transform.FindChild ("dialog").GetComponent<Button> ().setText(dialog[0]);	//COY, ini bukan button
 			transform.FindChild ("yes").GetComponent<Button> ().setText(dialog[1]);

@@ -10,7 +10,7 @@ public class Achievements : Menu {
 		case "reset":
 			instantPrompt(resetPrefab, 
 					new string[] {"Are you sure you want to reset all achievement you have got?","I'm not a pussy!","No, please."}, 
-					new utils.delegatedMethod[] { reset });
+					new delegatedMethod[] { reset });
 			break;
 		case "back":
 			Destroy(gameObject);

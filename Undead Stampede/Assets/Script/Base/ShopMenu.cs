@@ -23,7 +23,7 @@ public class ShopMenu : Menu {
 		case "buy":
 			instantPrompt(buyPrefab, 
 					new string[] {"Do you want to buy "+objectName+"? \nIt wil cost you "+objectCurrency+objectPrice+".","Okay","Nope"},
-					new utils.delegatedMethod[] { buy });
+					new delegatedMethod[] { buy });
 			break;
 		case "back":
 			Destroy(gameObject);

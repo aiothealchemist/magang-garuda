@@ -1,34 +1,35 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlaymenuGUI : MonoBehaviour {
-
-	int height, width;
-	public Texture menuBG;
+public class PlaymenuGUI : BasemenuGUI {
 
 	int selectedButton = 0;
 	string[] menuButtons;
 
+	Vector2 viewVector;
+	System.Collections.Generic.List<Rect> levelButtons;
+	level levelConstructor;
+
 	// Use this for initialization
-	void Start () {
-		height = Screen.height;
-		width = Screen.width;
+	protected override void Start () {
+		base.Start ();
 		menuButtons = new string[] { "View Garage", "Achievements", "Gem Shop"};
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+		levelButtons = new System.Collections.Generic.List<Rect> ();
 	}
 
-	void OnGUI () {
-		GUI.Box (new Rect (0, height / 8, width / 3, height * 3 / 4), menuBG, GUIStyle.none);
+	void Update () {
+		if (showcase == null && levelConstructor != null)
+			Destroy(levelConstructor);
+	}
+
+	protected override void updateGUI () {
+		GUI.Box (new Rect (0, height / 8, width / 3, height * 3 / 4), menuBG);	//GUIStyle.none
 
 		selectedButton = GUI.SelectionGrid (
-			new Rect (0, height * 3 / 16, width / 3, height * 3 / 4), 
+			new Rect (0, height * 3 / 16, width / 3, height / 2), 
 			selectedButton, menuButtons, 1);
-
-		// If the user clicked a new Toolbar button this frame, we'll process their input
+		
+		// menu pad buttons
 		if (GUI.changed)
 		{
 			switch (selectedButton) {
@@ -37,19 +38,43 @@ public class PlaymenuGUI : MonoBehaviour {
 				Destroy (this);
 				break;
 			case 1:	//achievements
-				gameObject.AddComponent<AchievementsGUI>();
+				setShowcase (gameObject.AddComponent<AchievementsGUI>());
 				break;
 			case 2:	//gem shop
-				gameObject.AddComponent<BaseShopGUI>();
+				setShowcase (gameObject.AddComponent<BaseShopGUI>());
 				break;
 			default:
 				break;
 			}
 		}
-		
-		if (GUI.Button(new Rect(0, height/8,width/7,height*3/16),"Back")){
+
+		// level buttons
+		if (showcase == null) {
+			// Begin the ScrollView
+			viewVector = GUI.BeginScrollView (new Rect (width * 2 / 5, height / 18, width * 8 / 15, height * 8 / 9), 
+					viewVector, new Rect (0, 0, width * 8 / 15, height * 8 / 9));
+			
+			// TODO level position
+			for (int i = 0; i < levelButtons.Count; i++) {
+				if (GUI.Button (levelButtons[i], i.ToString())) {
+					levelChosen (i);
+				}
+			}
+			
+			// End the ScrollView
+			GUI.EndScrollView();
+		}
+
+		if (GUI.Button(new Rect(0, height/8,width/7,height/16),"Back")){
 			gameObject.AddComponent<MainmenuGUI>();
 			Destroy(this);
 		}
+	}
+
+	void levelChosen (int levelNum) {
+		setShowcase (gameObject.AddComponent<ChooseWeaponGUI> ());
+		levelConstructor = new level ();
+		levelConstructor.fillWave (levelNum);
+		DontDestroyOnLoad (levelConstructor);
 	}
 }

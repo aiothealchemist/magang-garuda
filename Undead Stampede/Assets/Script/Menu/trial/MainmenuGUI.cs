@@ -1,28 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MainmenuGUI : MonoBehaviour {
-
-	int height, width;
-	public Texture menuBG;
+public class MainmenuGUI : BasemenuGUI {
 
 	int selectedButton = 0;
 	string[] menuButtons;
 
 	// Use this for initialization
-	void Start () {
-		height = Screen.height;
-		width = Screen.width;
+	protected override void Start () {
+		base.Start ();
+		menuType = type.menu;
 		menuButtons = new string[] { "Play", "Settings", "Credits", "Exit" };
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
-	void OnGUI () {
-		GUI.Box (new Rect (0, height / 8, width / 3, height * 3 / 4), menuBG, GUIStyle.none);
+	protected override void updateGUI () {
+		GUI.Box (new Rect (0, height / 8, width / 3, height * 3 / 4), menuBG);	//GUIStyle.none
 		selectedButton = GUI.SelectionGrid (
 			new Rect (0, height / 8, width / 3, height * 3 / 4), 
 			selectedButton, menuButtons, 1);
@@ -36,15 +28,24 @@ public class MainmenuGUI : MonoBehaviour {
 				Destroy (this);
 				break;
 			case 1:	//settings
-				gameObject.AddComponent<SettingsGUI>();
+				setShowcase(gameObject.AddComponent<SettingsGUI>());
 				break;
 			case 2:	//credits
+				setShowcase(gameObject.AddComponent<ChooseWeaponGUI>());
 				break;
 			case 3:	//exit
+				createPrompt(new delegatedMethod[] { new delegatedMethod(exit), null },
+						new string[] { "Are you sure you want to Quit?", "Yes", "No" });
 				break;
 			default:
 				break;
 			}
 		}
+	}
+
+	//Exit game sequence
+	void exit(){
+		Debug.Log ("harusnya quit");
+		Application.Quit ();
 	}
 }

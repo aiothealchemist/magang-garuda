@@ -16,7 +16,7 @@ public class Settings : Menu {
 		case "reset":
 			instantPrompt(resetPrompt, 
 					new string[] {"Are you sure you want to reset all saved data?","Yes","NO!"}, 
-					new utils.delegatedMethod[] { reset });
+					new delegatedMethod[] { reset });
 			break;
 		case "back":
 			Destroy(gameObject);

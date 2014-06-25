@@ -14,5 +14,7 @@ public class DLC {
 		pricing.Add ("rp", 20);
 		pricing.Add ("gem", 20);
 		pricing.Add ("coin", 20);
+		description = "lolololol";
+		name = "hehehehe";
 	}
 }

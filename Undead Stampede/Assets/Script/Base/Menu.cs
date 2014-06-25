@@ -62,10 +62,11 @@ public abstract class Menu : MonoBehaviour {
 	/// </summary>
 	/// <param name="prefab">Prefab.</param>
 	/// <param name="dialog">Dialog. Array of string[3] {prompt question, yes/confirm, no/cancel}</param>
-	/// <param name="method">Method. Array of utils.delegatedMethod[2] {confirmedMethod, cancelledMethod} ()</param>
-	protected void instantPrompt(Transform prefab, string[] dialog, utils.delegatedMethod[] method){
+	/// <param name="method">Method. Array of delegatedMethod[2] {confirmedMethod, cancelledMethod} ()</param>
+	protected void instantPrompt(Transform prefab, string[] dialog, delegatedMethod[] method){
+		Vector2 promptPos = Vector2.zero;
 		PromptScript promptScript = 
-			((Transform) Instantiate(prefab, utils.promptPos, Quaternion.identity)).GetComponent<PromptScript>();
+			((Transform) Instantiate(prefab, promptPos, Quaternion.identity)).GetComponent<PromptScript>();
 		promptScript.setVar (this, dialog, method);
 		toggleFocus (false);
 	}

@@ -21,7 +21,7 @@ public class MainMenu : Menu {
 			case "exit":
 				instantPrompt(exitPrompt, 
 						new string[] { "Are you sure you want to Quit?", "Yes", "No"}, 
-						new utils.delegatedMethod[] {exit});
+						new delegatedMethod[] {exit, null});
 				break;
 			default:
 				//what the fuck are you doing?
