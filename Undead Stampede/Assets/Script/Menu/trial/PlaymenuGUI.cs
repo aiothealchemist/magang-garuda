@@ -24,10 +24,6 @@ public class PlaymenuGUI : MonoBehaviour {
 	void OnGUI () {
 		GUI.Box (new Rect (0, height / 8, width / 3, height * 3 / 4), menuBG, GUIStyle.none);
 
-		if (GUI.Button(new Rect(0, height/8,width/7,height*3/16),"Back")){
-			
-		}
-
 		selectedButton = GUI.SelectionGrid (
 			new Rect (0, height * 3 / 16, width / 3, height * 3 / 4), 
 			selectedButton, menuButtons, 1);
@@ -36,15 +32,24 @@ public class PlaymenuGUI : MonoBehaviour {
 		if (GUI.changed)
 		{
 			switch (selectedButton) {
-			case 0:
+			case 0:	//garage
+				gameObject.AddComponent<GaragemenuGUI>();
+				Destroy (this);
 				break;
-			case 1:
+			case 1:	//achievements
+				gameObject.AddComponent<AchievementsGUI>();
 				break;
-			case 2:
+			case 2:	//gem shop
+				gameObject.AddComponent<BaseShopGUI>();
 				break;
 			default:
 				break;
 			}
+		}
+		
+		if (GUI.Button(new Rect(0, height/8,width/7,height*3/16),"Back")){
+			gameObject.AddComponent<MainmenuGUI>();
+			Destroy(this);
 		}
 	}
 }
