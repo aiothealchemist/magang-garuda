@@ -22,6 +22,12 @@ public class ZombieController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		//check zombie's health point
+		if (health < 0) {
+			//destroy zombie
+			DestroyObject(gameObject);
+		}
+
 		//move zombie
 		target_pos.z = 0.0f; 
 		object_pos = transform.position;
@@ -47,6 +53,11 @@ public class ZombieController : MonoBehaviour {
 	{
 		if (coll.gameObject.tag == "vehicle") {
 						moveSpeed = 0;
-				}
+				} 
+		else if (coll.gameObject.tag == "bullet") {//zombie is hit by bullet
+			//add bullet damage
+			Debug.Log("oi oi");
+			health -= 3;
+		}
 	}
 }
