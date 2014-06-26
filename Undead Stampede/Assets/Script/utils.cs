@@ -23,12 +23,12 @@ public static class utils {
 				{
 					if (xmlReader.isOpeningTag)
 					{
-						text += ("Skill: " + xmlReader.tagName + " \"" + xmlReader.content + "\"\n");
+						//text += ("Skill: " + xmlReader.tagName + " \"" + xmlReader.content + "\"\n");
 					}
 				}
 			}
 		}
-		return temp.ToArray ();
+		return arrayOfDLC.ToArray();
 	}
 
 	public static DLC[] getWeapon(){
