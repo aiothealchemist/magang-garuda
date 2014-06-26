@@ -20,6 +20,7 @@ public class level : MonoBehaviour
 	{
 		//set zombie rooster for each level
 		arrofarrofzombie = new Stack<List<Transform>> ();
+		fillWave (1);
 	}
 
 	public List<Transform> pop(){
