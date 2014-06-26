@@ -26,6 +26,7 @@ public static class utils {
 						//text += ("Skill: " + xmlReader.tagName + " \"" + xmlReader.content + "\"\n");
 					}
 				}
+				arrayOfDLC.Add (temp);
 			}
 		}
 		return arrayOfDLC.ToArray();

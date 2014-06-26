@@ -6,7 +6,8 @@ public class Bus : MonoBehaviour {
 	public static Bus busYangAda;
 	ScrollingBackground fore, parFore, parBack;
 	public float speed, health;
-	public float speedFactor;
+	float speedFactor;
+	public int coinsCollected;
 
 	// Use this for initialization
 	void Start () {
@@ -26,9 +27,9 @@ public class Bus : MonoBehaviour {
 	}
 
 	void updateParallax (){
-		fore.speed = speed * 1; // TODO diganti
-		parFore.speed = fore.speed * 0.2f;
-		parBack.speed = fore.speed * 0.001f;
+		fore.speed = speedFactor * .5f; // TODO diganti
+		parFore.speed = fore.speed * 0.5f;
+		parBack.speed = fore.speed * 0.25f;
 	}
 
 	public void digaet(float speedBerkurang){
