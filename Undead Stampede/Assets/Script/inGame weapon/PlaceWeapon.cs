@@ -14,9 +14,11 @@ public class PlaceWeapon : MonoBehaviour {
 	private float bulletSpeed = 10;
 	private float lastFireTime = 0;	
 	private float burstDelay = 0.5f;
-	private GameObject[] grid;
+	private GameObject[] gridup;
+	private GameObject[] gridback;
+	private GameObject[] gridside;
 	private bool isMustDelete = true;
-	private string searchTag = "zombie";
+	private string searchTag;
 	private float searchFrequency = 1.0f;
 	private Transform target;
 
@@ -48,9 +50,11 @@ public class PlaceWeapon : MonoBehaviour {
 
 	//set the turret position to snap to selected position
 	public void SetPosition(){
-		grid = GameObject.FindGameObjectsWithTag("placementgrid");
+		gridup = GameObject.FindGameObjectsWithTag("placementgridup");
+		gridback = GameObject.FindGameObjectsWithTag("placementgridback");
+		gridside = GameObject.FindGameObjectsWithTag("placementgridside");
 
-		foreach (GameObject quad in grid) {
+		foreach (GameObject quad in gridup) {
 			if	(!gameObject.renderer.bounds.Intersects(quad.renderer.bounds)){
 				//object not intersect, delete turret
 			}
@@ -64,6 +68,47 @@ public class PlaceWeapon : MonoBehaviour {
 				else{
 					//grid has no content, snap weapon on Update
 					gameObject.transform.position = quad.transform.position;
+					searchTag = "zombieup";
+					quad.GetComponent<PlacementGridDisp>().isHaveContent = true;
+					isMustDelete = false;
+				}
+			}
+		}
+		foreach (GameObject quad in gridback) {
+			if	(!gameObject.renderer.bounds.Intersects(quad.renderer.bounds)){
+				//object not intersect, delete turret
+			}
+			else{
+				//snap turret position to the selected one
+				
+				//check if grid already has content
+				if (quad.GetComponent<PlacementGridDisp>().isHaveContent){
+					//grid has content, delete turret on Update
+				}
+				else{
+					//grid has no content, snap weapon on Update
+					gameObject.transform.position = quad.transform.position;
+					searchTag = "zombieback";
+					quad.GetComponent<PlacementGridDisp>().isHaveContent = true;
+					isMustDelete = false;
+				}
+			}
+		}
+		foreach (GameObject quad in gridside) {
+			if	(!gameObject.renderer.bounds.Intersects(quad.renderer.bounds)){
+				//object not intersect, delete turret
+			}
+			else{
+				//snap turret position to the selected one
+				
+				//check if grid already has content
+				if (quad.GetComponent<PlacementGridDisp>().isHaveContent){
+					//grid has content, delete turret on Update
+				}
+				else{
+					//grid has no content, snap weapon on Update
+					gameObject.transform.position = quad.transform.position;
+					searchTag = "zombieside";
 					quad.GetComponent<PlacementGridDisp>().isHaveContent = true;
 					isMustDelete = false;
 				}

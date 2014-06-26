@@ -15,8 +15,8 @@ GameObject:
   - 50: {fileID: 5000000}
   - 114: {fileID: 11400004}
   m_Layer: 10
-  m_Name: zombie01
-  m_TagString: zombieup
+  m_Name: zombie02
+  m_TagString: zombieback
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

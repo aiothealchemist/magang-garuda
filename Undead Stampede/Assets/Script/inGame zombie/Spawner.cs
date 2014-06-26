@@ -30,8 +30,10 @@ public class Spawner : MonoBehaviour {
 
 		//check the remaining zombie in the field
 		if (zombiePrefabs.Count == 0) {
-			GameObject[] enemyChecker = GameObject.FindGameObjectsWithTag("zombie");
-			if (enemyChecker.Length == 0) {
+			GameObject[] enemyCheckerUp = GameObject.FindGameObjectsWithTag("zombieup");
+			GameObject[] enemyCheckerBack = GameObject.FindGameObjectsWithTag("zombieback");
+			GameObject[] enemyCheckerSide = GameObject.FindGameObjectsWithTag("zombieside");
+			if (enemyCheckerUp.Length == 0 && enemyCheckerBack.Length == 0 && enemyCheckerSide.Length == 0) {
 				//win signal
 				//Debug.Log("no zombie");
 				zombiePrefabs = GameObject.FindObjectOfType<level>().pop();
