@@ -29,7 +29,7 @@ public static class utils {
 				arrayOfDLC.Add (temp);
 			}
 		}
-		return arrayOfDLC.ToArray ();
+		return arrayOfDLC.ToArray();
 	}
 
 	public static DLC[] getWeapon(){
