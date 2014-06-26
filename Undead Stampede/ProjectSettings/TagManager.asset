@@ -4,9 +4,16 @@
 TagManager:
   tags:
   - vehicle
-  - placementgrid
-  - zombie
+  - placementgridup
+  - zombieup
   - bullet
+  - placementgridback
+  - placementgridside
+  - zombieback
+  - 
+  - zombieside
+  - 
+  - 
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

@@ -20,10 +20,18 @@ public class BuyWeapon : MonoBehaviour {
 		draggedWeapon.GetComponent<PlaceWeapon> ().OnMouseDrag ();
 
 		//show placement grid, to be multiplied
-		GameObject[] PG = GameObject.FindGameObjectsWithTag("placementgrid");
-		foreach (GameObject quad in PG) {
+		GameObject[] PGUp = GameObject.FindGameObjectsWithTag("placementgridup");
+		foreach (GameObject quad in PGUp) {
 						quad.GetComponent<PlacementGridDisp> ().OnMouseDrag ();
 				}
+		GameObject[] PGBack = GameObject.FindGameObjectsWithTag("placementgridback");
+		foreach (GameObject quad in PGBack) {
+			quad.GetComponent<PlacementGridDisp> ().OnMouseDrag ();
+		}
+		GameObject[] PGSide = GameObject.FindGameObjectsWithTag("placementgridside");
+		foreach (GameObject quad in PGSide) {
+			quad.GetComponent<PlacementGridDisp> ().OnMouseDrag ();
+		}
 	}
 
 	void OnMouseUp(){
@@ -32,9 +40,17 @@ public class BuyWeapon : MonoBehaviour {
 		draggedWeapon.GetComponent<PlaceWeapon> ().SetPosition ();
 
 		//hide placement grid, to be multiplied
-		GameObject[] PG = GameObject.FindGameObjectsWithTag("placementgrid");
-		foreach (GameObject quad in PG) {
+		GameObject[] PGUp = GameObject.FindGameObjectsWithTag("placementgridup");
+		foreach (GameObject quad in PGUp) {
 						quad.GetComponent<PlacementGridDisp> ().renderer.enabled = false;
 				}
+		GameObject[] PGBack = GameObject.FindGameObjectsWithTag("placementgridback");
+		foreach (GameObject quad in PGBack) {
+			quad.GetComponent<PlacementGridDisp> ().renderer.enabled = false;
+		}
+		GameObject[] PGSide = GameObject.FindGameObjectsWithTag("placementgridside");
+		foreach (GameObject quad in PGSide) {
+			quad.GetComponent<PlacementGridDisp> ().renderer.enabled = false;
+		}
 	}
 }
