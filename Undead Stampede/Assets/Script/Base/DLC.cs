@@ -9,6 +9,8 @@ public class DLC {
 	public Texture buttonImage;
 	public Sprite ingameImage;
 
+	public DLC () { }
+
 	public DLC(string toParse){
 		pricing = new Hashtable ();
 		pricing.Add ("rp", 20);
