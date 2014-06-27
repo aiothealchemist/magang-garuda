@@ -175,6 +175,13 @@ public static class utils {
 	//INSERT OTHER PREFERENCES HERE
 
 	public static void SetInitialPersistent(){
-
+		PlayerPrefs.DeleteAll ();
+		setGems (100);
+		buyWeapon ("UMachineGun");
+		buyWeapon("UGrenadeLauncher");
+		buyWeapon ("UCryoGun");
+		equipWeapon ("EMachineGun");
+		equipWeapon("EGrenadeLauncher");
+		equipWeapon ("ECryoGun");
 	}
 }
