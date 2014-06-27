@@ -11,14 +11,14 @@ public static class utils {
 	//harusnya ada Persistent data
 	public static bool sfxON = true, musicON = true;
 
-	public enum xmlType { achievement, gem, part, powerup, vehicle, weapon, zombie }
+	public enum loadedContentType { achievement, gem, part, powerup, vehicle, weapon, zombie }
 	static TinyXmlReader xmlReader;
 	static string fileXML = "*";
 
 	public static bool isSfx { get; set; }
 	public static bool isMusic { get; set; }
 
-	public static LoadableContent[] loadSpecificXML (xmlType tag){
+	public static LoadableContent[] loadSpecificXML (loadedContentType tag){
 		System.Collections.Generic.List<string> stringTags = new System.Collections.Generic.List<string>(getXMLTag (tag));
 		string typenameTag = stringTags [0]; stringTags.RemoveAt (0);
 		System.Collections.Generic.List<LoadableContent> contents = new System.Collections.Generic.List<LoadableContent> ();
@@ -26,7 +26,7 @@ public static class utils {
 		while (xmlReader.Read ()) {
 			if (xmlReader.isOpeningTag && xmlReader.tagName == typenameTag){
 				LoadableContent temp = constructContent(tag);
-				while(xmlReader.Read(typenameTag)){ // read as long as not encountering the closing tag for Skills
+				while(xmlReader.Read(typenameTag)){ // read as long as not encountering the closing tag
 					if (xmlReader.isOpeningTag && stringTags.Contains(xmlReader.tagName)) {
 						var propertyCalled = temp.GetType().GetProperty(xmlReader.tagName);
 						if (propertyCalled == null) {}
@@ -41,7 +41,8 @@ public static class utils {
 							voidWithTwoParams_String_String dictMethod = 
 									((dictionaryTag == "pricing") ? 
 								 new voidWithTwoParams_String_String(temp.setPrice) : 
-								 new voidWithTwoParams_String_String(temp.setSprite));
+								 	(dictionaryTag == "sprites") ? 
+								 new voidWithTwoParams_String_String(temp.setSprite) : null );
 							while (xmlReader.Read (dictionaryTag)) {
 								if (xmlReader.isOpeningTag){
 									dictMethod(xmlReader.tagName, xmlReader.content);
@@ -56,49 +57,38 @@ public static class utils {
 		return contents.ToArray();
 	}
 
-	static string[] getXMLTag(xmlType tipe){
-		string[] tag = new string[0];
-		switch (tipe) {
-		case xmlType.achievement:
-			break;
-		case xmlType.gem:
-			break;
-		case xmlType.part:
-			break;
-		case xmlType.powerup:
-			break;
-		case xmlType.vehicle:
-			break;
-		case xmlType.weapon:
-			break;
-		case xmlType.zombie:
-			break;
+	static string[] getXMLTag(loadedContentType tipe){
+		System.Collections.Generic.List<string> tag = new System.Collections.Generic.List<string> ();
+		tag.Add (tipe.ToString ());
+		LoadableContent temp = constructContent (tipe);
+		foreach (var item in temp.GetType ().GetProperties ()) {
+			tag.Add (item.Name);
 		}
-		return tag;
+		return tag.ToArray ();
 	}
 
-	static LoadableContent constructContent(xmlType tipe){
+	static LoadableContent constructContent(loadedContentType tipe){
 		LoadableContent tag = null;
 		switch (tipe) {
-		case xmlType.achievement:
+		case loadedContentType.achievement:
 			tag = new AchievementXML();
 			break;
-		case xmlType.gem:
+		case loadedContentType.gem:
 			tag = new GemXML();
 			break;
-		case xmlType.part:
+		case loadedContentType.part:
 			tag = new PartXML();
 			break;
-		case xmlType.powerup:
+		case loadedContentType.powerup:
 			tag = new PowerupXML();
 			break;
-		case xmlType.vehicle:
+		case loadedContentType.vehicle:
 			tag = new VehicleXML();
 			break;
-		case xmlType.weapon:
+		case loadedContentType.weapon:
 			tag = new WeaponXML();
 			break;
-		case xmlType.zombie:
+		case loadedContentType.zombie:
 			tag = new ZombieXML();
 			break;
 		}

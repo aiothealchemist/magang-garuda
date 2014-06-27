@@ -9,7 +9,12 @@ public class BaseShopGUI : BasemenuGUI {
 	Vector2 viewVector;
 	Texture objImage;
 	string objDesc;
-	int objPrice, num;
+	int objPrice = 0;
+	int num;
+	
+	public void loadShop(utils.loadedContentType tipe){
+		content = utils.loadSpecificXML (tipe);
+	}
 
 	// Use this for initialization
 	protected override void Start () {

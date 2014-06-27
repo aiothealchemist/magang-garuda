@@ -10,9 +10,9 @@ public class ZombieController : MonoBehaviour {
 	private Vector3 object_pos;
 
 	//bikinan cahyo
-	ZombieXML attributes;
-	public int health;
-	public int strength;
+	public ZombieXML attributes { get; set; }
+	public int health { get; set; }
+	public int strength { get; set; }
 	//END OF bikinan cahyo
 
 	// Use this for initialization

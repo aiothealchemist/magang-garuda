@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public abstract class LoadableContent {
@@ -34,15 +34,15 @@ public abstract class LoadableContent {
 		sprites [tipe] = sprite;
 	}
 
+	// ToParse price & sprite
 	public void setPrice(string money, string price){
 		setPrice (money == "realMoney" ? currency.realMoney : money == "gem" ? currency.gem : currency.coin,
 		          int.Parse(price));
 	}
-
 	public void setSprite(string tipe, string sprite){
 		setSprite (tipe == "button" ? spriteTypes.button : tipe == "ingame" ? spriteTypes.ingame :
 		           tipe == "explode" ? spriteTypes.explode : spriteTypes.projectile,
-		           null);
+		           null);	//parse sprite path: 
 	}
 }
 
@@ -50,31 +50,31 @@ public class ZombieXML : LoadableContent {
 	public enum zombieSide {atas, belakang, samping};
 
 	//properties
+	public zombieSide sisi { get; set; }
 	public int baseSpeed { get; set; } 
 	public int baseHealth{ get; set; } 
 	public int baseDamage{ get; set; } 
 	public bool isGaet { get; set; }
-	public zombieSide sisi { get; set; }
 
 	public ZombieXML() : base() { }
 }
 
 class WeaponXML : LoadableContent {
 	//properties
-	public int fireRate { get; set; } 
-	public int damage { get; set; } 
+	public bool isDariLangit { get; set; }
+	public bool isParabolic { get; set; } 
 	public int blastRadius { get; set; } 
 	public int initSpeed { get; set; }
-	public bool isParabolic { get; set; } 
-	public bool isDariLangit{ get; set; }
+	public int fireRate { get; set; } 
+	public int damage { get; set; } 
 
 	public WeaponXML() : base() { }
 }
 
 class VehicleXML : LoadableContent {
 	//properties
-	public int baseSpeed { get; set; } 
 	public int baseHealth{ get; set; } 
+	public int baseSpeed { get; set; } 
 
 	public VehicleXML() : base() { }
 }
