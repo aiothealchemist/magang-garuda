@@ -20,7 +20,6 @@ public class DestroyOffScreen : MonoBehaviour {
 	}
 
 	void OnBecameInvisible(){
-		Debug.Log ("object out of screen");
 		DestroyObject (gameObject);
 	}
 }

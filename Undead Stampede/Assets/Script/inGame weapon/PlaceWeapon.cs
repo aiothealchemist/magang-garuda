@@ -132,7 +132,7 @@ public class PlaceWeapon : MonoBehaviour {
 			float distanceSqr = (objectPos - transform.position).sqrMagnitude;
 
 			if(distanceSqr < nearestDistanceSqr){
-				Debug.Log("new target set");
+				//set new target
 				nearestObject = target.transform;
 				nearestDistanceSqr = distanceSqr;
 			}
@@ -168,7 +168,7 @@ public class PlaceWeapon : MonoBehaviour {
 								lastFireTime = Time.time;
 							}
 						}catch{
-							Debug.Log("zombie not found");
+							//no zombie found
 						}
 					}
 					else{
