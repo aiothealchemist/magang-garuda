@@ -3,10 +3,10 @@ using System.Collections;
 
 public class BaseShopGUI : BasemenuGUI {
 	
-	public DLC[] dlcs;
+	public LoadableContent[] content { get; set; }
+	LoadableContent.currency currency { get; set; }
 
 	Vector2 viewVector;
-	string currency;
 	Texture objImage;
 	string objDesc;
 	int objPrice, num;
@@ -14,11 +14,8 @@ public class BaseShopGUI : BasemenuGUI {
 	// Use this for initialization
 	protected override void Start () {
 		base.Start ();
-		menuType = type.showcase;
-		dlcs = new DLC[3];
-
 		viewVector = Vector2.zero;
-		currency = "gem";
+		menuType = type.showcase;
 	}
 	
 	// Update is called once per frame
@@ -40,9 +37,13 @@ public class BaseShopGUI : BasemenuGUI {
 		for (int i = 0; i < 9; i++) {
 			if (GUI.Button (new Rect (0 , (1 * i) * height * 4 / 15, width * 3 / 15 - 18, height * 4 / 15 - 10),
 					"Button Image")) { //DLC button , GUIStyle.none
-//				objImage = dlcs[i].buttonImage;
-//				objDesc = dlcs[i].description;
-//				objPrice = (int) dlcs[i].pricing [currency];
+//		for (int i = 0; i < content.Length; i++) {
+//			if (GUI.Button (
+//					new Rect (0 , (1 * i) * height * 4 / 15, width * 3 / 15 - 18, height * 4 / 15 - 10),
+//					content[i].sprites[LoadableContent.spriteTypes.button], GUIStyle.none)) { //DLC button , GUIStyle.none
+//				objImage = content[i].sprites[LoadableContent.spriteTypes.button];
+//				objDesc = content[i].description;
+//				objPrice = content[i].pricing [currency];
 				num = i;
 			}
 		}
@@ -53,10 +54,10 @@ public class BaseShopGUI : BasemenuGUI {
 		// DLC description
 		GUI.Box (new Rect (width * 12 / 30, height * 2.5f / 18, width * 4 / 15, width / 5), "Image here");
 		GUI.Box (new Rect (width * 12 / 30, height * 7 / 15, width * 4 / 15, width / 5), "Description here");
-		GUI.Box (new Rect (width * 12 / 30, height * 12 / 15, width * 2 / 15, height * 0.115f), "Price\n" + num);
+		GUI.Box (new Rect (width * 12 / 30, height * 12 / 15, width * 2 / 15, height * 0.115f), "Price\n" + num);	//objPrice
 		if (GUI.Button (new Rect (width * 16 / 30, height * 12 / 15, width * 2 / 15, height * 0.115f), "Buy for " + objPrice)) { //buy
 			// TODO Prompt
-			createPrompt(new delegatedMethod[] { new delegatedMethod(buy), null }, 
+			createPrompt(new voidWithZeroParam[] { buy, null }, 
 					new string[] { "Do you want to buy this for "+objPrice+" "+currency+"?", "Accept", "Decline" });
 		}
 

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using PlayerPrefs = PreviewLabs.PlayerPrefs;
 
@@ -35,7 +35,7 @@ public class MainmenuGUI : BasemenuGUI {
 				setShowcase(gameObject.AddComponent<CreditsGUI>());
 				break;
 			case 3:	//exit
-				createPrompt(new delegatedMethod[] { new delegatedMethod(exit), null },
+				createPrompt(new voidWithZeroParam[] { exit, null },
 						new string[] { "Are you sure you want to Quit?", "Yes", "No" });
 				break;
 			default:

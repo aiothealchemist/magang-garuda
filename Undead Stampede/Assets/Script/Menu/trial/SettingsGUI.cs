@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class SettingsGUI : BasemenuGUI {
@@ -36,7 +36,7 @@ public class SettingsGUI : BasemenuGUI {
 		if (GUI.Button (new Rect (width * 27 / 30, height / 18, width / 15, height / 18), "Back")) { //back
 			Destroy (this);
 		} else if (GUI.Button (new Rect (width * 8 / 15, height * 3 / 5, width / 15, height / 18), "Reset")) { //reset
-			createPrompt (new delegatedMethod[]{ new delegatedMethod(reset), null },
+			createPrompt (new voidWithZeroParam[]{ reset, null },
 					new string[] {"Are you sure you want to reset all saved data?","Yes","NO!"});
 		}
 	}

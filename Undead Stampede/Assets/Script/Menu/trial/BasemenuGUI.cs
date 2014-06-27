@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public abstract class BasemenuGUI : MonoBehaviour {
@@ -30,7 +30,7 @@ public abstract class BasemenuGUI : MonoBehaviour {
 
 	protected abstract void updateGUI ();
 
-	protected void createPrompt (delegatedMethod[] method, string[] dialog) {
+	protected void createPrompt (voidWithZeroParam[] method, string[] dialog) {
 		if (menuType == type.showcase) {
 			parent.createPrompt (method, dialog);
 		} else {
