@@ -2,6 +2,7 @@
 
 using UnityEngine;
 using System.Collections;
+using PlayerPrefs = PreviewLabs.PlayerPrefs;
 
 public delegate void voidWithZeroParam();
 public delegate void voidWithTwoParams_String_String(string a, string b);
@@ -93,5 +94,87 @@ public static class utils {
 			break;
 		}
 		return tag;
+	}
+
+	//player preferences methods
+	//gems --> key = "PlayerGems"
+	public static void setGems(int gems){
+		PlayerPrefs.SetInt ("PlayerGems", gems);
+	}
+	public static int getGems(){
+		return PlayerPrefs.GetInt("PlayerGems");
+	}
+	public static void addGems(int gems){
+		PlayerPrefs.SetInt ("PlayerGems", getGems () + gems);
+	}
+	public static void substractGems(int gems){
+		PlayerPrefs.SetInt ("PlayerGems", getGems () - gems);
+	}
+
+	//powerups
+	//extracoins key = "ExtraCoins"
+	//extrahealth key = "ExtraHealth"
+	//extraspeed key = "ExtraSpeed"
+	public static void setExtraCoin(int coin){
+		PlayerPrefs.SetInt ("ExtraCoins", coin);
+	}
+	public static void setExtraHealth(int health){
+		PlayerPrefs.SetInt ("ExtraHealth", health);
+	}
+	public static void setExtraSpeed(int speed){
+		PlayerPrefs.SetInt ("ExtraSpeed", speed);
+	}
+	public static int getExtraCoin(){
+		return PlayerPrefs.GetInt("ExtraCoins");
+	}
+	public static int getExtraHealth(){
+		return PlayerPrefs.GetInt("ExtraHealth");
+	}
+	public static int getExtraSpeed(){
+		return PlayerPrefs.GetInt("ExtraSpeed");
+	}
+
+	//unlocked weapons
+	//contains booleans referring whether or not the weapon has been unlocked, setter, getter
+	// index 0, key "UMachineGun" =  Machine Gun
+	// index 1, key "UGrenadeLauncher" =  Grenade Launcher
+	// index 2, key "UCryoGun" =  Cryo Gun
+	public static System.Collections.Generic.List<bool> getAllUnlockedWeapon(){
+		System.Collections.Generic.List<bool> res = new System.Collections.Generic.List<bool>();
+
+		res.Add (PlayerPrefs.GetBool("UMachineGun"));
+		res.Add (PlayerPrefs.GetBool("UGrenadeLauncher"));
+		res.Add (PlayerPrefs.GetBool("UCryoGun"));
+
+		return res;
+	}
+	public static void buyWeapon(string weaponname){
+		PlayerPrefs.SetBool (weaponname, true);
+	}
+
+	//equipped weapon, index arrangement equals to the unlocked weapon index arrangement
+	// index 0, key "EMachineGun" =  Machine Gun
+	// index 1, key "EGrenadeLauncher" =  Grenade Launcher
+	// index 2, key "ECryoGun" =  Cryo Gun
+	public static System.Collections.Generic.List<bool> getAllEquippedWeapon(){
+		System.Collections.Generic.List<bool> res = new System.Collections.Generic.List<bool>();
+		
+		res.Add (PlayerPrefs.GetBool("EMachineGun"));
+		res.Add (PlayerPrefs.GetBool("EGrenadeLauncher"));
+		res.Add (PlayerPrefs.GetBool("ECryoGun"));
+
+		return res;
+	}
+	public static void equipWeapon(string weaponname){
+		PlayerPrefs.SetBool (weaponname, true);
+	}
+	public static void unequipWeapon(string weaponname){
+		PlayerPrefs.SetBool (weaponname, false);
+	}
+
+	//INSERT OTHER PREFERENCES HERE
+
+	public static void SetInitialPersistent(){
+
 	}
 }
