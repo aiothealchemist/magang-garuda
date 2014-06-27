@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using PlayerPrefs = PreviewLabs.PlayerPrefs;
 
 public class ZombieController : MonoBehaviour {
 	public float moveSpeed = 5.0f;
@@ -59,7 +60,6 @@ public class ZombieController : MonoBehaviour {
 				} 
 		else if (coll.gameObject.tag == "bullet") {//zombie is hit by bullet
 			//add bullet damage
-			Debug.Log("oi oi");
 			health -= 3;
 		}
 	}

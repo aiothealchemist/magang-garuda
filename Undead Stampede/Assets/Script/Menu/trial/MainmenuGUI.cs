@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using PlayerPrefs = PreviewLabs.PlayerPrefs;
 
 public class MainmenuGUI : BasemenuGUI {
 
