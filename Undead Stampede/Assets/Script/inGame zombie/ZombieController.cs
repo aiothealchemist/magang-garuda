@@ -9,8 +9,7 @@ public class ZombieController : MonoBehaviour {
 	private Vector3 object_pos;
 
 	//bikinan cahyo
-	public enum zombieSide {atas, belakang, samping};
-	public zombieSide sisi;
+	ZombieXML attributes;
 	public int health;
 	public int strength;
 	//END OF bikinan cahyo
@@ -18,6 +17,10 @@ public class ZombieController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		moveDirection = Vector3.right;
+	}
+
+	void setAttribute(ZombieXML xml){
+		attributes = xml;
 	}
 	
 	// Update is called once per frame
