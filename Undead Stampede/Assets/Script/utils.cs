@@ -8,10 +8,6 @@ public delegate void voidWithZeroParam();
 public delegate void voidWithTwoParams_String_String(string a, string b);
 
 public static class utils {
-
-	//harusnya ada Persistent data
-	public static bool sfxON = true, musicON = true;
-
 	public enum loadedContentType { achievement, gem, part, powerup, vehicle, weapon, zombie }
 	static TinyXmlReader xmlReader;
 	static string fileXML = "*";
@@ -257,6 +253,30 @@ public static class utils {
 		}
 	}
 
+	//BGM and SFX toggle preference
+	// index 0, key "BGMSetting" = toggle settings for BGM
+	// index 1, key "SFXSetting" = toggle settings for SFX
+	public static System.Collections.Generic.List<bool> getAllSetting(){
+		System.Collections.Generic.List<bool> res = new System.Collections.Generic.List<bool> ();
+
+		res.Add(PlayerPrefs.GetBool("BGMSetting"));
+		res.Add(PlayerPrefs.GetBool("SFXSetting"));
+
+		return res;
+	}
+	public static void setBGM(bool setting){
+		PlayerPrefs.SetBool ("BGMSetting", setting);
+	}
+	public static void setSFX(bool setting){
+		PlayerPrefs.SetBool ("SFXSetting", setting);
+	}
+	public static bool getBGM(){
+		return PlayerPrefs.GetBool("BGMSetting");
+	}
+	public static bool getSFX(){
+		return PlayerPrefs.GetBool("SFXSetting");
+	}
+
 	//INSERT OTHER PREFERENCES HERE
 
 	public static void setInitialPersistent(){
@@ -273,5 +293,7 @@ public static class utils {
 		unlockLevel ("level01");
 		unlockLevel ("level02");
 		unlockLevel ("level03");
+		setBGM (true);
+		setSFX (true);
 	}
 }
