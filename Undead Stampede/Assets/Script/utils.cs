@@ -2,12 +2,22 @@
 
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using PlayerPrefs = PreviewLabs.PlayerPrefs;
 
 public delegate void voidWithZeroParam();
 public delegate void voidWithTwoParams_String_String(string a, string b);
 
 public static class utils {
+
+	//path inside "/Assets/"
+	public static IEnumerator loadImageByPath(string internalPath, Vector2 size, List<Texture2D> array){
+		WWW www = new WWW (Application.dataPath + internalPath);
+		yield return www;
+		Texture2D image = new Texture2D ((int)size.x, (int)size.y);
+		//LoadImageIntoTexture compresses JPGs by DXT1 and PNGs by DXT5 (assume all images are png)
+		www.LoadImageIntoTexture (image);
+	}
 
 	//harusnya ada Persistent data
 	public static bool sfxON = true, musicON = true;
@@ -20,9 +30,9 @@ public static class utils {
 	public static bool isMusic { get; set; }
 
 	public static LoadableContent[] loadSpecificXML (loadedContentType tag){
-		System.Collections.Generic.List<string> stringTags = new System.Collections.Generic.List<string>(getXMLTag (tag));
+		List<string> stringTags = new List<string>(getXMLTag (tag));
 		string typenameTag = stringTags [0]; stringTags.RemoveAt (0);
-		System.Collections.Generic.List<LoadableContent> contents = new System.Collections.Generic.List<LoadableContent> ();
+		List<LoadableContent> contents = new List<LoadableContent> ();
 		xmlReader = new TinyXmlReader (fileXML, true);
 		while (xmlReader.Read ()) {
 			if (xmlReader.isOpeningTag && xmlReader.tagName == typenameTag){
@@ -44,7 +54,7 @@ public static class utils {
 								 new voidWithTwoParams_String_String(temp.setPrice) : 
 								 	(dictionaryTag == "sprites") ? 
 								 new voidWithTwoParams_String_String(temp.setSprite) : null );
-							while (xmlReader.Read (dictionaryTag)) {
+							while (xmlReader.Read (dictionaryTag) && dictMethod != null) {
 								if (xmlReader.isOpeningTag){
 									dictMethod(xmlReader.tagName, xmlReader.content);
 								}
@@ -59,7 +69,7 @@ public static class utils {
 	}
 
 	static string[] getXMLTag(loadedContentType tipe){
-		System.Collections.Generic.List<string> tag = new System.Collections.Generic.List<string> ();
+		List<string> tag = new List<string> ();
 		tag.Add (tipe.ToString ());
 		LoadableContent temp = constructContent (tipe);
 		foreach (var item in temp.GetType ().GetProperties ()) {
