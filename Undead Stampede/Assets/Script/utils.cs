@@ -119,23 +119,29 @@ public static class utils {
 	//extracoins key = "ExtraCoins"
 	//extrahealth key = "ExtraHealth"
 	//extraspeed key = "ExtraSpeed"
-	public static void setExtraCoin(int coin){
-		PlayerPrefs.SetInt ("ExtraCoins", coin);
+	public static int PowerupsExtraCoin{
+		get{
+			return PlayerPrefs.GetInt("ExtraCoins");
+		}
+		set{
+			PlayerPrefs.SetInt("ExtraCoins", value);
+		}
 	}
-	public static void setExtraHealth(int health){
-		PlayerPrefs.SetInt ("ExtraHealth", health);
+	public static int PowerupsExtraHealth{
+		get{
+			return PlayerPrefs.GetInt("ExtraHealth");
+		}
+		set{
+			PlayerPrefs.SetInt("ExtraHealth", value);
+		}
 	}
-	public static void setExtraSpeed(int speed){
-		PlayerPrefs.SetInt ("ExtraSpeed", speed);
-	}
-	public static int getExtraCoin(){
-		return PlayerPrefs.GetInt("ExtraCoins");
-	}
-	public static int getExtraHealth(){
-		return PlayerPrefs.GetInt("ExtraHealth");
-	}
-	public static int getExtraSpeed(){
-		return PlayerPrefs.GetInt("ExtraSpeed");
+	public static int PowerupsExtraSpeed{
+		get{
+			return PlayerPrefs.GetInt("ExtraSpeed");
+		}
+		set{
+			PlayerPrefs.SetInt("ExtraSpeed", value);
+		}
 	}
 
 	//unlocked weapons
@@ -182,25 +188,17 @@ public static class utils {
 			Debug.Log("key: " + weaponname + "not found");
 		}
 	}
-	public static void unequipWeapon(string weaponname){
-		if (PlayerPrefs.HasKey (weaponname)) {
-			PlayerPrefs.SetBool (weaponname, false);
-		} else {
-			//key not found
-			Debug.Log("key: " + weaponname + "not found");
-		}
-	}
 
 	//vehicle preference
-	// index 0, key "Bus" = Default Bus, bought by default
-	// index 1, key "Truck" = The Truck
-	// index 2, key "RV" = The RV
+	// index 0, key "UBus" = Default Bus, bought by default, key "EBus" to equip
+	// index 1, key "UTruck" = The Truck, key "ETruck" to equip
+	// index 2, key "URV" = The RV, key "ERV" to equip
 	public static List<bool> getAllUnlockedVehicle(){
 		List<bool> res = new List<bool>();
 
-		res.Add(PlayerPrefs.GetBool("Bus"));
-		res.Add(PlayerPrefs.GetBool("Truck"));
-		res.Add(PlayerPrefs.GetBool("RV"));
+		res.Add(PlayerPrefs.GetBool("UBus"));
+		res.Add(PlayerPrefs.GetBool("UTruck"));
+		res.Add(PlayerPrefs.GetBool("URV"));
 
 		return res;
 	}
@@ -292,8 +290,8 @@ public static class utils {
 		equipWeapon ("EMachineGun");
 		equipWeapon("EGrenadeLauncher");
 		equipWeapon ("ECryoGun");
-		buyVehicle ("Bus");
-		equipVehicle ("Bus");
+		buyVehicle ("UBus");
+		equipVehicle ("EBus");
 		unlockLevel ("level01");
 		unlockLevel ("level02");
 		unlockLevel ("level03");
