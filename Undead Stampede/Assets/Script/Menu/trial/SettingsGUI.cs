@@ -14,9 +14,6 @@ public class SettingsGUI : BasemenuGUI {
 		base.Start ();
 		menuType = type.showcase;
 
-		isSfx = true;
-		isMusic = utils.musicON;
-
 		sfx = new Texture[] {
 			(Texture2D)Resources.LoadAssetAtPath("Assets/Sprites/speaker1.png", typeof(Texture)), 
 			(Texture2D)Resources.LoadAssetAtPath("Assets/Sprites/speaker2.png", typeof(Texture))
