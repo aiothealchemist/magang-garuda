@@ -19,15 +19,9 @@ public static class utils {
 		www.LoadImageIntoTexture (image);
 	}
 
-	//harusnya ada Persistent data
-	public static bool sfxON = true, musicON = true;
-
 	public enum loadedContentType { achievement, gem, part, powerup, vehicle, weapon, zombie }
 	static TinyXmlReader xmlReader;
 	static string fileXML = "*";
-
-	public static bool isSfx { get; set; }
-	public static bool isMusic { get; set; }
 
 	public static LoadableContent[] loadSpecificXML (loadedContentType tag){
 		List<string> stringTags = new List<string>(getXMLTag (tag));
@@ -149,8 +143,8 @@ public static class utils {
 	// index 0, key "UMachineGun" =  Machine Gun
 	// index 1, key "UGrenadeLauncher" =  Grenade Launcher
 	// index 2, key "UCryoGun" =  Cryo Gun
-	public static System.Collections.Generic.List<bool> getAllUnlockedWeapon(){
-		System.Collections.Generic.List<bool> res = new System.Collections.Generic.List<bool>();
+	public static List<bool> getAllUnlockedWeapon(){
+		List<bool> res = new List<bool>();
 
 		res.Add (PlayerPrefs.GetBool("UMachineGun"));
 		res.Add (PlayerPrefs.GetBool("UGrenadeLauncher"));
@@ -171,8 +165,8 @@ public static class utils {
 	// index 0, key "EMachineGun" =  Machine Gun
 	// index 1, key "EGrenadeLauncher" =  Grenade Launcher
 	// index 2, key "ECryoGun" =  Cryo Gun
-	public static System.Collections.Generic.List<bool> getAllEquippedWeapon(){
-		System.Collections.Generic.List<bool> res = new System.Collections.Generic.List<bool>();
+	public static List<bool> getAllEquippedWeapon(){
+		List<bool> res = new List<bool>();
 		
 		res.Add (PlayerPrefs.GetBool("EMachineGun"));
 		res.Add (PlayerPrefs.GetBool("EGrenadeLauncher"));
@@ -201,8 +195,8 @@ public static class utils {
 	// index 0, key "Bus" = Default Bus, bought by default
 	// index 1, key "Truck" = The Truck
 	// index 2, key "RV" = The RV
-	public static System.Collections.Generic.List<bool> getAllUnlockedVehicle(){
-		System.Collections.Generic.List<bool> res = new System.Collections.Generic.List<bool>();
+	public static List<bool> getAllUnlockedVehicle(){
+		List<bool> res = new List<bool>();
 
 		res.Add(PlayerPrefs.GetBool("Bus"));
 		res.Add(PlayerPrefs.GetBool("Truck"));
@@ -231,8 +225,8 @@ public static class utils {
 	// index 0, key "level01" = level 1
 	// index 1, key "level02" = level 2
 	// index 3, key "level03" = level 3
-	public static System.Collections.Generic.List<bool> getAllUnlockedLevel(){
-		System.Collections.Generic.List<bool> res = new System.Collections.Generic.List<bool> ();
+	public static List<bool> getAllUnlockedLevel(){
+		List<bool> res = new List<bool> ();
 
 		res.Add(PlayerPrefs.GetBool("level01"));
 		res.Add(PlayerPrefs.GetBool("level02"));
@@ -251,8 +245,8 @@ public static class utils {
 
 	//achievement preference
 	// index 0, key "achv01" = Finished Tutorial
-	public static System.Collections.Generic.List<bool> getAllUnlockedAchievement(){
-		System.Collections.Generic.List<bool> res = new System.Collections.Generic.List<bool> ();
+	public static List<bool> getAllUnlockedAchievement(){
+		List<bool> res = new List<bool> ();
 
 		res.Add(PlayerPrefs.GetBool("achv01"));
 
@@ -268,27 +262,23 @@ public static class utils {
 	}
 
 	//BGM and SFX toggle preference
-	// index 0, key "BGMSetting" = toggle settings for BGM
-	// index 1, key "SFXSetting" = toggle settings for SFX
-	public static System.Collections.Generic.List<bool> getAllSetting(){
-		System.Collections.Generic.List<bool> res = new System.Collections.Generic.List<bool> ();
-
-		res.Add(PlayerPrefs.GetBool("BGMSetting"));
-		res.Add(PlayerPrefs.GetBool("SFXSetting"));
-
-		return res;
+	// key "BGMSetting" = toggle settings for BGM
+	// key "SFXSetting" = toggle settings for SFX
+	public static bool persistenceSFX {
+		get {
+			return PlayerPrefs.GetBool("SFXSetting");
+		}
+		set {
+			PlayerPrefs.SetBool("SFXSetting", value);
+		}
 	}
-	public static void setBGM(bool setting){
-		PlayerPrefs.SetBool ("BGMSetting", setting);
-	}
-	public static void setSFX(bool setting){
-		PlayerPrefs.SetBool ("SFXSetting", setting);
-	}
-	public static bool getBGM(){
-		return PlayerPrefs.GetBool("BGMSetting");
-	}
-	public static bool getSFX(){
-		return PlayerPrefs.GetBool("SFXSetting");
+	public static bool persistenceBGM {
+		get {
+			return PlayerPrefs.GetBool("BGMSetting");
+		}
+		set {
+			PlayerPrefs.SetBool("BGMSetting", value);
+		}
 	}
 
 	//INSERT OTHER PREFERENCES HERE
@@ -307,7 +297,7 @@ public static class utils {
 		unlockLevel ("level01");
 		unlockLevel ("level02");
 		unlockLevel ("level03");
-		setBGM (true);
-		setSFX (true);
+		persistenceBGM = true;
+		persistenceSFX = true;
 	}
 }
