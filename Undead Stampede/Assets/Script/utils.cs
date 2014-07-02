@@ -11,7 +11,7 @@ public delegate void voidWithTwoParams_String_String(string a, string b);
 
 public static class utils {
 	//player preferences index
-	public enum playerprefsKey {
+	enum playerprefsKey {
 		UnlockedWeaponInt, UnlockedVehicleInt, UnlockedPartInt,
 		EquippedWeaponInt, EquippedVehicleInt, EquippedPartInt, 
 		PlayerGems, ExtraCoins, ExtraHealth, ExtraSpeed,
@@ -20,6 +20,9 @@ public static class utils {
 	public enum enumeratedBooleanKey {
 		UnlockedWeaponInt, UnlockedVehicleInt, UnlockedPartInt,
 		EquippedWeaponInt, EquippedVehicleInt, EquippedPartInt
+	};
+	public enum integerKey {
+		PlayerGems, ExtraCoins, ExtraHealth, ExtraSpeed
 	};
 	public enum Weapons{MachineGun,GrenadeLauncher,CryoGun};
 	public enum Vehicle{Bus,Truck,RV};
