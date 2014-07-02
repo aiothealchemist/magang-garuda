@@ -188,14 +188,14 @@ public static class utils {
 	public static void setInitialPersistent(){
 		PlayerPrefs.DeleteAll ();
 		Gem = 100;
-		setEnumeratedBoolean (enumeratedBooleanKey.UnlockedWeaponInt, Weapons.MachineGun, true);
-		setEnumeratedBoolean (enumeratedBooleanKey.UnlockedWeaponInt, Weapons.GrenadeLauncher, true);
-		setEnumeratedBoolean (enumeratedBooleanKey.UnlockedWeaponInt, Weapons.CryoGun, true);
-		setEnumeratedBoolean (enumeratedBooleanKey.EquippedWeaponInt, Weapons.MachineGun, true);
-		setEnumeratedBoolean (enumeratedBooleanKey.EquippedWeaponInt, Weapons.GrenadeLauncher, true);
-		setEnumeratedBoolean (enumeratedBooleanKey.EquippedWeaponInt, Weapons.CryoGun, true);
-		setEnumeratedBoolean (enumeratedBooleanKey.UnlockedVehicleInt, Vehicle.Bus, true);
-		setEnumeratedBoolean (enumeratedBooleanKey.EquippedVehicleInt, Vehicle.Bus, true);
+		setEnumeratedBoolean<Weapons> (enumeratedBooleanKey.UnlockedWeaponInt, Weapons.MachineGun, true);
+		setEnumeratedBoolean<Weapons> (enumeratedBooleanKey.UnlockedWeaponInt, Weapons.GrenadeLauncher, true);
+		setEnumeratedBoolean<Weapons> (enumeratedBooleanKey.UnlockedWeaponInt, Weapons.CryoGun, true);
+		setEnumeratedBoolean<Weapons> (enumeratedBooleanKey.EquippedWeaponInt, Weapons.MachineGun, true);
+		setEnumeratedBoolean<Weapons> (enumeratedBooleanKey.EquippedWeaponInt, Weapons.GrenadeLauncher, true);
+		setEnumeratedBoolean<Weapons> (enumeratedBooleanKey.EquippedWeaponInt, Weapons.CryoGun, true);
+		setEnumeratedBoolean<Vehicle> (enumeratedBooleanKey.UnlockedVehicleInt, Vehicle.Bus, true);
+		setEnumeratedBoolean<Vehicle> (enumeratedBooleanKey.EquippedVehicleInt, Vehicle.Bus, true);
 		UnlockedLevel = 1;		
 		persistenceBGM = true;
 		persistenceSFX = true;
