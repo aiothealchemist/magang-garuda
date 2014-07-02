@@ -11,20 +11,13 @@ public delegate void voidWithTwoParams_String_String(string a, string b);
 
 public static class utils {
 	//player preferences indices
-	enum playerprefsKey {
-		UnlockedWeaponInt, UnlockedVehicleInt, UnlockedPartInt,
-		EquippedWeaponInt, EquippedVehicleInt, EquippedPartInt, 
-		UnlockedLevel, UnlockedAchievement,
-		PlayerGems, ExtraCoins, ExtraHealth, ExtraSpeed,
-		SFXSetting, BGMSetting
-	};
 	public enum enumeratedBooleanKey {
 		UnlockedWeaponInt, UnlockedVehicleInt, UnlockedPartInt,
 		EquippedWeaponInt, EquippedVehicleInt, EquippedPartInt,
-		UnlockedLevel, UnlockedAchievement
+		UnlockedAchievement
 	};
 	public enum integerKey {
-		PlayerGems, ExtraCoins, ExtraHealth, ExtraSpeed
+		PlayerGems, ExtraCoins, ExtraHealth, ExtraSpeed, UnlockedLevel
 	};
 	public enum booleanKey {
 		SFXSetting, BGMSetting
@@ -51,11 +44,11 @@ public static class utils {
 		tempSet [index] = status;
 		PlayerPrefs.SetInt (key, ToNumeral (tempSet));
 	}
-	public static BitArray ToBinary(int numeral)
+	static BitArray ToBinary(int numeral)
 	{
 		return new BitArray(new[] { numeral });
 	}
-	public static int ToNumeral(BitArray binary)
+	static int ToNumeral(BitArray binary)
 	{
 		if (binary == null)
 			throw new ArgumentNullException("binary");
@@ -180,22 +173,30 @@ public static class utils {
 		}
 	}
 
+	//unlocked level preferences
+	public static int UnlockedLevel{
+		get{
+			return PlayerPrefs.GetInt(integerKey.UnlockedLevel.ToString ());
+		}
+		set{
+			PlayerPrefs.SetInt(integerKey.UnlockedLevel.ToString (), value);
+		}
+	}
+
 	//INSERT OTHER PREFERENCES HERE
 
 	public static void setInitialPersistent(){
 		PlayerPrefs.DeleteAll ();
 		Gem = 100;
-//		buyWeapon ("UMachineGun");
-//		buyWeapon("UGrenadeLauncher");
-//		buyWeapon ("UCryoGun");
-//		equipWeapon ("EMachineGun");
-//		equipWeapon("EGrenadeLauncher");
-//		equipWeapon ("ECryoGun");
-//		buyVehicle ("UBus");
-//		equipVehicle ("EBus");
-//		unlockLevel ("level01");
-//		unlockLevel ("level02");
-//		unlockLevel ("level03");
+		setEnumeratedBoolean (enumeratedBooleanKey.UnlockedWeaponInt, Weapons.MachineGun, true);
+		setEnumeratedBoolean (enumeratedBooleanKey.UnlockedWeaponInt, Weapons.GrenadeLauncher, true);
+		setEnumeratedBoolean (enumeratedBooleanKey.UnlockedWeaponInt, Weapons.CryoGun, true);
+		setEnumeratedBoolean (enumeratedBooleanKey.EquippedWeaponInt, Weapons.MachineGun, true);
+		setEnumeratedBoolean (enumeratedBooleanKey.EquippedWeaponInt, Weapons.GrenadeLauncher, true);
+		setEnumeratedBoolean (enumeratedBooleanKey.EquippedWeaponInt, Weapons.CryoGun, true);
+		setEnumeratedBoolean (enumeratedBooleanKey.UnlockedVehicleInt, Vehicle.Bus, true);
+		setEnumeratedBoolean (enumeratedBooleanKey.EquippedVehicleInt, Vehicle.Bus, true);
+		UnlockedLevel = 1;		
 		persistenceBGM = true;
 		persistenceSFX = true;
 	}
