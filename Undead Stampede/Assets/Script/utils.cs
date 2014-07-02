@@ -11,23 +11,23 @@ public delegate void voidWithTwoParams_String_String(string a, string b);
 
 public static class utils {
 	//player preferences index
-	//Unlockable Weapon
+	const string[] playerprefsKey = new string[] {"UnlockedWeaponInt", "UnlockedVehicleInt", "PlayerGems", "ExtraCoins"};
 	public enum UnlockableWeapon{MachineGun,GrenadeLauncher,CryoGun};
 	public enum UnlockableVehicle{Bus,Truck,RV};
 
-	public static int getAllUnlockableWeaponInt(){
-		return PlayerPrefs.GetInt("UnlockedWeaponInt");
+	public static BitArray getAllUnlockableWeaponInt(){
+		return ToBinary(PlayerPrefs.GetInt("UnlockedWeaponInt"));
 	}
 	
 	public static void setUnlockableWeapon(UnlockableWeapon weaponname, bool toggle){
-		setBitArrayPrefs ("UnlockedWeaponInt", (int)weaponname, toggle);
+		set_BitArray_PlayerPrefs ("UnlockedWeaponInt", (int)weaponname, toggle);
 	}
 	
 	public static void setUnlockableVehicle(UnlockableVehicle vehiclename, bool toggle){
-		setBitArrayPrefs ("UnlockedVehicleInt", (int)vehiclename, toggle);
+		set_BitArray_PlayerPrefs ("UnlockedVehicleInt", (int)vehiclename, toggle);
 	}
 
-	static void setBitArrayPrefs(string key, int index, bool status){
+	static void set_BitArray_PlayerPrefs(string key, int index, bool status){
 		int indexInt = PlayerPrefs.GetInt(key);
 		BitArray tempSet = ToBinary (indexInt);
 		tempSet [index] = status;
@@ -49,15 +49,6 @@ public static class utils {
 		var result = new int[1];
 		binary.CopyTo(result, 0);
 		return result[0];
-	}
-
-	//path inside "/Assets/"
-	public static IEnumerator loadImageByPath(string internalPath, Vector2 size, List<Texture2D> array){
-		WWW www = new WWW (Application.dataPath + internalPath);
-		yield return www;
-		Texture2D image = new Texture2D ((int)size.x, (int)size.y);
-		//LoadImageIntoTexture compresses JPGs by DXT1 and PNGs by DXT5 (assume all images are png)
-		www.LoadImageIntoTexture (image);
 	}
 
 	public enum loadedContentType { achievement, gem, part, powerup, vehicle, weapon, zombie }
@@ -143,17 +134,19 @@ public static class utils {
 
 	//player preferences methods
 	//gems --> key = "PlayerGems"
-	public static void setGems(int gems){
-		PlayerPrefs.SetInt ("PlayerGems", gems);
-	}
-	public static int getGems(){
-		return PlayerPrefs.GetInt("PlayerGems");
+	public static int Gem{
+		get{
+			return PlayerPrefs.GetInt("PlayerGems");
+		}
+		set{
+			PlayerPrefs.SetInt("PlayerGems", value);
+		}
 	}
 	public static void addGems(int gems){
-		PlayerPrefs.SetInt ("PlayerGems", getGems () + gems);
+		PlayerPrefs.SetInt ("PlayerGems", Gem + gems);
 	}
 	public static void substractGems(int gems){
-		PlayerPrefs.SetInt ("PlayerGems", getGems () - gems);
+		PlayerPrefs.SetInt ("PlayerGems", Gem - gems);
 	}
 
 	//powerups
@@ -324,7 +317,7 @@ public static class utils {
 
 	public static void setInitialPersistent(){
 		PlayerPrefs.DeleteAll ();
-		setGems (100);
+		Gem = 100;
 //		buyWeapon ("UMachineGun");
 //		buyWeapon("UGrenadeLauncher");
 //		buyWeapon ("UCryoGun");
