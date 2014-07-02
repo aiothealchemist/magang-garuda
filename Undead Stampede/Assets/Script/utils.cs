@@ -15,7 +15,7 @@ public static class utils {
 		UnlockedWeaponInt, UnlockedVehicleInt, UnlockedPartInt,
 		EquippedWeaponInt, EquippedVehicleInt, EquippedPartInt, 
 		PlayerGems, ExtraCoins, ExtraHealth, ExtraSpeed,
-		SFXSetting, BGMSetting
+		SFXSetting, BGMSetting, UnlockedLevel, UnlockedAchievement
 	};
 	public enum enumeratedBooleanKey {
 		UnlockedWeaponInt, UnlockedVehicleInt, UnlockedPartInt,
