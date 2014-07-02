@@ -40,7 +40,7 @@ public static class utils {
 		set_BitArray_PlayerPrefs (key.ToString (), index, toggle);
 	}
 	public static void setEnumeratedBoolean<TEnum>(enumeratedBooleanKey key, TEnum enumValue, bool toggle) {
-		set_BitArray_PlayerPrefs (key.ToString (), (int) Enum.ToObject(typeof(TEnum), enumValue), toggle);
+		set_BitArray_PlayerPrefs (key.ToString (), (int) (object) enumValue, toggle);
 	}
 	public static BitArray getEnumeratedBoolean(enumeratedBooleanKey key){
 		return ToBinary(PlayerPrefs.GetInt(key.ToString ()));
