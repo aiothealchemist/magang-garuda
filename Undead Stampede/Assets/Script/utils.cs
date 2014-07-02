@@ -123,60 +123,60 @@ public static class utils {
 	//gems
 	public static int Gem{
 		get{
-			return PlayerPrefs.GetInt(playerprefsKey.PlayerGems.ToString ());
+			return PlayerPrefs.GetInt(integerKey.PlayerGems.ToString ());
 		}
 		set{
-			PlayerPrefs.SetInt(playerprefsKey.PlayerGems.ToString (), value);
+			PlayerPrefs.SetInt(integerKey.PlayerGems.ToString (), value);
 		}
 	}
 	public static void addGems(int gems){
-		PlayerPrefs.SetInt (playerprefsKey.PlayerGems.ToString (), Gem + gems);
+		PlayerPrefs.SetInt (integerKey.PlayerGems.ToString (), Gem + gems);
 	}
 	public static void substractGems(int gems){
-		PlayerPrefs.SetInt (playerprefsKey.PlayerGems.ToString (), Gem - gems);
+		PlayerPrefs.SetInt (integerKey.PlayerGems.ToString (), Gem - gems);
 	}
 
 	//powerups
 	public static int PowerupsExtraCoin{
 		get{
-			return PlayerPrefs.GetInt(playerprefsKey.ExtraCoins.ToString ());
+			return PlayerPrefs.GetInt(integerKey.ExtraCoins.ToString ());
 		}
 		set{
-			PlayerPrefs.SetInt(playerprefsKey.ExtraCoins.ToString (), value);
+			PlayerPrefs.SetInt(integerKey.ExtraCoins.ToString (), value);
 		}
 	}
 	public static int PowerupsExtraHealth{
 		get{
-			return PlayerPrefs.GetInt(playerprefsKey.ExtraHealth.ToString ());
+			return PlayerPrefs.GetInt(integerKey.ExtraHealth.ToString ());
 		}
 		set{
-			PlayerPrefs.SetInt(playerprefsKey.ExtraHealth.ToString (), value);
+			PlayerPrefs.SetInt(integerKey.ExtraHealth.ToString (), value);
 		}
 	}
 	public static int PowerupsExtraSpeed{
 		get{
-			return PlayerPrefs.GetInt(playerprefsKey.ExtraSpeed.ToString ());
+			return PlayerPrefs.GetInt(integerKey.ExtraSpeed.ToString ());
 		}
 		set{
-			PlayerPrefs.SetInt(playerprefsKey.ExtraSpeed.ToString (), value);
+			PlayerPrefs.SetInt(integerKey.ExtraSpeed.ToString (), value);
 		}
 	}
 	
 	//BGM and SFX toggle preference
 	public static bool persistenceSFX {
 		get {
-			return PlayerPrefs.GetBool(playerprefsKey.SFXSetting.ToString ());
+			return PlayerPrefs.GetBool(booleanKey.SFXSetting.ToString ());
 		}
 		set {
-			PlayerPrefs.SetBool(playerprefsKey.SFXSetting.ToString (), value);
+			PlayerPrefs.SetBool(booleanKey.SFXSetting.ToString (), value);
 		}
 	}
 	public static bool persistenceBGM {
 		get {
-			return PlayerPrefs.GetBool(playerprefsKey.BGMSetting.ToString ());
+			return PlayerPrefs.GetBool(booleanKey.BGMSetting.ToString ());
 		}
 		set {
-			PlayerPrefs.SetBool(playerprefsKey.BGMSetting.ToString (), value);
+			PlayerPrefs.SetBool(booleanKey.BGMSetting.ToString (), value);
 		}
 	}
 
