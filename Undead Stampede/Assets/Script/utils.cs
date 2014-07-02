@@ -38,10 +38,6 @@ public static class utils {
 		PlayerPrefs.SetInt (key, ToNumeral (tempSet));
 	}
 
-	public static BitArray getAllUnlockableWeaponInt(){
-		return ToBinary(PlayerPrefs.GetInt("UnlockedWeaponInt"));
-	}
-
 	public static BitArray ToBinary(int numeral)
 	{
 		return new BitArray(new[] { numeral });
