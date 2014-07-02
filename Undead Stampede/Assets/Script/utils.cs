@@ -13,7 +13,7 @@ public static class utils {
 	//player preferences index
 	//Unlockable Weapon
 	public enum UnlockableWeapon{MachineGun,GrenadeLauncher,CryoGun};
-	public enum UnlockableVehicle{MachineGun,GrenadeLauncher,CryoGun};
+	public enum UnlockableVehicle{Bus,Truck,RV};
 
 	public static int getAllUnlockableWeaponInt(){
 		return PlayerPrefs.GetInt("UnlockedWeaponInt");
@@ -190,115 +190,115 @@ public static class utils {
 	// index 0, key "UMachineGun" =  Machine Gun
 	// index 1, key "UGrenadeLauncher" =  Grenade Launcher
 	// index 2, key "UCryoGun" =  Cryo Gun
-	public static List<bool> getAllUnlockedWeapon(){
-		List<bool> res = new List<bool>();
-
-		res.Add (PlayerPrefs.GetBool("UMachineGun"));
-		res.Add (PlayerPrefs.GetBool("UGrenadeLauncher"));
-		res.Add (PlayerPrefs.GetBool("UCryoGun"));
-
-		return res;
-	}
-	public static void buyWeapon(string weaponname){
-		if (PlayerPrefs.HasKey (weaponname)) {
-						PlayerPrefs.SetBool (weaponname, true);
-				} else {
-					//key not found
-					Debug.Log("key: " + weaponname + "not found");
-				}
-	}
+//	public static List<bool> getAllUnlockedWeapon(){
+//		List<bool> res = new List<bool>();
+//
+//		res.Add (PlayerPrefs.GetBool("UMachineGun"));
+//		res.Add (PlayerPrefs.GetBool("UGrenadeLauncher"));
+//		res.Add (PlayerPrefs.GetBool("UCryoGun"));
+//
+//		return res;
+//	}
+//	public static void buyWeapon(string weaponname){
+//		if (PlayerPrefs.HasKey (weaponname)) {
+//						PlayerPrefs.SetBool (weaponname, true);
+//				} else {
+//					//key not found
+//					Debug.Log("key: " + weaponname + "not found");
+//				}
+//	}
 
 	//equipped weapon, index arrangement equals to the unlocked weapon index arrangement
 	// index 0, key "EMachineGun" =  Machine Gun
 	// index 1, key "EGrenadeLauncher" =  Grenade Launcher
 	// index 2, key "ECryoGun" =  Cryo Gun
-	public static List<bool> getAllEquippedWeapon(){
-		List<bool> res = new List<bool>();
-		
-		res.Add (PlayerPrefs.GetBool("EMachineGun"));
-		res.Add (PlayerPrefs.GetBool("EGrenadeLauncher"));
-		res.Add (PlayerPrefs.GetBool("ECryoGun"));
-
-		return res;
-	}
-	public static void equipWeapon(string weaponname){
-		if (PlayerPrefs.HasKey (weaponname)) {
-			PlayerPrefs.SetBool (weaponname, true);
-		} else {
-			//key not found
-			Debug.Log("key: " + weaponname + "not found");
-		}
-	}
+//	public static List<bool> getAllEquippedWeapon(){
+//		List<bool> res = new List<bool>();
+//		
+//		res.Add (PlayerPrefs.GetBool("EMachineGun"));
+//		res.Add (PlayerPrefs.GetBool("EGrenadeLauncher"));
+//		res.Add (PlayerPrefs.GetBool("ECryoGun"));
+//
+//		return res;
+//	}
+//	public static void equipWeapon(string weaponname){
+//		if (PlayerPrefs.HasKey (weaponname)) {
+//			PlayerPrefs.SetBool (weaponname, true);
+//		} else {
+//			//key not found
+//			Debug.Log("key: " + weaponname + "not found");
+//		}
+//	}
 
 	//vehicle preference
 	// index 0, key "UBus" = Default Bus, bought by default, key "EBus" to equip
 	// index 1, key "UTruck" = The Truck, key "ETruck" to equip
 	// index 2, key "URV" = The RV, key "ERV" to equip
-	public static List<bool> getAllUnlockedVehicle(){
-		List<bool> res = new List<bool>();
-
-		res.Add(PlayerPrefs.GetBool("UBus"));
-		res.Add(PlayerPrefs.GetBool("UTruck"));
-		res.Add(PlayerPrefs.GetBool("URV"));
-
-		return res;
-	}
-	public static void buyVehicle(string vehiclename){
-		if (PlayerPrefs.HasKey (vehiclename)) {
-			PlayerPrefs.SetBool (vehiclename, true);
-		} else {
-			//key not found
-			Debug.Log("key: " + vehiclename + "not found");
-		}
-	}
-	public static void equipVehicle(string vehiclename){
-		if (PlayerPrefs.HasKey (vehiclename)) {
-			PlayerPrefs.SetBool (vehiclename, true);
-		} else {
-			//key not found
-			Debug.Log("key: " + vehiclename + "not found");
-		}
-	}
+//	public static List<bool> getAllUnlockedVehicle(){
+//		List<bool> res = new List<bool>();
+//
+//		res.Add(PlayerPrefs.GetBool("UBus"));
+//		res.Add(PlayerPrefs.GetBool("UTruck"));
+//		res.Add(PlayerPrefs.GetBool("URV"));
+//
+//		return res;
+//	}
+//	public static void buyVehicle(string vehiclename){
+//		if (PlayerPrefs.HasKey (vehiclename)) {
+//			PlayerPrefs.SetBool (vehiclename, true);
+//		} else {
+//			//key not found
+//			Debug.Log("key: " + vehiclename + "not found");
+//		}
+//	}
+//	public static void equipVehicle(string vehiclename){
+//		if (PlayerPrefs.HasKey (vehiclename)) {
+//			PlayerPrefs.SetBool (vehiclename, true);
+//		} else {
+//			//key not found
+//			Debug.Log("key: " + vehiclename + "not found");
+//		}
+//	}
 
 	//level preference
 	// index 0, key "level01" = level 1
 	// index 1, key "level02" = level 2
 	// index 3, key "level03" = level 3
-	public static List<bool> getAllUnlockedLevel(){
-		List<bool> res = new List<bool> ();
-
-		res.Add(PlayerPrefs.GetBool("level01"));
-		res.Add(PlayerPrefs.GetBool("level02"));
-		res.Add(PlayerPrefs.GetBool("level03"));
-		
-		return res;
-	}
-	public static void unlockLevel(string levelname){
-		if (PlayerPrefs.HasKey (levelname)) {
-			PlayerPrefs.SetBool (levelname, true);
-		} else {
-			//key not found
-			Debug.Log("key: " + levelname + "not found");
-		}
-	}
+//	public static List<bool> getAllUnlockedLevel(){
+//		List<bool> res = new List<bool> ();
+//
+//		res.Add(PlayerPrefs.GetBool("level01"));
+//		res.Add(PlayerPrefs.GetBool("level02"));
+//		res.Add(PlayerPrefs.GetBool("level03"));
+//		
+//		return res;
+//	}
+//	public static void unlockLevel(string levelname){
+//		if (PlayerPrefs.HasKey (levelname)) {
+//			PlayerPrefs.SetBool (levelname, true);
+//		} else {
+//			//key not found
+//			Debug.Log("key: " + levelname + "not found");
+//		}
+//	}
 
 	//achievement preference
 	// index 0, key "achv01" = Finished Tutorial
-	public static List<bool> getAllUnlockedAchievement(){
-		List<bool> res = new List<bool> ();
-
-		res.Add(PlayerPrefs.GetBool("achv01"));
-
-		return res;
-	}
-	public static void unlockAchievement(string achievementname){
-		if (PlayerPrefs.HasKey (achievementname)) {
-			PlayerPrefs.SetBool (achievementname, true);
-		} else {
-			//key not found
-			Debug.Log("key: " + achievementname + "not found");
-		}
-	}
+//	public static List<bool> getAllUnlockedAchievement(){
+//		List<bool> res = new List<bool> ();
+//
+//		res.Add(PlayerPrefs.GetBool("achv01"));
+//
+//		return res;
+//	}
+//	public static void unlockAchievement(string achievementname){
+//		if (PlayerPrefs.HasKey (achievementname)) {
+//			PlayerPrefs.SetBool (achievementname, true);
+//		} else {
+//			//key not found
+//			Debug.Log("key: " + achievementname + "not found");
+//		}
+//	}
 
 	//BGM and SFX toggle preference
 	// key "BGMSetting" = toggle settings for BGM
@@ -325,17 +325,17 @@ public static class utils {
 	public static void setInitialPersistent(){
 		PlayerPrefs.DeleteAll ();
 		setGems (100);
-		buyWeapon ("UMachineGun");
-		buyWeapon("UGrenadeLauncher");
-		buyWeapon ("UCryoGun");
-		equipWeapon ("EMachineGun");
-		equipWeapon("EGrenadeLauncher");
-		equipWeapon ("ECryoGun");
-		buyVehicle ("UBus");
-		equipVehicle ("EBus");
-		unlockLevel ("level01");
-		unlockLevel ("level02");
-		unlockLevel ("level03");
+//		buyWeapon ("UMachineGun");
+//		buyWeapon("UGrenadeLauncher");
+//		buyWeapon ("UCryoGun");
+//		equipWeapon ("EMachineGun");
+//		equipWeapon("EGrenadeLauncher");
+//		equipWeapon ("ECryoGun");
+//		buyVehicle ("UBus");
+//		equipVehicle ("EBus");
+//		unlockLevel ("level01");
+//		unlockLevel ("level02");
+//		unlockLevel ("level03");
 		persistenceBGM = true;
 		persistenceSFX = true;
 	}
