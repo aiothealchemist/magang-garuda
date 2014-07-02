@@ -11,22 +11,41 @@ public delegate void voidWithTwoParams_String_String(string a, string b);
 
 public static class utils {
 	//player preferences index
-	const string[] playerprefsKey = new string[] {"UnlockedWeaponInt", "UnlockedVehicleInt", "PlayerGems", "ExtraCoins"};
+	public enum playerprefsKey {
+		UnlockedWeaponInt, UnlockedVehicleInt, UnlockedPartInt,
+		EquippedWeaponInt, EquippedVehicleInt, EquippedPartInt, 
+		PlayerGems, ExtraCoins, ExtraHealth, ExtraSpeed,
+		SFXSetting, BGMSetting
+	};
+	public static void setEnumeratedBoolean(playerprefsKey key, Enum enumValue, bool toggle){
+		set_BitArray_PlayerPrefs (key.ToString (), (int) enumValue,toggle);
+	}
+	void anu(){
+		setUnlockableVehicle (UnlockableVehicle.RV, true);
+		// ==
+		setEnumeratedBoolean (playerprefsKey.UnlockedVehicleInt, UnlockableVehicle.RV, true);
+
+		setUnlockableWeapon (UnlockableWeapon.CryoGun, true);
+		// ==
+		setEnumeratedBoolean (playerprefsKey.UnlockedWeaponInt, UnlockableWeapon.CryoGun, true);
+	}
+
+
 	public enum UnlockableWeapon{MachineGun,GrenadeLauncher,CryoGun};
 	public enum UnlockableVehicle{Bus,Truck,RV};
 
 	public static BitArray getAllUnlockableWeaponInt(){
 		return ToBinary(PlayerPrefs.GetInt("UnlockedWeaponInt"));
 	}
-	
-	public static void setUnlockableWeapon(UnlockableWeapon weaponname, bool toggle){
-		set_BitArray_PlayerPrefs ("UnlockedWeaponInt", (int)weaponname, toggle);
-	}
-	
-	public static void setUnlockableVehicle(UnlockableVehicle vehiclename, bool toggle){
-		set_BitArray_PlayerPrefs ("UnlockedVehicleInt", (int)vehiclename, toggle);
-	}
-
+//	
+//	public static void setUnlockableWeapon(UnlockableWeapon weaponname, bool toggle){
+//		set_BitArray_PlayerPrefs ("UnlockedWeaponInt", (int)weaponname, toggle);
+//	}
+//	
+//	public static void setUnlockableVehicle(UnlockableVehicle vehiclename, bool toggle){
+//		set_BitArray_PlayerPrefs ("UnlockedVehicleInt", (int)vehiclename, toggle);
+//	}
+//
 	static void set_BitArray_PlayerPrefs(string key, int index, bool status){
 		int indexInt = PlayerPrefs.GetInt(key);
 		BitArray tempSet = ToBinary (indexInt);
