@@ -4,11 +4,46 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using PlayerPrefs = PreviewLabs.PlayerPrefs;
+using System;
 
 public delegate void voidWithZeroParam();
 public delegate void voidWithTwoParams_String_String(string a, string b);
 
 public static class utils {
+	//player preferences index
+	//Unlockable Weapon
+	public enum UnlockableWeapon{MachineGun,GrenadeLauncher,CryoGun};
+
+	public static int getAllUnlockableWeaponInt(){
+		return PlayerPrefs.GetInt("UnlockedWeaponInt");
+	}
+
+	public static void setUnlockableWeapon(UnlockableWeapon weaponname, bool toggle){
+		int indexInt = PlayerPrefs.GetInt("UnlockedWeaponInt");
+		int weaponIndex = (int)weaponname;
+
+		BitArray tempSet = ToBinary (indexInt);
+		tempSet [weaponIndex] = toggle;
+
+		PlayerPrefs.SetInt ("UnlockedWeaponInt", ToNumeral (tempSet));
+	}
+
+	public static BitArray ToBinary(int numeral)
+	{
+		return new BitArray(new[] { numeral });
+	}
+	
+	public static int ToNumeral(BitArray binary)
+	{
+		if (binary == null)
+			throw new ArgumentNullException("binary");
+		if (binary.Length > 32)
+			throw new ArgumentException("must be at most 32 bits long");
+		
+		var result = new int[1];
+		binary.CopyTo(result, 0);
+		return result[0];
+	}
 
 	//path inside "/Assets/"
 	public static IEnumerator loadImageByPath(string internalPath, Vector2 size, List<Texture2D> array){
