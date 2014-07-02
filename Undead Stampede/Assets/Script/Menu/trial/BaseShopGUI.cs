@@ -12,7 +12,7 @@ public class BaseShopGUI : BasemenuGUI {
 	int objPrice = 0;
 	int num;
 	
-	public void loadShop(utils.loadedContentType tipe){
+	public void loadShop(LoadableContent.loadedContentType tipe){
 		content = utils.loadSpecificXML (tipe);
 	}
 

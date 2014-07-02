@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 public abstract class LoadableContent {
+	public enum loadedContentType { achievement, gem, part, powerup, vehicle, weapon, zombie }
 
 	//di sini termasuk achievement, parts, powerups
 	public enum currency { gem, coin, realMoney }
@@ -25,24 +26,53 @@ public abstract class LoadableContent {
 		sprites = new System.Collections.Generic.Dictionary<spriteTypes, Sprite> ();
 		pricing = new System.Collections.Generic.Dictionary<currency, int> ();
 	}
-	
-	public void setPrice(currency money, int price){
-		pricing [money] = price;
-	}
 
-	public void setSprite(spriteTypes tipe, Sprite sprite){
-		sprites [tipe] = sprite;
-	}
-
-	// ToParse price & sprite
+	// ToParse price
 	public void setPrice(string money, string price){
 		setPrice (money == "realMoney" ? currency.realMoney : money == "gem" ? currency.gem : currency.coin,
 		          int.Parse(price));
 	}
+	public void setPrice(currency money, int price){
+		pricing [money] = price;
+	}
+
+	// ToParse sprite
 	public void setSprite(string tipe, string sprite){
 		setSprite (tipe == "button" ? spriteTypes.button : tipe == "ingame" ? spriteTypes.ingame :
 		           tipe == "explode" ? spriteTypes.explode : spriteTypes.projectile,
 		           null);	//parse sprite path: 
+	}
+	public void setSprite(spriteTypes tipe, Sprite sprite){
+		sprites [tipe] = sprite;
+	}
+
+	//construct child
+	public static LoadableContent constructContent(loadedContentType tipe){
+		LoadableContent tag = null;
+		switch (tipe) {
+		case loadedContentType.achievement:
+			tag = new AchievementXML();
+			break;
+		case loadedContentType.gem:
+			tag = new GemXML();
+			break;
+		case loadedContentType.part:
+			tag = new PartXML();
+			break;
+		case loadedContentType.powerup:
+			tag = new PowerupXML();
+			break;
+		case loadedContentType.vehicle:
+			tag = new VehicleXML();
+			break;
+		case loadedContentType.weapon:
+			tag = new WeaponXML();
+			break;
+		case loadedContentType.zombie:
+			tag = new ZombieXML();
+			break;
+		}
+		return tag;
 	}
 }
 
