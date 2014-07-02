@@ -4,7 +4,6 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using PlayerPrefs = PreviewLabs.PlayerPrefs;
-using System;
 
 public delegate void voidWithZeroParam();
 public delegate void voidWithTwoParams_String_String(string a, string b);
@@ -40,6 +39,7 @@ public static class utils {
 		set_BitArray_PlayerPrefs (key.ToString (), index, toggle);
 	}
 	public static void setEnumeratedBoolean<TEnum>(enumeratedBooleanKey key, TEnum enumValue, bool toggle) {
+		//(int) Enum.ToObject(typeof(TEnum), enumValue)
 		set_BitArray_PlayerPrefs (key.ToString (), (int) (object) enumValue, toggle);
 	}
 	public static BitArray getEnumeratedBoolean(enumeratedBooleanKey key){
@@ -58,9 +58,9 @@ public static class utils {
 	public static int ToNumeral(BitArray binary)
 	{
 		if (binary == null)
-			throw new ArgumentNullException("binary");
+			throw new System.ArgumentNullException("binary");
 		if (binary.Length > 32)
-			throw new ArgumentException("must be at most 32 bits long");
+			throw new System.ArgumentException("must be at most 32 bits long");
 		
 		var result = new int[1];
 		binary.CopyTo(result, 0);
