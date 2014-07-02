@@ -13,19 +13,25 @@ public static class utils {
 	//player preferences index
 	//Unlockable Weapon
 	public enum UnlockableWeapon{MachineGun,GrenadeLauncher,CryoGun};
+	public enum UnlockableVehicle{MachineGun,GrenadeLauncher,CryoGun};
 
 	public static int getAllUnlockableWeaponInt(){
 		return PlayerPrefs.GetInt("UnlockedWeaponInt");
 	}
-
+	
 	public static void setUnlockableWeapon(UnlockableWeapon weaponname, bool toggle){
-		int indexInt = PlayerPrefs.GetInt("UnlockedWeaponInt");
-		int weaponIndex = (int)weaponname;
+		setBitArrayPrefs ("UnlockedWeaponInt", (int)weaponname, toggle);
+	}
+	
+	public static void setUnlockableVehicle(UnlockableVehicle vehiclename, bool toggle){
+		setBitArrayPrefs ("UnlockedVehicleInt", (int)vehiclename, toggle);
+	}
 
+	static void setBitArrayPrefs(string key, int index, bool status){
+		int indexInt = PlayerPrefs.GetInt(key);
 		BitArray tempSet = ToBinary (indexInt);
-		tempSet [weaponIndex] = toggle;
-
-		PlayerPrefs.SetInt ("UnlockedWeaponInt", ToNumeral (tempSet));
+		tempSet [index] = status;
+		PlayerPrefs.SetInt (key, ToNumeral (tempSet));
 	}
 
 	public static BitArray ToBinary(int numeral)
