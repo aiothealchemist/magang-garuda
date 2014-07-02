@@ -17,11 +17,18 @@ public static class utils {
 		PlayerGems, ExtraCoins, ExtraHealth, ExtraSpeed,
 		SFXSetting, BGMSetting, UnlockedLevel, UnlockedAchievement
 	};
-	public enum UnlockableWeapon{MachineGun,GrenadeLauncher,CryoGun};
-	public enum UnlockableVehicle{Bus,Truck,RV};
+	public enum enumeratedBooleanKey {
+		UnlockedWeaponInt, UnlockedVehicleInt, UnlockedPartInt,
+		EquippedWeaponInt, EquippedVehicleInt, EquippedPartInt
+	};
+	public enum Weapons{MachineGun,GrenadeLauncher,CryoGun};
+	public enum Vehicle{Bus,Truck,RV};
 
-	public static void setEnumeratedBoolean(playerprefsKey key, Enum enumValue, bool toggle){
+	public static void setEnumeratedBoolean(enumeratedBooleanKey key, Enum enumValue, bool toggle){
 		set_BitArray_PlayerPrefs (key.ToString (), (int) enumValue,toggle);
+	}
+	public static BitArray getEnumeratedBoolean(enumeratedBooleanKey key){
+		return ToBinary(PlayerPrefs.GetInt(key.ToString ()));
 	}
 
 	static void set_BitArray_PlayerPrefs(string key, int index, bool status){
