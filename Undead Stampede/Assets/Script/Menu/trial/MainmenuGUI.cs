@@ -5,24 +5,20 @@ using PlayerPrefs = PreviewLabs.PlayerPrefs;
 public class MainmenuGUI : BasemenuGUI {
 
 	int selectedButton = 0;
-	public System.Collections.Generic.List<Texture2D> menuButtons;
+	Texture2D[] menuButtons;
 
 	// Use this for initialization
 	protected override void Start () {
 		base.Start ();
-		menuType = type.menu;
-		menuButtons = new System.Collections.Generic.List<Texture2D> ();
-		utils.loadImageByPath ("Textures/menu/play.png", new Vector2 (256, 64), menuButtons);
-		utils.loadImageByPath ("Textures/menu/setting.png", new Vector2 (256, 64), menuButtons);
-		utils.loadImageByPath ("Textures/menu/credits.png", new Vector2 (256, 64), menuButtons);
-		utils.loadImageByPath ("Textures/menu/exit.png", new Vector2 (256, 64), menuButtons);
+		menuButtons = Resources.LoadAll<Texture2D> ("button/mainmenu");
+		menuBG = Resources.Load<Texture2D> ("background/menupad");
 	}
 
 	protected override void updateGUI () {
-		GUI.Box (new Rect (0, height / 8, width / 3, height * 3 / 4), menuBG);	//GUIStyle.none
+		GUI.DrawTexture (new Rect (- width / 6, height / 10, width / 2, height * 4 / 5), menuBG,ScaleMode.StretchToFill);
 		selectedButton = GUI.SelectionGrid (
-			new Rect (width / 30, height / 8, width / 3, height * 3 / 4), 
-			selectedButton, menuButtons.ToArray (), 1, GUIStyle.none);
+			new Rect (width / 100, height / 6, width / 3, height * 2 / 3), 
+			selectedButton, menuButtons, 1, GUIStyle.none);
 
 		// If the user clicked a new Toolbar button this frame, we'll process their input
 		if (GUI.changed)
@@ -33,7 +29,7 @@ public class MainmenuGUI : BasemenuGUI {
 				Destroy (this);
 				break;
 			case 1:	//settings
-				setShowcase(gameObject.AddComponent<SettingsGUI>());
+				setShowcase(gameObject.AddComponent<Settings>());
 				break;
 			case 2:	//credits
 				setShowcase(gameObject.AddComponent<CreditsGUI>());
