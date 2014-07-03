@@ -21,22 +21,23 @@ public static class utils {
 	public enum booleanKey {
 		SFXSetting, BGMSetting
 	};
-
 	//unlockables
 	public enum Parts{Engine, Armor};
 	public enum Weapons{MachineGun,GrenadeLauncher,CryoGun};
 	public enum Vehicle{Bus,Truck,RV};
 
-	//enumerated boolean
-	public static void setEnumeratedBoolean(enumeratedBooleanKey key, int index, bool toggle){
-		set_BitArray_PlayerPrefs (key.ToString (), index, toggle);
+	//prefs setter
+	public static void setIntegerPrefs(integerKey key, int value){
+		PlayerPrefs.SetInt (key.ToString (), value);
 	}
-	public static void setEnumeratedBoolean<TEnum>(enumeratedBooleanKey key, TEnum enumValue, bool toggle) {
-		//(int) Enum.ToObject(typeof(TEnum), enumValue)
-		set_BitArray_PlayerPrefs (key.ToString (), (int) (object) enumValue, toggle);
+	public static void setBooleanPrefs(booleanKey key, bool value){
+		PlayerPrefs.SetBool (key.ToString (), value);;
 	}
-	public static BitArray getEnumeratedBoolean(enumeratedBooleanKey key){
-		return ToBinary(PlayerPrefs.GetInt(key.ToString ()));
+	public static void setEnumeratedBooleanPrefs(enumeratedBooleanKey key, int index, bool value){
+		set_BitArray_PlayerPrefs (key.ToString (), index, value);
+	}
+	public static void setEnumeratedBooleanPrefs<TEnum>(enumeratedBooleanKey key, TEnum enumIdx, bool value) {
+		set_BitArray_PlayerPrefs (key.ToString (), (int) System.Enum.ToObject(typeof(TEnum), enumIdx), value);
 	}
 	static void set_BitArray_PlayerPrefs(string key, int index, bool status){
 		int indexInt = PlayerPrefs.GetInt(key);
@@ -44,6 +45,19 @@ public static class utils {
 		tempSet [index] = status;
 		PlayerPrefs.SetInt (key, ToNumeral (tempSet));
 	}
+
+	//prefs getter
+	public static int getIntegerPrefs(integerKey key){
+		return PlayerPrefs.GetInt (key.ToString ());
+	}
+	public static bool getBooleanPrefs(booleanKey key){
+		return PlayerPrefs.GetBool (key.ToString ());
+	}
+	public static BitArray getEnumeratedBooleanPrefs(enumeratedBooleanKey key){
+		return ToBinary(PlayerPrefs.GetInt(key.ToString ()));
+	}
+
+	//bitarray 
 	static BitArray ToBinary(int numeral)
 	{
 		return new BitArray(new[] { numeral });
@@ -188,14 +202,14 @@ public static class utils {
 	public static void setInitialPersistent(){
 		PlayerPrefs.DeleteAll ();
 		Gem = 100;
-		setEnumeratedBoolean<Weapons> (enumeratedBooleanKey.UnlockedWeaponInt, Weapons.MachineGun, true);
-		setEnumeratedBoolean<Weapons> (enumeratedBooleanKey.UnlockedWeaponInt, Weapons.GrenadeLauncher, true);
-		setEnumeratedBoolean<Weapons> (enumeratedBooleanKey.UnlockedWeaponInt, Weapons.CryoGun, true);
-		setEnumeratedBoolean<Weapons> (enumeratedBooleanKey.EquippedWeaponInt, Weapons.MachineGun, true);
-		setEnumeratedBoolean<Weapons> (enumeratedBooleanKey.EquippedWeaponInt, Weapons.GrenadeLauncher, true);
-		setEnumeratedBoolean<Weapons> (enumeratedBooleanKey.EquippedWeaponInt, Weapons.CryoGun, true);
-		setEnumeratedBoolean<Vehicle> (enumeratedBooleanKey.UnlockedVehicleInt, Vehicle.Bus, true);
-		setEnumeratedBoolean<Vehicle> (enumeratedBooleanKey.EquippedVehicleInt, Vehicle.Bus, true);
+		setEnumeratedBooleanPrefs<Weapons> (enumeratedBooleanKey.UnlockedWeaponInt, Weapons.MachineGun, true);
+		setEnumeratedBooleanPrefs<Weapons> (enumeratedBooleanKey.UnlockedWeaponInt, Weapons.GrenadeLauncher, true);
+		setEnumeratedBooleanPrefs<Weapons> (enumeratedBooleanKey.UnlockedWeaponInt, Weapons.CryoGun, true);
+		setEnumeratedBooleanPrefs<Weapons> (enumeratedBooleanKey.EquippedWeaponInt, Weapons.MachineGun, true);
+		setEnumeratedBooleanPrefs<Weapons> (enumeratedBooleanKey.EquippedWeaponInt, Weapons.GrenadeLauncher, true);
+		setEnumeratedBooleanPrefs<Weapons> (enumeratedBooleanKey.EquippedWeaponInt, Weapons.CryoGun, true);
+		setEnumeratedBooleanPrefs<Vehicle> (enumeratedBooleanKey.UnlockedVehicleInt, Vehicle.Bus, true);
+		setEnumeratedBooleanPrefs<Vehicle> (enumeratedBooleanKey.EquippedVehicleInt, Vehicle.Bus, true);
 		UnlockedLevel = 1;		
 		persistenceBGM = true;
 		persistenceSFX = true;
