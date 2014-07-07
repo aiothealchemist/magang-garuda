@@ -57,6 +57,42 @@ public static class utils {
 		return ToBinary(PlayerPrefs.GetInt(key.ToString ()));
 	}
 
+	//prefs properties
+	//gems
+	public static int Gem{
+		get{ return PlayerPrefs.GetInt(integerKey.PlayerGems.ToString ()); }
+		set{ PlayerPrefs.SetInt(integerKey.PlayerGems.ToString (), value); }
+	}
+	public static void substractGems(int gems){ Gem -= gems; }
+	public static void addGems(int gems){ Gem += gems; }
+	//powerups
+	public static int PowerupsExtraCoin{
+		get{ return PlayerPrefs.GetInt(integerKey.ExtraCoins.ToString ()); }
+		set{ PlayerPrefs.SetInt(integerKey.ExtraCoins.ToString (), value); }
+	}
+	public static int PowerupsExtraSpeed{
+		get{ return PlayerPrefs.GetInt(integerKey.ExtraSpeed.ToString ()); }
+		set{ PlayerPrefs.SetInt(integerKey.ExtraSpeed.ToString (), value); }
+	}
+	public static int PowerupsExtraHealth{
+		get{ return PlayerPrefs.GetInt(integerKey.ExtraHealth.ToString ()); }
+		set{ PlayerPrefs.SetInt(integerKey.ExtraHealth.ToString (), value); }
+	}
+	//BGM and SFX toggle preference
+	public static bool persistenceSFX {
+		get { return PlayerPrefs.GetBool(booleanKey.SFXSetting.ToString ()); }
+		set { PlayerPrefs.SetBool(booleanKey.SFXSetting.ToString (), value); }
+	}
+	public static bool persistenceBGM {
+		get { return PlayerPrefs.GetBool(booleanKey.BGMSetting.ToString ()); }
+		set { PlayerPrefs.SetBool(booleanKey.BGMSetting.ToString (), value); }
+	}
+	//unlocked level preferences
+	public static int UnlockedLevel{
+		get{ return PlayerPrefs.GetInt(integerKey.UnlockedLevel.ToString ()); }
+		set{ PlayerPrefs.SetInt(integerKey.UnlockedLevel.ToString (), value); }
+	}
+
 	//bitarray 
 	static BitArray ToBinary(int numeral)
 	{
@@ -77,42 +113,54 @@ public static class utils {
 	//xml loading
 	static TinyXmlReader xmlReader;
 	static string fileXML = "*";
+	
+	static bool findXMLTagName(ref TinyXmlReader xmlReader, string tagName, string closure = null){
+		while (closure == null ? xmlReader.Read () : xmlReader.Read(closure))
+			if (xmlReader.isOpeningTag && xmlReader.tagName == tagName)
+				return true;
+		return false;
+	}
+
+	static bool findXMLTagName(ref TinyXmlReader xmlReader, List<string> tagNames, string closure = null){
+		foreach (string item in tagNames)
+			if (findXMLTagName(ref xmlReader,item,closure))
+			    return true;
+		return false;
+	}
+
+	static void loadXMLToContent(ref TinyXmlReader xmlReader, ref LoadableContent temp, string closure = null) {
+		var propertyCalled = temp.GetType().GetProperty(xmlReader.tagName);
+		if (propertyCalled == null) {
+		} else if (propertyCalled.PropertyType.IsEnum) {
+			if (xmlReader.tagName == "sisi")	//punyaan anak zombie
+				temp.setSisi (xmlReader.content);
+		} else if (propertyCalled.PropertyType is IDictionary) {
+			string dictionaryTag = xmlReader.tagName;
+			voidWithTwoParams_String_String dictMethod = 
+				(dictionaryTag == "pricing") ? 
+					new voidWithTwoParams_String_String(temp.setPrice) : 
+				(dictionaryTag == "sprites") ? 
+					new voidWithTwoParams_String_String(temp.setSprite) : null;
+			while (dictMethod != null && xmlReader.Read (dictionaryTag))
+				if (xmlReader.isOpeningTag)
+					dictMethod(xmlReader.tagName, xmlReader.content);
+		} else {	//singular variable (string, int, bool)
+			propertyCalled.SetValue (
+				temp, System.Convert.ChangeType (xmlReader.content, propertyCalled.PropertyType), null);
+		}
+	}
 
 	public static LoadableContent[] loadSpecificXML (LoadableContent.loadedContentType tag){
 		List<string> stringTags = new List<string>(getXMLTag (tag));
 		string typenameTag = stringTags [0]; stringTags.RemoveAt (0);
 		List<LoadableContent> contents = new List<LoadableContent> ();
 		xmlReader = new TinyXmlReader (fileXML, true);
-		while (xmlReader.Read ()) {
-			if (xmlReader.isOpeningTag && xmlReader.tagName == typenameTag){
-				LoadableContent temp = LoadableContent.constructContent(tag);
-				while(xmlReader.Read(typenameTag)){ // read as long as not encountering the closing tag
-					if (xmlReader.isOpeningTag && stringTags.Contains(xmlReader.tagName)) {
-						var propertyCalled = temp.GetType().GetProperty(xmlReader.tagName);
-						if (propertyCalled == null) {}
-						else if (propertyCalled.PropertyType == typeof(string)) {
-							propertyCalled.SetValue (temp, xmlReader.content, null);
-						} else if (propertyCalled.PropertyType == typeof(int)) {
-							propertyCalled.SetValue(temp, int.Parse (xmlReader.content), null);
-						} else if (propertyCalled.PropertyType == typeof(bool)) {
-							propertyCalled.SetValue(temp, bool.Parse (xmlReader.content), null);
-						} else if (propertyCalled.PropertyType is IDictionary) {
-							string dictionaryTag = propertyCalled.Name;
-							voidWithTwoParams_String_String dictMethod = 
-									((dictionaryTag == "pricing") ? 
-								 new voidWithTwoParams_String_String(temp.setPrice) : 
-								 	(dictionaryTag == "sprites") ? 
-								 new voidWithTwoParams_String_String(temp.setSprite) : null );
-							while (xmlReader.Read (dictionaryTag) && dictMethod != null) {
-								if (xmlReader.isOpeningTag){
-									dictMethod(xmlReader.tagName, xmlReader.content);
-								}
-							}
-						}
-					}
-				}
-				contents.Add (temp);
-			}
+
+		while (findXMLTagName (ref xmlReader, typenameTag)) {
+			LoadableContent temp = LoadableContent.constructContent(tag);
+			while (findXMLTagName (ref xmlReader, stringTags, typenameTag))
+				loadXMLToContent(ref xmlReader, ref temp);
+			contents.Add (temp);
 		}
 		return contents.ToArray();
 	}
@@ -127,80 +175,11 @@ public static class utils {
 		return tag.ToArray ();
 	}
 
-	//gems
-	public static int Gem{
-		get{
-			return PlayerPrefs.GetInt(integerKey.PlayerGems.ToString ());
-		}
-		set{
-			PlayerPrefs.SetInt(integerKey.PlayerGems.ToString (), value);
-		}
-	}
-	public static void addGems(int gems){
-		PlayerPrefs.SetInt (integerKey.PlayerGems.ToString (), Gem + gems);
-	}
-	public static void substractGems(int gems){
-		PlayerPrefs.SetInt (integerKey.PlayerGems.ToString (), Gem - gems);
-	}
-
-	//powerups
-	public static int PowerupsExtraCoin{
-		get{
-			return PlayerPrefs.GetInt(integerKey.ExtraCoins.ToString ());
-		}
-		set{
-			PlayerPrefs.SetInt(integerKey.ExtraCoins.ToString (), value);
-		}
-	}
-	public static int PowerupsExtraHealth{
-		get{
-			return PlayerPrefs.GetInt(integerKey.ExtraHealth.ToString ());
-		}
-		set{
-			PlayerPrefs.SetInt(integerKey.ExtraHealth.ToString (), value);
-		}
-	}
-	public static int PowerupsExtraSpeed{
-		get{
-			return PlayerPrefs.GetInt(integerKey.ExtraSpeed.ToString ());
-		}
-		set{
-			PlayerPrefs.SetInt(integerKey.ExtraSpeed.ToString (), value);
-		}
-	}
-	
-	//BGM and SFX toggle preference
-	public static bool persistenceSFX {
-		get {
-			return PlayerPrefs.GetBool(booleanKey.SFXSetting.ToString ());
-		}
-		set {
-			PlayerPrefs.SetBool(booleanKey.SFXSetting.ToString (), value);
-		}
-	}
-	public static bool persistenceBGM {
-		get {
-			return PlayerPrefs.GetBool(booleanKey.BGMSetting.ToString ());
-		}
-		set {
-			PlayerPrefs.SetBool(booleanKey.BGMSetting.ToString (), value);
-		}
-	}
-
-	//unlocked level preferences
-	public static int UnlockedLevel{
-		get{
-			return PlayerPrefs.GetInt(integerKey.UnlockedLevel.ToString ());
-		}
-		set{
-			PlayerPrefs.SetInt(integerKey.UnlockedLevel.ToString (), value);
-		}
-	}
-
 	//INSERT OTHER PREFERENCES HERE
 
 	public static void setInitialPersistent(){
 		PlayerPrefs.DeleteAll ();
+		PlayerPrefs.EnableEncryption (true);
 		Gem = 100;
 		setEnumeratedBooleanPrefs<Weapons> (enumeratedBooleanKey.UnlockedWeaponInt, Weapons.MachineGun, true);
 		setEnumeratedBooleanPrefs<Weapons> (enumeratedBooleanKey.UnlockedWeaponInt, Weapons.GrenadeLauncher, true);
