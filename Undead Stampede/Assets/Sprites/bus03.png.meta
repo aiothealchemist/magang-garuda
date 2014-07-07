@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 27209fafbff5e7146b6e89f726a13111
+guid: e9dc4d69aa1232f4582e345083d5be49
 TextureImporter:
   serializedVersion: 2
   mipmaps:
@@ -41,49 +41,49 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: bus02_0
+    - name: bus03_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 22
         width: 974
-        height: 389
+        height: 386
       alignment: 0
       pivot: {x: 0, y: 0}
-    - name: bus02_1
+    - name: bus03_1
       rect:
         serializedVersion: 2
         x: 1003
-        y: 0
+        y: 22
         width: 977
-        height: 389
+        height: 381
       alignment: 0
       pivot: {x: 0, y: 0}
-    - name: bus02_2
+    - name: bus03_2
       rect:
         serializedVersion: 2
         x: 2014
-        y: 0
-        width: 977
-        height: 379
+        y: 22
+        width: 976
+        height: 393
       alignment: 0
       pivot: {x: 0, y: 0}
-    - name: bus02_3
+    - name: bus03_3
       rect:
         serializedVersion: 2
         x: 3020
-        y: 0
+        y: 22
         width: 977
-        height: 396
+        height: 381
       alignment: 0
       pivot: {x: 0, y: 0}
-    - name: bus02_4
+    - name: bus03_4
       rect:
         serializedVersion: 2
         x: 4026
-        y: 0
+        y: 22
         width: 974
-        height: 379
+        height: 386
       alignment: 0
       pivot: {x: 0, y: 0}
   spritePackingTag: 

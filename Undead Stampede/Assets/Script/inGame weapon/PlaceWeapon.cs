@@ -21,9 +21,12 @@ public class PlaceWeapon : MonoBehaviour {
 	private string searchTag;
 	private float searchFrequency = 1.0f;
 	private Transform target;
+	GameObject barrel;
+	GameObject[] barrelFinder;
 
 	public void Start(){
 		//invoke searching target for turret
+		findBarrel ();
 		InvokeRepeating ("ScanForTarget", 0, searchFrequency);
 	}
 
@@ -120,6 +123,15 @@ public class PlaceWeapon : MonoBehaviour {
 		target = GetNearestTargetObject ();
 	}
 
+	public void findBarrel(){
+		barrelFinder = GameObject.FindObjectsOfType<GameObject>();
+		foreach(GameObject g in barrelFinder){
+			if (g.transform.IsChildOf(gameObject.transform) && g.name == "Barrel"){
+				barrel = g;
+			}
+		}
+	}
+
 	public Transform GetNearestTargetObject(){
 		//find the nearest target with certain tag
 		float nearestDistanceSqr = Mathf.Infinity;
@@ -149,7 +161,7 @@ public class PlaceWeapon : MonoBehaviour {
 				if(isMustDelete){
 					DestroyObject(gameObject);
 				}
-				else {
+				else{
 					// Point the cannon at the zombie that already liste on the target variable.
 					target_pos.z = 0.0f; 
 					object_pos = gameObject.transform.position;
@@ -159,11 +171,11 @@ public class PlaceWeapon : MonoBehaviour {
 							target_pos.y = target.transform.position.y - object_pos.y;
 							angle = Mathf.Atan2(target_pos.y, target_pos.x) * Mathf.Rad2Deg - 180;
 							Vector3 rotationVector = new Vector3 (0, 0, angle);
-							transform.rotation = Quaternion.Euler(rotationVector);
+							barrel.transform.rotation = Quaternion.Euler(rotationVector);
 							
 							// Fire a bullet.	
 							if(Time.time > lastFireTime + burstDelay){
-								bullet = Instantiate(ammo, transform.position, transform.rotation) as GameObject;
+							bullet = Instantiate(ammo, barrel.transform.position, barrel.transform.rotation) as GameObject;
 								bullet.rigidbody2D.AddForce(bullet.transform.right * bulletSpeed * -1);
 								lastFireTime = Time.time;
 							}
@@ -174,7 +186,7 @@ public class PlaceWeapon : MonoBehaviour {
 					else{
 						//do nothing
 					}
-				}	
+				}
 		}
 	}
 }

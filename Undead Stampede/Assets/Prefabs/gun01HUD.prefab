@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sensitivity: .0199999996
-  selectedWeapon: {fileID: 100000, guid: c6d7e6f0152d10d4a85dc8b61026413e, type: 2}
+  selectedWeapon: {fileID: 100004, guid: 95c42b28600034747bc3f91d0649728b, type: 2}
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
