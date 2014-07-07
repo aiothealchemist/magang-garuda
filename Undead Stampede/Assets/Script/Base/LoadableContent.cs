@@ -80,7 +80,7 @@ public class ZombieXML : LoadableContent {
 	public enum zombieSide {atas, belakang, samping};
 
 	//properties
-	public zombieSide sisi { get; set; }
+	public zombieSide sisi { get; set; }	//unusable yet
 	public int baseSpeed { get; set; } 
 	public int baseHealth{ get; set; } 
 	public int baseDamage{ get; set; } 
@@ -94,9 +94,9 @@ class WeaponXML : LoadableContent {
 	public bool isDariLangit { get; set; }
 	public bool isParabolic { get; set; } 
 	public int blastRadius { get; set; } 
-	public int initSpeed { get; set; }
+	public int initSpeed { get; set; }	//force needed to push the projectile
 	public int fireRate { get; set; } 
-	public int damage { get; set; } 
+	public int baseDamage { get; set; } 
 
 	public WeaponXML() : base() { }
 }
