@@ -27,6 +27,9 @@ public abstract class LoadableContent {
 		pricing = new System.Collections.Generic.Dictionary<currency, int> ();
 	}
 
+	//crazy child
+	public virtual void setSisi(string side) { }
+
 	// ToParse price
 	public void setPrice(string money, string price){
 		setPrice (money == "realMoney" ? currency.realMoney : money == "gem" ? currency.gem : currency.coin,
@@ -38,8 +41,10 @@ public abstract class LoadableContent {
 
 	// ToParse sprite
 	public void setSprite(string tipe, string sprite){
-		setSprite (tipe == "button" ? spriteTypes.button : tipe == "ingame" ? spriteTypes.ingame :
-		           tipe == "explode" ? spriteTypes.explode : spriteTypes.projectile,
+		setSprite (tipe == "button" ? spriteTypes.button : 
+		           tipe == "ingame" ? spriteTypes.ingame :
+		           tipe == "explode" ? spriteTypes.explode : 
+		           spriteTypes.projectile,
 		           null);	//parse sprite path: 
 	}
 	public void setSprite(spriteTypes tipe, Sprite sprite){
@@ -80,11 +85,18 @@ public class ZombieXML : LoadableContent {
 	public enum zombieSide {atas, belakang, samping};
 
 	//properties
-	public zombieSide sisi { get; set; }	//unusable yet
+	public zombieSide sisi { get; private set; }	//unusable yet
 	public int baseSpeed { get; set; } 
 	public int baseHealth{ get; set; } 
 	public int baseDamage{ get; set; } 
 	public bool isGaet { get; set; }
+
+	public void setSisi(zombieSide side) {sisi = side;}
+	public override void setSisi(string side){
+		setSisi (side == "atas" ? zombieSide.atas : 
+		         side == "belakang" ? zombieSide.belakang : 
+		         zombieSide.samping);
+	}
 
 	public ZombieXML() : base() { }
 }
