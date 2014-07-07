@@ -1,0 +1,171 @@
+fileFormatVersion: 2
+guid: 74525b032475d544eada89dbf7dd2ea0
+TextureImporter:
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: BASIC_0
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 21
+        width: 148
+        height: 203
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: BASIC_1
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 21
+        width: 152
+        height: 206
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: BASIC_2
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 22
+        width: 161
+        height: 215
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: BASIC_3
+      rect:
+        serializedVersion: 2
+        x: 541
+        y: 21
+        width: 162
+        height: 211
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: BASIC_4
+      rect:
+        serializedVersion: 2
+        x: 721
+        y: 21
+        width: 154
+        height: 218
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: BASIC_5
+      rect:
+        serializedVersion: 2
+        x: 902
+        y: 21
+        width: 148
+        height: 221
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: BASIC_6
+      rect:
+        serializedVersion: 2
+        x: 1081
+        y: 21
+        width: 143
+        height: 220
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: BASIC_7
+      rect:
+        serializedVersion: 2
+        x: 1260
+        y: 22
+        width: 140
+        height: 217
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: BASIC_8
+      rect:
+        serializedVersion: 2
+        x: 1435
+        y: 21
+        width: 144
+        height: 216
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: BASIC_9
+      rect:
+        serializedVersion: 2
+        x: 1614
+        y: 21
+        width: 140
+        height: 216
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: BASIC_10
+      rect:
+        serializedVersion: 2
+        x: 1793
+        y: 21
+        width: 136
+        height: 218
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: BASIC_11
+      rect:
+        serializedVersion: 2
+        x: 1970
+        y: 21
+        width: 136
+        height: 216
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: BASIC_12
+      rect:
+        serializedVersion: 2
+        x: 2142
+        y: 22
+        width: 148
+        height: 214
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: BASIC_13
+      rect:
+        serializedVersion: 2
+        x: 2316
+        y: 21
+        width: 155
+        height: 208
+      alignment: 0
+      pivot: {x: 0, y: 0}
+  spritePackingTag: 
+  userData: 

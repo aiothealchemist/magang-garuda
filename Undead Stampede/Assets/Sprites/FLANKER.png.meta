@@ -1,0 +1,144 @@
+fileFormatVersion: 2
+guid: d9af9799129edcc45aa40cf51e557850
+TextureImporter:
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: FLANKER_0
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 21
+        width: 133
+        height: 197
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: FLANKER_1
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 21
+        width: 123
+        height: 203
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: FLANKER_2
+      rect:
+        serializedVersion: 2
+        x: 386
+        y: 21
+        width: 115
+        height: 205
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: FLANKER_3
+      rect:
+        serializedVersion: 2
+        x: 564
+        y: 21
+        width: 113
+        height: 203
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: FLANKER_4
+      rect:
+        serializedVersion: 2
+        x: 742
+        y: 21
+        width: 112
+        height: 203
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: FLANKER_5
+      rect:
+        serializedVersion: 2
+        x: 921
+        y: 21
+        width: 110
+        height: 203
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: FLANKER_6
+      rect:
+        serializedVersion: 2
+        x: 1097
+        y: 25
+        width: 111
+        height: 199
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: FLANKER_7
+      rect:
+        serializedVersion: 2
+        x: 1275
+        y: 32
+        width: 112
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: FLANKER_8
+      rect:
+        serializedVersion: 2
+        x: 1443
+        y: 30
+        width: 131
+        height: 196
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: FLANKER_9
+      rect:
+        serializedVersion: 2
+        x: 1624
+        y: 25
+        width: 123
+        height: 199
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: FLANKER_10
+      rect:
+        serializedVersion: 2
+        x: 1797
+        y: 21
+        width: 132
+        height: 197
+      alignment: 0
+      pivot: {x: 0, y: 0}
+  spritePackingTag: 
+  userData: 

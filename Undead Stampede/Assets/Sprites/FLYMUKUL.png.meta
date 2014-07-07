@@ -1,0 +1,234 @@
+fileFormatVersion: 2
+guid: 629a855c218dee547b590355d35f313d
+TextureImporter:
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: FLYMUKUL_0
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 627
+        width: 195
+        height: 246
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: FLYMUKUL_1
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 634
+        width: 191
+        height: 238
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: FLYMUKUL_2
+      rect:
+        serializedVersion: 2
+        x: 438
+        y: 644
+        width: 187
+        height: 228
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: FLYMUKUL_3
+      rect:
+        serializedVersion: 2
+        x: 649
+        y: 642
+        width: 192
+        height: 230
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: FLYMUKUL_4
+      rect:
+        serializedVersion: 2
+        x: 861
+        y: 640
+        width: 195
+        height: 233
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: FLYMUKUL_5
+      rect:
+        serializedVersion: 2
+        x: 1072
+        y: 640
+        width: 198
+        height: 233
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: FLYMUKUL_6
+      rect:
+        serializedVersion: 2
+        x: 1284
+        y: 640
+        width: 202
+        height: 232
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: FLYMUKUL_7
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 340
+        width: 196
+        height: 234
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: FLYMUKUL_8
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 342
+        width: 191
+        height: 231
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: FLYMUKUL_9
+      rect:
+        serializedVersion: 2
+        x: 438
+        y: 345
+        width: 188
+        height: 227
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: FLYMUKUL_10
+      rect:
+        serializedVersion: 2
+        x: 649
+        y: 344
+        width: 192
+        height: 229
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: FLYMUKUL_11
+      rect:
+        serializedVersion: 2
+        x: 861
+        y: 341
+        width: 195
+        height: 232
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: FLYMUKUL_12
+      rect:
+        serializedVersion: 2
+        x: 1071
+        y: 340
+        width: 200
+        height: 233
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: FLYMUKUL_13
+      rect:
+        serializedVersion: 2
+        x: 1284
+        y: 342
+        width: 202
+        height: 230
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: FLYMUKUL_14
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 40
+        width: 196
+        height: 234
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: FLYMUKUL_15
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 42
+        width: 191
+        height: 231
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: FLYMUKUL_16
+      rect:
+        serializedVersion: 2
+        x: 438
+        y: 45
+        width: 188
+        height: 227
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: FLYMUKUL_17
+      rect:
+        serializedVersion: 2
+        x: 649
+        y: 44
+        width: 192
+        height: 229
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: FLYMUKUL_18
+      rect:
+        serializedVersion: 2
+        x: 861
+        y: 41
+        width: 195
+        height: 232
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: FLYMUKUL_19
+      rect:
+        serializedVersion: 2
+        x: 1071
+        y: 40
+        width: 200
+        height: 233
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: FLYMUKUL_20
+      rect:
+        serializedVersion: 2
+        x: 1284
+        y: 42
+        width: 202
+        height: 230
+      alignment: 0
+      pivot: {x: 0, y: 0}
+  spritePackingTag: 
+  userData: 
