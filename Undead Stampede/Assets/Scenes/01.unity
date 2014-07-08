@@ -612,9 +612,9 @@ Transform:
   m_LocalPosition: {x: -4.69231844, y: .449944973, z: 0}
   m_LocalScale: {x: 1.23361421, y: 1.23361552, z: 1}
   m_Children:
+  - {fileID: 1422172523}
   - {fileID: 808105373}
   - {fileID: 1306726815}
-  - {fileID: 1422172523}
   m_Father: {fileID: 1843088736}
   m_RootOrder: 0
 --- !u!1 &808105372
@@ -647,7 +647,7 @@ Transform:
   m_LocalScale: {x: .5, y: .5, z: 1}
   m_Children: []
   m_Father: {fileID: 774655479}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!114 &808105374
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -865,7 +865,7 @@ Transform:
   m_LocalScale: {x: .5, y: .5, z: 1}
   m_Children: []
   m_Father: {fileID: 774655479}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!23 &1306726816
 Renderer:
   m_ObjectHideFlags: 0
@@ -1047,7 +1047,7 @@ Transform:
   m_LocalScale: {x: .5, y: .5, z: 1}
   m_Children: []
   m_Father: {fileID: 774655479}
-  m_RootOrder: 2
+  m_RootOrder: 0
 --- !u!1001 &1492112976
 Prefab:
   m_ObjectHideFlags: 0

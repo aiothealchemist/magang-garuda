@@ -36,9 +36,7 @@ public class level : MonoBehaviour
 		switch (levelNum) {
 		case 1:
 			//insert all wave for level 1
-			CreateWave(new int[3]{0,0,0});
-			CreateWave(new int[3]{0,1,1});
-			CreateWave(new int[3]{2,2,2});
+			CreateWave(new int[1]{2});
 			break;
 		}
 	}
