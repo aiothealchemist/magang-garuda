@@ -2,11 +2,11 @@ using UnityEngine;
 using System.Collections;
 
 public abstract class LoadableContent {
-	public enum loadedContentType { achievement, gem, part, powerup, vehicle, weapon, zombie }
+	public enum loadedContentType { Achievement, Gem, Part, Powerup, Vehicle, Weapon, Zombie }
 
 	//di sini termasuk achievement, parts, powerups
 	public enum currency { gem, coin, realMoney }
-	public enum spriteTypes { button, ingame, explode, projectile }
+	public enum textureTypes { button, ingame, explode, projectile }
 	//	enum spriteTypes: 
 	//		zombie{ingame, explode}; 
 	//		weapon{all}; 
@@ -20,10 +20,10 @@ public abstract class LoadableContent {
 	public string name { get; set; }
 	public string description  { get; set; }
 	public System.Collections.Generic.Dictionary<currency, int> pricing { get; private set; }
-	public System.Collections.Generic.Dictionary<spriteTypes, Sprite> sprites { get; private set; }
+	public System.Collections.Generic.Dictionary<textureTypes, Texture2D> textures { get; private set; }
 
 	public LoadableContent () {
-		sprites = new System.Collections.Generic.Dictionary<spriteTypes, Sprite> ();
+		textures = new System.Collections.Generic.Dictionary<textureTypes, Texture2D> ();
 		pricing = new System.Collections.Generic.Dictionary<currency, int> ();
 	}
 
@@ -41,39 +41,39 @@ public abstract class LoadableContent {
 
 	// ToParse sprite
 	public void setSprite(string tipe, string sprite){
-		setSprite (tipe == "button" ? spriteTypes.button : 
-		           tipe == "ingame" ? spriteTypes.ingame :
-		           tipe == "explode" ? spriteTypes.explode : 
-		           spriteTypes.projectile,
-		           null);	//parse sprite path: 
+		setSprite (tipe == "button" ? textureTypes.button : 
+		           tipe == "ingame" ? textureTypes.ingame :
+		           tipe == "explode" ? textureTypes.explode : 
+		           textureTypes.projectile,
+		           (Texture2D)Resources.LoadAssetAtPath(sprite, typeof(Texture)));	//parse sprite path: 
 	}
-	public void setSprite(spriteTypes tipe, Sprite sprite){
-		sprites [tipe] = sprite;
+	public void setSprite(textureTypes tipe, Texture2D sprite){
+		textures [tipe] = sprite;
 	}
 
 	//construct child
 	public static LoadableContent constructContent(loadedContentType tipe){
 		LoadableContent tag = null;
 		switch (tipe) {
-		case loadedContentType.achievement:
+		case loadedContentType.Achievement:
 			tag = new AchievementXML();
 			break;
-		case loadedContentType.gem:
+		case loadedContentType.Gem:
 			tag = new GemXML();
 			break;
-		case loadedContentType.part:
+		case loadedContentType.Part:
 			tag = new PartXML();
 			break;
-		case loadedContentType.powerup:
+		case loadedContentType.Powerup:
 			tag = new PowerupXML();
 			break;
-		case loadedContentType.vehicle:
+		case loadedContentType.Vehicle:
 			tag = new VehicleXML();
 			break;
-		case loadedContentType.weapon:
+		case loadedContentType.Weapon:
 			tag = new WeaponXML();
 			break;
-		case loadedContentType.zombie:
+		case loadedContentType.Zombie:
 			tag = new ZombieXML();
 			break;
 		}

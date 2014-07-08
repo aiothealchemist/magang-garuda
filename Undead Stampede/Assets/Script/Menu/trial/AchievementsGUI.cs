@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class AchievementsGUI : BasemenuGUI {
+public class AchievementsGUI : BaseMenu {
 	
 	Vector2 viewVector;
 
@@ -9,7 +9,7 @@ public class AchievementsGUI : BasemenuGUI {
 
 	protected override void Start () {
 		base.Start ();
-		menuType = type.showcase;
+		menuType = type.window;
 	}
 
 	protected override void updateGUI () {

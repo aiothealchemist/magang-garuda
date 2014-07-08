@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using PlayerPrefs = PreviewLabs.PlayerPrefs;
 
-public class MainmenuGUI : BasemenuGUI {
+public class MainmenuGUI : BaseMenu {
 
 	int selectedButton = 0;
 	Texture2D[] menuButtons;
@@ -29,13 +29,13 @@ public class MainmenuGUI : BasemenuGUI {
 				Destroy (this);
 				break;
 			case 1:	//settings
-				setShowcase(gameObject.AddComponent<Settings>());
+				setShowcase(gameObject.AddComponent<SettingsGUI>());
 				break;
 			case 2:	//credits
 				setShowcase(gameObject.AddComponent<CreditsGUI>());
 				break;
 			case 3:	//exit
-				createPrompt(new voidWithZeroParam[] { exit, null },
+				createPrompt(new delegateVoidWithZeroParam[] { exit, null },
 						new string[] { "Are you sure you want to Quit?", "Yes", "No" });
 				break;
 			default:

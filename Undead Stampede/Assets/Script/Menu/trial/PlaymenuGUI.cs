@@ -1,7 +1,7 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
-public class PlaymenuGUI : BasemenuGUI {
+public class PlaymenuGUI : BaseMenu {
 
 	int selectedButton = 0;
 	string[] menuButtons;
@@ -18,7 +18,7 @@ public class PlaymenuGUI : BasemenuGUI {
 	}
 
 	void Update () {
-		if (showcase == null && levelConstructor != null)
+		if (window == null && levelConstructor != null)
 			Destroy(levelConstructor);
 	}
 
@@ -49,7 +49,7 @@ public class PlaymenuGUI : BasemenuGUI {
 		}
 
 		// level buttons
-		if (showcase == null) {
+		if (window == null) {
 			// Begin the ScrollView
 			viewVector = GUI.BeginScrollView (new Rect (width * 2 / 5, height / 18, width * 8 / 15, height * 8 / 9), 
 					viewVector, new Rect (0, 0, width * 8 / 15, height * 8 / 9));

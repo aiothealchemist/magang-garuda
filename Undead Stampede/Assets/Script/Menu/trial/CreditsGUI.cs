@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class CreditsGUI : BasemenuGUI {
+public class CreditsGUI : BaseMenu {
 	
 	string[] menuButtons;
 	

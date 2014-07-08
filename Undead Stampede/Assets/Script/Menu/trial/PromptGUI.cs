@@ -5,7 +5,7 @@ public class PromptGUI : MonoBehaviour {
 
 	int height, width;
 	string dialog, yes, no;
-	voidWithZeroParam rmiYes, rmiNo;
+	delegateVoidWithZeroParam rmiYes, rmiNo;
 
 	// Use this for initialization
 	void Start () {

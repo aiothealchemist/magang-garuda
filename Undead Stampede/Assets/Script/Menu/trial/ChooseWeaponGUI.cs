@@ -1,12 +1,12 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
-public class ChooseWeaponGUI : BasemenuGUI {
+public class ChooseWeaponGUI : BaseMenu {
 	
 	// Use this for initialization
 	protected override void Start () {
 		base.Start ();
-		menuType = type.showcase;
+		menuType = type.window;
 	}
 
 	protected override void updateGUI ()

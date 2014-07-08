@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class SettingsGUI : BasemenuGUI {
+public class SettingsGUI : BaseMenu {
 	
 	public Texture[] sfx, music;
 	bool isSfx, isMusic;
@@ -12,7 +12,7 @@ public class SettingsGUI : BasemenuGUI {
 	// Use this for initialization
 	protected override void Start () {
 		base.Start ();
-		menuType = type.showcase;
+		menuType = type.window;
 
 		sfx = new Texture[] {
 			(Texture2D)Resources.LoadAssetAtPath("Assets/Sprites/speaker1.png", typeof(Texture)), 
@@ -33,7 +33,7 @@ public class SettingsGUI : BasemenuGUI {
 		if (GUI.Button (new Rect (width * 27 / 30, height / 18, width / 15, height / 18), "Back")) { //back
 			Destroy (this);
 		} else if (GUI.Button (new Rect (width * 8 / 15, height * 3 / 5, width / 15, height / 18), "Reset")) { //reset
-			createPrompt (new voidWithZeroParam[]{ reset, null },
+			createPrompt (new delegateVoidWithZeroParam[]{ reset, null },
 					new string[] {"Are you sure you want to reset all saved data?","Yes","NO!"});
 		}
 	}

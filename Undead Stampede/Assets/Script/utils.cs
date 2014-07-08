@@ -5,14 +5,14 @@ using System.Collections;
 using System.Collections.Generic;
 using PlayerPrefs = PreviewLabs.PlayerPrefs;
 
-public delegate void voidWithZeroParam();
-public delegate void voidWithTwoParams_String_String(string a, string b);
+public delegate void delegateVoidWithZeroParam();
+public delegate void delegateVoidWithTwoParams_String_String(string a, string b);
 
 public static class utils {
 	//player preferences indices
 	public enum enumeratedBooleanKey {
-		UnlockedWeaponInt, UnlockedVehicleInt, UnlockedPartInt,
-		EquippedWeaponInt, EquippedVehicleInt, EquippedPartInt,
+		UnlockedWeapon, UnlockedVehicle, UnlockedPart,
+		EquippedWeapon, EquippedVehicle, EquippedPart,
 		UnlockedAchievement
 	};
 	public enum integerKey {
@@ -31,7 +31,10 @@ public static class utils {
 		PlayerPrefs.SetInt (key.ToString (), value);
 	}
 	public static void setBooleanPrefs(booleanKey key, bool value){
-		PlayerPrefs.SetBool (key.ToString (), value);;
+		PlayerPrefs.SetBool (key.ToString (), value);
+	}
+	public static void setEnumeratedBooleanPrefs(string key, int index, bool value){
+		set_BitArray_PlayerPrefs (key, index, value);
 	}
 	public static void setEnumeratedBooleanPrefs(enumeratedBooleanKey key, int index, bool value){
 		set_BitArray_PlayerPrefs (key.ToString (), index, value);
@@ -136,11 +139,11 @@ public static class utils {
 				temp.setSisi (xmlReader.content);
 		} else if (propertyCalled.PropertyType is IDictionary) {
 			string dictionaryTag = xmlReader.tagName;
-			voidWithTwoParams_String_String dictMethod = 
+			delegateVoidWithTwoParams_String_String dictMethod = 
 				(dictionaryTag == "pricing") ? 
-					new voidWithTwoParams_String_String(temp.setPrice) : 
+					new delegateVoidWithTwoParams_String_String(temp.setPrice) : 
 				(dictionaryTag == "sprites") ? 
-					new voidWithTwoParams_String_String(temp.setSprite) : null;
+					new delegateVoidWithTwoParams_String_String(temp.setSprite) : null;
 			while (dictMethod != null && xmlReader.Read (dictionaryTag))
 				if (xmlReader.isOpeningTag)
 					dictMethod(xmlReader.tagName, xmlReader.content);
@@ -181,14 +184,14 @@ public static class utils {
 		PlayerPrefs.DeleteAll ();
 		PlayerPrefs.EnableEncryption (true);
 		Gem = 100;
-		setEnumeratedBooleanPrefs<Weapons> (enumeratedBooleanKey.UnlockedWeaponInt, Weapons.MachineGun, true);
-		setEnumeratedBooleanPrefs<Weapons> (enumeratedBooleanKey.UnlockedWeaponInt, Weapons.GrenadeLauncher, true);
-		setEnumeratedBooleanPrefs<Weapons> (enumeratedBooleanKey.UnlockedWeaponInt, Weapons.CryoGun, true);
-		setEnumeratedBooleanPrefs<Weapons> (enumeratedBooleanKey.EquippedWeaponInt, Weapons.MachineGun, true);
-		setEnumeratedBooleanPrefs<Weapons> (enumeratedBooleanKey.EquippedWeaponInt, Weapons.GrenadeLauncher, true);
-		setEnumeratedBooleanPrefs<Weapons> (enumeratedBooleanKey.EquippedWeaponInt, Weapons.CryoGun, true);
-		setEnumeratedBooleanPrefs<Vehicle> (enumeratedBooleanKey.UnlockedVehicleInt, Vehicle.Bus, true);
-		setEnumeratedBooleanPrefs<Vehicle> (enumeratedBooleanKey.EquippedVehicleInt, Vehicle.Bus, true);
+		setEnumeratedBooleanPrefs<Weapons> (enumeratedBooleanKey.UnlockedWeapon, Weapons.MachineGun, true);
+		setEnumeratedBooleanPrefs<Weapons> (enumeratedBooleanKey.UnlockedWeapon, Weapons.GrenadeLauncher, true);
+		setEnumeratedBooleanPrefs<Weapons> (enumeratedBooleanKey.UnlockedWeapon, Weapons.CryoGun, true);
+		setEnumeratedBooleanPrefs<Weapons> (enumeratedBooleanKey.EquippedWeapon, Weapons.MachineGun, true);
+		setEnumeratedBooleanPrefs<Weapons> (enumeratedBooleanKey.EquippedWeapon, Weapons.GrenadeLauncher, true);
+		setEnumeratedBooleanPrefs<Weapons> (enumeratedBooleanKey.EquippedWeapon, Weapons.CryoGun, true);
+		setEnumeratedBooleanPrefs<Vehicle> (enumeratedBooleanKey.UnlockedVehicle, Vehicle.Bus, true);
+		setEnumeratedBooleanPrefs<Vehicle> (enumeratedBooleanKey.EquippedVehicle, Vehicle.Bus, true);
 		UnlockedLevel = 1;		
 		persistenceBGM = true;
 		persistenceSFX = true;

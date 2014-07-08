@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class GaragemenuGUI : BasemenuGUI {
+public class GaragemenuGUI : BaseMenu {
 	
 	int selectedButton = 0;
 	string[] menuButtons;
