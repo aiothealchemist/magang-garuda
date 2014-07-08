@@ -153,6 +153,33 @@ public class PlaceWeapon : MonoBehaviour {
 		return nearestObject;
 	}
 
+	void shootTarget(){
+		// Point the cannon at the zombie that already liste on the target variable.
+		target_pos.z = 0.0f; 
+		object_pos = gameObject.transform.position;
+		if(target != null){
+			try{
+				target_pos.x = target.transform.position.x - object_pos.x;
+				target_pos.y = target.transform.position.y - object_pos.y;
+				angle = Mathf.Atan2(target_pos.y, target_pos.x) * Mathf.Rad2Deg - 180;
+				Vector3 rotationVector = new Vector3 (0, 0, angle);
+				barrel.transform.rotation = Quaternion.Euler(rotationVector);
+				
+				// Fire a bullet.	
+				if(Time.time > lastFireTime + burstDelay){
+					bullet = Instantiate(ammo, barrel.transform.position, barrel.transform.rotation) as GameObject;
+					bullet.rigidbody2D.AddForce(bullet.transform.right * bulletSpeed * -1);
+					lastFireTime = Time.time;
+				}
+			}catch{
+				//no zombie found
+			}
+		}
+		else{
+			//do nothing
+		}
+	}
+
 	public void Update(){
 		//shoot a bullet while placed
 		if (!isPlaced && isNotChosen) {
@@ -162,30 +189,7 @@ public class PlaceWeapon : MonoBehaviour {
 					DestroyObject(gameObject);
 				}
 				else{
-					// Point the cannon at the zombie that already liste on the target variable.
-					target_pos.z = 0.0f; 
-					object_pos = gameObject.transform.position;
-					if(target != null){
-						try{
-							target_pos.x = target.transform.position.x - object_pos.x;
-							target_pos.y = target.transform.position.y - object_pos.y;
-							angle = Mathf.Atan2(target_pos.y, target_pos.x) * Mathf.Rad2Deg - 180;
-							Vector3 rotationVector = new Vector3 (0, 0, angle);
-							barrel.transform.rotation = Quaternion.Euler(rotationVector);
-							
-							// Fire a bullet.	
-							if(Time.time > lastFireTime + burstDelay){
-							bullet = Instantiate(ammo, barrel.transform.position, barrel.transform.rotation) as GameObject;
-								bullet.rigidbody2D.AddForce(bullet.transform.right * bulletSpeed * -1);
-								lastFireTime = Time.time;
-							}
-						}catch{
-							//no zombie found
-						}
-					}
-					else{
-						//do nothing
-					}
+					shootTarget();
 				}
 		}
 	}

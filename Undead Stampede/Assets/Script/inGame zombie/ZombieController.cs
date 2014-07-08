@@ -8,6 +8,7 @@ public class ZombieController : MonoBehaviour {
 	public float turnSpeed;
 	private Vector3 target_pos;
 	private Vector3 object_pos;
+	private float attackFreq = 3.0f;
 
 	//bikinan cahyo
 	public ZombieXML attributes { get; set; }
@@ -31,8 +32,10 @@ public class ZombieController : MonoBehaviour {
 			//destroy zombie
 			DestroyObject(gameObject);
 		}
+		MoveTowardVehicle ();
+	}
 
-		//move zombie
+	void MoveTowardVehicle(){
 		target_pos.z = 0.0f; 
 		object_pos = transform.position;
 		target_pos.x = GameObject.Find("vehicle").transform.position.x - object_pos.x;
@@ -43,7 +46,7 @@ public class ZombieController : MonoBehaviour {
 		moveDirection.Normalize();
 		Vector3 target = moveDirection * moveSpeed + object_pos;
 		transform.position = Vector3.Lerp( object_pos, target, Time.deltaTime );
-
+		
 		//rotate zombie
 		float targetAngle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
 		transform.rotation = 
@@ -52,11 +55,16 @@ public class ZombieController : MonoBehaviour {
 			                 turnSpeed * Time.deltaTime );
 	}
 
+	void Attack(){
+		gameObject.GetComponent<ZombieAnimator>().state = "attacking";
+	}
+
 	//Define the state when this object collide
 	void OnCollisionEnter2D(Collision2D coll)
 	{
 		if (coll.gameObject.tag == "vehicle") {
 						moveSpeed = 0;
+						InvokeRepeating ("Attack", 0, attackFreq);
 				} 
 		else if (coll.gameObject.tag == "bullet") {//zombie is hit by bullet
 			//add bullet damage
