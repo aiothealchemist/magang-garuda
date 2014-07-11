@@ -38,10 +38,10 @@ public class PlaymenuGUI : BaseMenu {
 				Destroy (this);
 				break;
 			case 1:	//achievements
-				setShowcase (gameObject.AddComponent<AchievementsGUI>());
+				setWindow (gameObject.AddComponent<AchievementsGUI>());
 				break;
 			case 2:	//gem shop
-				setShowcase (gameObject.AddComponent<BaseShopGUI>());
+				setWindow (gameObject.AddComponent<BaseShopGUI>());
 				break;
 			default:
 				break;
@@ -72,7 +72,7 @@ public class PlaymenuGUI : BaseMenu {
 	}
 
 	void levelChosen (int levelNum) {
-		setShowcase (gameObject.AddComponent<ChooseWeaponGUI> ());
+		setWindow (gameObject.AddComponent<ChooseWeaponGUI> ());
 		levelConstructor = new level ();
 		levelConstructor.fillWave (levelNum);
 		DontDestroyOnLoad (levelConstructor);

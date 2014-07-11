@@ -5,7 +5,7 @@ public class PromptGUI : MonoBehaviour {
 
 	int height, width;
 	string dialog, yes, no;
-	delegateVoidWithZeroParam rmiYes, rmiNo;
+	Utils.delegateVoidWithZeroParam rmiYes, rmiNo;
 
 	// Use this for initialization
 	void Start () {
@@ -31,7 +31,7 @@ public class PromptGUI : MonoBehaviour {
 		}
 	}
 
-	public void setVar(string[] dialogStrings, voidWithZeroParam[] method){
+	public void setVar(string[] dialogStrings, Utils.delegateVoidWithZeroParam[] method){
 		if (dialogStrings.Length != 3) {
 			Debug.Log ("Wrong string array size (3: dialog box, yes button, no button).");
 		} else if (method == null ||  method.Length != 2) {
