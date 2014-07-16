@@ -16,7 +16,7 @@ GameObject:
   - 114: {fileID: 11400004}
   m_Layer: 10
   m_Name: FLY
-  m_TagString: zombieback
+  m_TagString: zombieup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

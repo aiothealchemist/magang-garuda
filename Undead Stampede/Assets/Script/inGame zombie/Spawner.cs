@@ -6,6 +6,7 @@ public class Spawner : MonoBehaviour {
 	private System.Collections.Generic.List<Transform> zombiePrefabs;
 	public float koreksiPosisiAwal;
 	public float xMax = -6;
+	public int minDelayTime = 0;
 	public int maxDelayTime = 60;
 	public Stack waves;
 
@@ -42,7 +43,7 @@ public class Spawner : MonoBehaviour {
 	}
 
 	void startTick () {
-		countdown = Random.Range(0,maxDelayTime);
+		countdown = Random.Range(minDelayTime,maxDelayTime);
 	}
 
 	void spawnZombie(){
