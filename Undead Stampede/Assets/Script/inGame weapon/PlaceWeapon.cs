@@ -23,6 +23,8 @@ public class PlaceWeapon : MonoBehaviour {
 	private Transform target;
 	GameObject barrel;
 	GameObject[] barrelFinder;
+	public Sprite sidePad;
+	public Sprite sideBarrel;
 
 	public void Start(){
 		//invoke searching target for turret
@@ -121,6 +123,21 @@ public class PlaceWeapon : MonoBehaviour {
 					gameObject.transform.position = quad.transform.position;
 					searchTag = "zombieside";
 					//rotate pad
+					SpriteRenderer[] renderers =  gameObject.GetComponentsInChildren<SpriteRenderer>();
+					foreach(SpriteRenderer s in renderers){
+						if(s.name == "Pad"){
+							s.sprite = sidePad;
+							s.transform.localScale = new Vector3(0.1f, 0.1f, 1f);
+						}
+						else if(s.name == "Barrel"){
+							s.sprite = sideBarrel;
+							s.transform.localScale = new Vector3(0.07f, 0.07f, 1f);
+							s.transform.position = new Vector3(s.transform.position.x,s.transform.position.y + 0.25f, s.transform.position.z);
+							Vector3 newAngle = new Vector3(0,0,60);
+							s.transform.rotation = Quaternion.Euler(newAngle);
+							s.sortingOrder = 1;
+						}
+					}
 					quad.GetComponent<PlacementGridDisp>().isHaveContent = true;
 					isMustDelete = false;
 				}
