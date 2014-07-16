@@ -19,6 +19,9 @@ public class MainMenu : BaseMenu {
 	protected override void Start () {
 		base.Start ();
 		resetCredits ();
+	}
+
+	protected override void loadResources () {
 		menuType = type.menu;
 		menuBG = Resources.Load<Texture2D> ("background/mainmenu");
 		menuButtons = Resources.LoadAll<Texture2D> ("button/mainmenu");
@@ -36,16 +39,15 @@ public class MainMenu : BaseMenu {
 	}
 
 	protected override void updateGUI () {
-		GUI.Box (new Rect(0, 0, width, height), menuBG, GUIStyle.none);
-		GUI.Box (new Rect(width * 1.1f / 5, height / 4, width / 2, height), gameTitle, GUIStyle.none);
-		BGM = (GUI.Toggle (new Rect (width * 12 / 15, audiButtY, width / 10.9f, height / 8), BGM, menuButtons [BGM ? 3 : 4], GUIStyle.none));
-		SFX = (GUI.Toggle (new Rect (width * 13.5f / 15, audiButtY, width / 8, height / 8), SFX, menuButtons [SFX ? 5 : 6], GUIStyle.none));
-
-		if (GUI.Button (new Rect (width * 2.38f / 7, playButtY, width / 3, height  / 5), menuButtons [0], GUIStyle.none)) {//play
+		GUI.DrawTexture (new Rect(width * 1.1f / 5, height / 4, width / 2, height / 3f), gameTitle, ScaleMode.ScaleToFit);
+		if (GUI.Button (new Rect (width * 2.38f / 7, playButtY, width / 3, height  / 5), menuButtons [0], GUIStyle.none)) {
+			//play
 			gameObject.AddComponent<PlayMenu>();	Destroy (this);
-		} else if (GUI.Button (new Rect (achiButtX, height * 3.1f / 4, width * 3.2f / 10, height), menuButtons [1], GUIStyle.none)) {//achievement
+		} else if (GUI.Button (new Rect (achiButtX, height * 3.1f / 4, width * 3.2f / 10, height), menuButtons [1], GUIStyle.none)) {
+			//achievement
 			setWindow (gameObject.AddComponent<Achievements>());
-		} else if (GUI.Button (new Rect (credButtX, height * 3.1f / 4, width * 3.3f / 10, height), menuButtons [2], GUIStyle.none)) {//credits
+		} else if (GUI.Button (new Rect (credButtX, height * 3.1f / 4, width * 3.3f / 10, height), menuButtons [2], GUIStyle.none)) {
+			//credits
 			Destroy (window);
 			credits = true;
 		}
@@ -55,6 +57,13 @@ public class MainMenu : BaseMenu {
 		}
 	}
 
+	protected override void updateBlockableGUI () {
+		BGM = (GUI.Toggle (new Rect (width * 12 / 15, audiButtY, width / 10.9f, height / 8), 
+		                   BGM, menuButtons [BGM ? 3 : 4], GUIStyle.none));
+		SFX = (GUI.Toggle (new Rect (width * 13.5f / 15, audiButtY, width / 8, height / 8), 
+		                   SFX, menuButtons [SFX ? 5 : 6], GUIStyle.none));
+	}
+	
 	bool credits, creditText;
 	float credButtX, achiButtX, playButtY, audiButtY;
 

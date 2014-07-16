@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class PromptGUI : MonoBehaviour {
+public class PopUp : MonoBehaviour {
 
 	int height, width;
 	string dialog, yes, no;
@@ -13,21 +13,13 @@ public class PromptGUI : MonoBehaviour {
 		height = Screen.height;
 	}
 
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
 	void OnGUI () {
+		GUI.depth = 0;
 		GUI.Box (new Rect (width / 5, height * 4 / 15, width * 3 / 5, height * 7 / 15), dialog);
 		if (GUI.Button (new Rect (width * 35 / 160, height * 8 / 15, width /4, height / 6), yes)) { // confirm
-			if (rmiYes != null)
-				rmiYes();
-			Destroy (this);
+			(rmiYes ?? kill) ();
 		} else if (GUI.Button (new Rect (width * 17 / 32, height * 8 / 15, width /4, height / 6), no)) { // cancel
-			if (rmiNo != null)
-				rmiNo();
-			Destroy (this);
+			(rmiNo ?? kill) ();
 		}
 	}
 
@@ -44,5 +36,9 @@ public class PromptGUI : MonoBehaviour {
 			rmiYes = method[0];
 			rmiNo = method[1];
 		}
+	}
+
+	void kill(){
+		Destroy (this);
 	}
 }
