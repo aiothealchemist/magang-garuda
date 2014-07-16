@@ -92,6 +92,14 @@ public class PlaceWeapon : MonoBehaviour {
 					//grid has no content, snap weapon on Update
 					gameObject.transform.position = quad.transform.position;
 					searchTag = "zombieback";
+					//rotate pad
+					SpriteRenderer[] renderers =  gameObject.GetComponentsInChildren<SpriteRenderer>();
+					foreach(SpriteRenderer s in renderers){
+						if(s.name == "Pad"){
+							Debug.Log("rotating pad");
+							s.transform.Rotate(new Vector3(0f,0f,90f));
+						}
+					}
 					quad.GetComponent<PlacementGridDisp>().isHaveContent = true;
 					isMustDelete = false;
 				}
@@ -112,6 +120,7 @@ public class PlaceWeapon : MonoBehaviour {
 					//grid has no content, snap weapon on Update
 					gameObject.transform.position = quad.transform.position;
 					searchTag = "zombieside";
+					//rotate pad
 					quad.GetComponent<PlacementGridDisp>().isHaveContent = true;
 					isMustDelete = false;
 				}
