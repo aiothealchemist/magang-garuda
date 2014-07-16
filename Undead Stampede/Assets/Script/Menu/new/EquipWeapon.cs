@@ -3,29 +3,27 @@ using System.Collections;
 
 public class EquipWeapon : BaseMenu {
 	
-	WeaponXML[] contents, equipped;
+	WeaponXML[] contents;
+	System.Collections.Generic.List<WeaponXML> equipped;
+	Texture2D[] contentButtons;
 	string[] tempButtonStrings;
 
 	Texture2D playButton;
-	int chosenWeapon;
+	int chosenWeapon, equippedWeapon, maxAvailableEquip = 3, maxEquip = 6;
 
 	// Use this for initialization
 	protected override void Start () {
 		base.Start ();
 		viewVector = Vector2.zero;
-		equipped = new WeaponXML[3];	//3 selain itu jadi in-app purchase, belum dibuat
+		equipped = new System.Collections.Generic.List<WeaponXML> ();
 //		contents = System.Array.ConvertAll(
 //			Utils.XMLLoader.loadSpecificXML (LoadableContent.loadedContentType.Weapon), 
 //			item => (WeaponXML) item
 //		);
-//		equipButtons = new System.Collections.Generic.List<Texture2D>(contents.Length);
-//		System.Array.ForEach(
-//			contents, 
-//			item => equipButtons.Add (
-//				item.textures[LoadableContent.textureTypes.button]
-//			)
-//		);
-//		equippedContents = new bool[contents.Length];
+//		contentButtons = new Texture2D[contents.Length];
+//		for (int i = 0; i < contents.Length; i++) {
+//			contentButtons[i] = contents[i].textures[LoadableContent.textureTypes.button];
+//		}
 		tempButtonStrings = new string[]{ "Weapons", "Parts", "Vehicles", "Gems" };
 	}
 
@@ -47,24 +45,35 @@ public class EquipWeapon : BaseMenu {
 	}
 
 	protected override void updateGUI () {
-		GUI.Box (new Rect(width / 3.1f, height / 7, width / 3, height / 16),"Select your weapon");
+		GUI.Box (new Rect(width / 3.1f, height / 7, width / 3, height / 16), "Select your weapon");
 		GUI.Box (new Rect (width / 13, height / 4.8f, width * 12.3f / 15, height * 2.5f / 9), "Available Weapons");
 		// ScrollView
 		viewVector = GUI.BeginScrollView (new Rect (width / 12, height / 4f, width * 12.1f / 15, height * 2.5f / 10.8f), 
 		                                  viewVector, new Rect (0, 0, tempButtonStrings.Length * width * 12.3f / 15, height * 2.4f / 12f));
 		chosenWeapon = GUI.Toolbar(
 			new Rect (0, 0,(tempButtonStrings.Length) *  width / 6, height * 2.4f / 12f), 
-			-1, /*equipButtons ?? */tempButtonStrings);
+			-1, /*contentButtons ?? */tempButtonStrings);
 		GUI.EndScrollView();
 
-		if (chosenWeapon != -1){
+		for (int i = 0; i < maxEquip; i++){
+			if (GUI.Button(new Rect(width * (i%3 / 5.8f + 1 /9f), height * (1 / 2f + i / 3 / 6f), width / 6,height * 5.6f / 36f),
+					"No data."))
+				if (equipped[i] != null) equipped.RemoveAt (i);
+		}
 
+		if (chosenWeapon != -1 && !equipped.Contains (contents[chosenWeapon])){
+			if (equippedWeapon < maxAvailableEquip ) {
+				equipped[equippedWeapon++] = contents[chosenWeapon];
+			} else {
+				createPrompt (new Utils.delegateVoidWithZeroParam[2], 
+						new string[] {"Please buy more slot to equip weapon", "okay", "okay"});
+			}
 		}
 
 		if (GUI.Button (new Rect (width * 26 / 30, height / 20, width * 2 / 26, height / 10), backButton, GUIStyle.none)) { 
 			//back
 			Destroy (this);
-		} else if (GUI.Button (new Rect (width * 3.35f / 5, height / 1.7f, width / 6, height / 8), playButton, GUIStyle.none)) {
+		} else if (GUI.Button (new Rect (width * 3.35f / 5, height / 1.65f, width / 6, height / 8), playButton, GUIStyle.none)) {
 
 		}
 	}
