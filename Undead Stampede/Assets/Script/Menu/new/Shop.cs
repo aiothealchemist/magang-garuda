@@ -26,6 +26,7 @@ public class Shop : BaseMenu {
 		buyButton = Resources.Load<Texture2D>("button/buy");
 		backButton = Resources.Load<Texture2D>("button/back");
 		menuBG = Resources.Load<Texture2D>("background/window");
+		shopButtons = Resources.LoadAll<Texture2D>("button/shop");
 		bgRect = new Rect (width / 30, height / 18, width * 14 / 15, height * 8 / 9);
 	}
 
@@ -39,7 +40,7 @@ public class Shop : BaseMenu {
 
 	protected override void updateGUI () {
 		int changeShop = GUI.Toolbar(new Rect(width / 13, height / 6.5f, width * 12.3f / 15, height / 10), 
-		                             chosenShop, /*shopButtons ?? */tempButtonStrings);
+		                             chosenShop, shopButtons, GUIStyle.none);
 		GUI.Box (new Rect (width / 13, height / 3.77f, width * 12.3f / 15, height / 2.3f), string.Empty);
 
 		// ScrollView
