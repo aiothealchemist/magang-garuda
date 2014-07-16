@@ -132,7 +132,7 @@ public class PlaceWeapon : MonoBehaviour {
 						else if(s.name == "Barrel"){
 							s.sprite = sideBarrel;
 							s.transform.localScale = new Vector3(0.07f, 0.07f, 1f);
-							s.transform.position = new Vector3(s.transform.position.x,s.transform.position.y + 0.25f, s.transform.position.z);
+							s.transform.position = new Vector3(s.transform.position.x,s.transform.position.y + 0.3f, s.transform.position.z);
 							Vector3 newAngle = new Vector3(0,0,60);
 							s.transform.rotation = Quaternion.Euler(newAngle);
 							s.sortingOrder = 1;
