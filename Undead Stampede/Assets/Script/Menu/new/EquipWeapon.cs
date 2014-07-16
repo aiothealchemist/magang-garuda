@@ -13,7 +13,7 @@ public class EquipWeapon : BaseMenu {
 	protected override void Start () {
 		base.Start ();
 		viewVector = Vector2.zero;
-		equipped = new WeaponXML[3];	//3 yang lain in-app purchase
+		equipped = new WeaponXML[3];	//3 selain itu jadi in-app purchase, belum dibuat
 //		contents = System.Array.ConvertAll(
 //			Utils.XMLLoader.loadSpecificXML (LoadableContent.loadedContentType.Weapon), 
 //			item => (WeaponXML) item
