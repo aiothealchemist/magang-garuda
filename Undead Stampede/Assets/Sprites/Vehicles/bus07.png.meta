@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 602c816825a85344a9dfac14b493733d
+guid: 83d89c7b04feccd40baaec83a2f4102c
 TextureImporter:
   serializedVersion: 2
   mipmaps:
@@ -20,8 +20,8 @@ TextureImporter:
   grayScaleToAlpha: 0
   generateCubemap: 0
   seamlessCubemap: 0
-  textureFormat: -1
-  maxTextureSize: 1024
+  textureFormat: -3
+  maxTextureSize: 4096
   textureSettings:
     filterMode: -1
     aniso: 1
@@ -41,41 +41,68 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: zombie_0
+    - name: bus07_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 5741
+        width: 2990
+        height: 845
+      alignment: 2
+      pivot: {x: 0, y: 0}
+    - name: bus07_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4810
+        width: 2990
+        height: 820
+      alignment: 2
+      pivot: {x: 0, y: 0}
+    - name: bus07_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3836
+        width: 2990
+        height: 837
+      alignment: 2
+      pivot: {x: 0, y: 0}
+    - name: bus07_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2869
+        width: 2990
+        height: 848
+      alignment: 2
+      pivot: {x: 0, y: 0}
+    - name: bus07_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1905
+        width: 2990
+        height: 855
+      alignment: 2
+      pivot: {x: 0, y: 0}
+    - name: bus07_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 938
+        width: 2990
+        height: 864
+      alignment: 2
+      pivot: {x: 0, y: 0}
+    - name: bus07_6
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 157
-        height: 102
-      alignment: 0
-      pivot: {x: 0, y: 0}
-    - name: zombie_1
-      rect:
-        serializedVersion: 2
-        x: 157
-        y: 0
-        width: 157
-        height: 102
-      alignment: 0
-      pivot: {x: 0, y: 0}
-    - name: zombie_2
-      rect:
-        serializedVersion: 2
-        x: 314
-        y: 0
-        width: 157
-        height: 102
-      alignment: 0
-      pivot: {x: 0, y: 0}
-    - name: zombie_3
-      rect:
-        serializedVersion: 2
-        x: 471
-        y: 0
-        width: 157
-        height: 102
-      alignment: 0
+        width: 2990
+        height: 845
+      alignment: 2
       pivot: {x: 0, y: 0}
   spritePackingTag: 
   userData: 

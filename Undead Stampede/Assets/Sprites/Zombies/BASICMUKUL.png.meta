@@ -1,0 +1,234 @@
+fileFormatVersion: 2
+guid: 06f2d5e93dde22642b7e087ee4fa3950
+TextureImporter:
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 4096
+  textureSettings:
+    filterMode: -1
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: BASICMUKUL_0
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 627
+        width: 174
+        height: 241
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: BASICMUKUL_1
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 627
+        width: 192
+        height: 255
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: BASICMUKUL_2
+      rect:
+        serializedVersion: 2
+        x: 441
+        y: 626
+        width: 183
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: BASICMUKUL_3
+      rect:
+        serializedVersion: 2
+        x: 659
+        y: 626
+        width: 171
+        height: 262
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: BASICMUKUL_4
+      rect:
+        serializedVersion: 2
+        x: 876
+        y: 626
+        width: 169
+        height: 259
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: BASICMUKUL_5
+      rect:
+        serializedVersion: 2
+        x: 1090
+        y: 626
+        width: 167
+        height: 257
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: BASICMUKUL_6
+      rect:
+        serializedVersion: 2
+        x: 1290
+        y: 627
+        width: 190
+        height: 247
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: BASICMUKUL_7
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 329
+        width: 186
+        height: 240
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: BASICMUKUL_8
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 329
+        width: 196
+        height: 254
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: BASICMUKUL_9
+      rect:
+        serializedVersion: 2
+        x: 441
+        y: 327
+        width: 180
+        height: 261
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: BASICMUKUL_10
+      rect:
+        serializedVersion: 2
+        x: 659
+        y: 328
+        width: 167
+        height: 262
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: BASICMUKUL_11
+      rect:
+        serializedVersion: 2
+        x: 876
+        y: 327
+        width: 164
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: BASICMUKUL_12
+      rect:
+        serializedVersion: 2
+        x: 1090
+        y: 327
+        width: 166
+        height: 258
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: BASICMUKUL_13
+      rect:
+        serializedVersion: 2
+        x: 1290
+        y: 329
+        width: 184
+        height: 248
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: BASICMUKUL_14
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 29
+        width: 180
+        height: 240
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: BASICMUKUL_15
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 29
+        width: 195
+        height: 254
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: BASICMUKUL_16
+      rect:
+        serializedVersion: 2
+        x: 441
+        y: 27
+        width: 184
+        height: 261
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: BASICMUKUL_17
+      rect:
+        serializedVersion: 2
+        x: 659
+        y: 28
+        width: 170
+        height: 262
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: BASICMUKUL_18
+      rect:
+        serializedVersion: 2
+        x: 876
+        y: 27
+        width: 170
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: BASICMUKUL_19
+      rect:
+        serializedVersion: 2
+        x: 1090
+        y: 27
+        width: 168
+        height: 258
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: BASICMUKUL_20
+      rect:
+        serializedVersion: 2
+        x: 1290
+        y: 29
+        width: 188
+        height: 248
+      alignment: 0
+      pivot: {x: 0, y: 0}
+  spritePackingTag: 
+  userData: 
