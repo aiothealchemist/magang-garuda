@@ -24,13 +24,13 @@ public class GaragemenuGUI : BaseMenu {
 		{
 			switch (selectedButton) {
 			case 0:	//arsenal
-				setShowcase (gameObject.AddComponent<BaseShopGUI>());
+				setWindow (gameObject.AddComponent<BaseShopGUI>());
 				break;
 			case 1:	//parts
-				setShowcase (gameObject.AddComponent<BaseShopGUI>());
+				setWindow (gameObject.AddComponent<BaseShopGUI>());
 				break;
 			case 2:	//vehicle
-				setShowcase (gameObject.AddComponent<BaseShopGUI>());
+				setWindow (gameObject.AddComponent<BaseShopGUI>());
 				break;
 			default:
 				break;

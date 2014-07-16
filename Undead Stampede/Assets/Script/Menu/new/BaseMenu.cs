@@ -4,11 +4,14 @@ using System.Collections;
 public abstract class BaseMenu : MonoBehaviour {
 
 	//menu type
-	protected enum type {menu, window};
+	protected enum type {window, menu};
 	protected type menuType;
 
 	protected int height, width;
 	public Texture menuBG;
+
+	public AudioSource bgm, sfx;
+
 	protected BaseMenu window, parent;
 	protected PromptGUI popup;
 
@@ -19,6 +22,7 @@ public abstract class BaseMenu : MonoBehaviour {
 	}
 
 	void OnGUI () {
+		GUI.depth = (int) menuType;
 		if ((parent ?? this).popup == null)
 			updateGUI ();
 	}
@@ -30,7 +34,7 @@ public abstract class BaseMenu : MonoBehaviour {
 
 	protected abstract void updateGUI ();
 
-	protected void createPrompt (delegateVoidWithZeroParam[] method, string[] dialog) {
+	protected void createPrompt (Utils.delegateVoidWithZeroParam[] method, string[] dialog) {
 		if (menuType == type.window) {
 			parent.createPrompt (method, dialog);
 		} else {
@@ -39,7 +43,7 @@ public abstract class BaseMenu : MonoBehaviour {
 		}
 	}
 
-	protected void setShowcase(BaseMenu newSC){
+	protected void setWindow(BaseMenu newSC){
 		Destroy (this.window);
 		this.window = newSC;
 		newSC.parent = this;

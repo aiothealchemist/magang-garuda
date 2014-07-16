@@ -29,13 +29,13 @@ public class MainmenuGUI : BaseMenu {
 				Destroy (this);
 				break;
 			case 1:	//settings
-				setShowcase(gameObject.AddComponent<SettingsGUI>());
+//				setShowcase(gameObject.AddComponent<SettingsGUI>());
 				break;
 			case 2:	//credits
-				setShowcase(gameObject.AddComponent<CreditsGUI>());
+				setWindow(gameObject.AddComponent<CreditsGUI>());
 				break;
 			case 3:	//exit
-				createPrompt(new delegateVoidWithZeroParam[] { exit, null },
+				createPrompt(new Utils.delegateVoidWithZeroParam[] { exit, null },
 						new string[] { "Are you sure you want to Quit?", "Yes", "No" });
 				break;
 			default:

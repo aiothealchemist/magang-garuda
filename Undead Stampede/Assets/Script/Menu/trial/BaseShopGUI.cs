@@ -47,7 +47,7 @@ public class BaseShopGUI : BaseMenu {
 		GUI.Box (new Rect (width * 12 / 30, height * 7 / 15, width * 4 / 15, width / 5), content[chosenContent].description);
 		GUI.Box (new Rect (width * 12 / 30, height * 12 / 15, width * 2 / 15, height * 0.115f), "Price\n" + content[chosenContent].pricing[currency]);	//objPrice
 		if (GUI.Button (new Rect (width * 16 / 30, height * 12 / 15, width * 2 / 15, height * 0.115f), "Buy")) {
-			createPrompt(new delegateVoidWithZeroParam[] { buy, null }, new string[] { 
+			createPrompt(new Utils.delegateVoidWithZeroParam[] { buy, null }, new string[] { 
 					"Do you want to buy "+content[chosenContent].name +" for "+content[chosenContent].pricing[currency]+" "+currency+"?", 
 					"Accept", "Decline" }
 			);
@@ -59,7 +59,7 @@ public class BaseShopGUI : BaseMenu {
 
 	public void loadShop(LoadableContent.loadedContentType tipe){
 		contentType = tipe;
-		content = utils.loadSpecificXML (tipe);
+		content = Utils.XMLLoader.loadSpecificXML (tipe);
 		currency = tipe != LoadableContent.loadedContentType.Gem ? 
 			LoadableContent.currency.gem : LoadableContent.currency.realMoney;
 		menuButtons = new Texture2D[content.Length];
@@ -70,12 +70,12 @@ public class BaseShopGUI : BaseMenu {
 	
 	void buy () {
 		// TODO shop for gem
-		if (content[chosenContent].pricing[currency] > utils.Gem) {
-			createPrompt (new delegateVoidWithZeroParam[] { null, null },
+		if (content[chosenContent].pricing[currency] > Utils.PrefsAccess.Gem) {
+			createPrompt (new Utils.delegateVoidWithZeroParam[] { null, null },
 					new string[] { "Susdulu, duitnya ga cukup coy", "okay", "okay" });
 		} else {
-			utils.substractGems (content[chosenContent].pricing[currency]);
-			utils.setEnumeratedBooleanPrefs("Unlocked"+contentType.ToString (), chosenContent, true);
+			Utils.PrefsAccess.substractGems (content[chosenContent].pricing[currency]);
+			Utils.PrefsAccess.setEnumeratedBooleanPrefs("Unlocked"+contentType.ToString (), chosenContent, true);
 		}
 	}
 }
