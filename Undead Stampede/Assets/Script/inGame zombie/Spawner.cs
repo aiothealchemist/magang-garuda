@@ -6,6 +6,7 @@ public class Spawner : MonoBehaviour {
 	private System.Collections.Generic.List<Transform> zombiePrefabs;
 	public float koreksiPosisiAwal;
 	public float xMax = -6;
+	public int minDelayTime = 0;
 	public int maxDelayTime = 60;
 	public Stack waves;
 
@@ -42,14 +43,14 @@ public class Spawner : MonoBehaviour {
 	}
 
 	void startTick () {
-		countdown = Random.Range(0,maxDelayTime);
+		countdown = Random.Range(minDelayTime,maxDelayTime);
 	}
 
 	void spawnZombie(){
 		if (zombiePrefabs.Count > 0) {
 			int i = Random.Range (0,zombiePrefabs.Count);
 			//Transform zombieInstance = (Transform)
-				Instantiate (zombiePrefabs [i], new Vector3( Random.value * -9 , 0, 0 ), Quaternion.identity);
+				Instantiate (zombiePrefabs [i], new Vector3( Random.value * -9 , 5, 0 ), Quaternion.identity);
 
 			//ini berisi posisi zombie yg benar, depend on sisi tertentu
 			//		if (zombieInstance.GetComponent<ZombieController>().sisi == ZombieController.zombieSide.belakang) {

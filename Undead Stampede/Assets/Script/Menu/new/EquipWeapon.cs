@@ -3,18 +3,17 @@ using System.Collections;
 
 public class EquipWeapon : BaseMenu {
 	
-	WeaponXML[] contents;
-	bool[] equippedContents;
-	System.Collections.Generic.List<Texture2D> equipButtons;
+	WeaponXML[] contents, equipped;
 	string[] tempButtonStrings;
 
 	Texture2D playButton;
-	int equipWeapon, unequipWeapon, i;
+	int chosenWeapon;
 
 	// Use this for initialization
 	protected override void Start () {
 		base.Start ();
 		viewVector = Vector2.zero;
+		equipped = new WeaponXML[3];	//3 yang lain in-app purchase
 //		contents = System.Array.ConvertAll(
 //			Utils.XMLLoader.loadSpecificXML (LoadableContent.loadedContentType.Weapon), 
 //			item => (WeaponXML) item
@@ -53,12 +52,12 @@ public class EquipWeapon : BaseMenu {
 		// ScrollView
 		viewVector = GUI.BeginScrollView (new Rect (width / 12, height / 4f, width * 12.1f / 15, height * 2.5f / 10.8f), 
 		                                  viewVector, new Rect (0, 0, tempButtonStrings.Length * width * 12.3f / 15, height * 2.4f / 12f));
-		equipWeapon = GUI.Toolbar(
+		chosenWeapon = GUI.Toolbar(
 			new Rect (0, 0,(tempButtonStrings.Length) *  width / 6, height * 2.4f / 12f), 
 			-1, /*equipButtons ?? */tempButtonStrings);
 		GUI.EndScrollView();
 
-		if (equipWeapon != -1){
+		if (chosenWeapon != -1){
 
 		}
 
