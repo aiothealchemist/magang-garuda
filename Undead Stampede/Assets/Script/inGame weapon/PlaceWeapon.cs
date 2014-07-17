@@ -21,8 +21,10 @@ public class PlaceWeapon : MonoBehaviour {
 	private string searchTag;
 	private float searchFrequency = 1.0f;
 	private Transform target;
+	//variables for rotating barrel
 	GameObject barrel;
 	GameObject[] barrelFinder;
+	//variables for sprite change to side weapon sprite
 	public Sprite sidePad;
 	public Sprite sideBarrel;
 
