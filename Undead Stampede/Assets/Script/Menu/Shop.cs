@@ -26,7 +26,7 @@ public class Shop : BaseMenu {
 		buyButton = Resources.Load<Texture2D>("button/buy");
 		backButton = Resources.Load<Texture2D>("button/back");
 		menuBG = Resources.Load<Texture2D>("background/window");
-		shopButtons = Resources.LoadAll<Texture2D>("button/shop");
+		shopButtons = Resources.LoadAll<Texture2D>("button/shopmenu");
 		bgRect = new Rect (width / 30, height / 18, width * 14 / 15, height * 8 / 9);
 	}
 
