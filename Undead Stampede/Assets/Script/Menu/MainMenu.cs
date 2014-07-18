@@ -58,7 +58,8 @@ public class MainMenu : BaseMenu {
 	}
 
 	protected override void updateBlockableGUI () {
-		BGM = (GUI.Toggle (new Rect (width * 12 / 15, audiButtY, width / 10.9f, height / 8), 
+		Rect anu = new Rect (width * 12 / 15, audiButtY, width / 10.9f, height / 8);
+		BGM = (GUI.Toggle (anu, 
 		                   BGM, menuButtons [BGM ? 3 : 4], GUIStyle.none));
 		SFX = (GUI.Toggle (new Rect (width * 13.5f / 15, audiButtY, width / 8, height / 8), 
 		                   SFX, menuButtons [SFX ? 5 : 6], GUIStyle.none));
