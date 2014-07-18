@@ -27,6 +27,9 @@ public class PlaceWeapon : MonoBehaviour {
 	//variables for sprite change to side weapon sprite
 	public Sprite sidePad;
 	public Sprite sideBarrel;
+	//variables for sell button
+	public GameObject sellButtonPrefab;
+	private GameObject sellButton;
 
 	public void Start(){
 		//invoke searching target for turret
@@ -42,6 +45,13 @@ public class PlaceWeapon : MonoBehaviour {
 			offset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
 		}
 	}
+
+	public void OnMouseUp(){
+		Debug.Log("weapon clicked");
+		//show sell button
+		showSellButton ();
+		//show upgrade button
+	}
 	
 	public void OnMouseDrag()
 	{
@@ -55,6 +65,29 @@ public class PlaceWeapon : MonoBehaviour {
 		}
 	}
 
+	void showSellButton(){
+		//show sell button when weapon is tapped
+		if (!isPlaced && isNotChosen) {
+			//do nothing		
+		} else if (isPlaced && !isNotChosen) {
+			//remove all sell and upgrade button of other weapons
+			deleteAllSellUpgradeButton();
+			//show sell and upgrade button for this weapon
+			Debug.Log("weapon clicked");
+			Vector3 sellButtonPos = new Vector3(gameObject.transform.position.x + 0.5f,gameObject.transform.position.y,gameObject.transform.position.z);
+			sellButton = Instantiate(sellButtonPrefab, sellButtonPos, gameObject.transform.rotation) as GameObject;
+			sellButton.transform.parent = gameObject.transform;
+		}
+	}
+
+	public void deleteAllSellUpgradeButton(){
+		GameObject[] delete = GameObject.FindGameObjectsWithTag("sellupgradebutton");
+		foreach (GameObject d in delete){
+			DestroyObject(d);
+			Debug.Log("sell button deleted");
+		}
+	}
+	
 	//set the turret position to snap to selected position
 	public void SetPosition(){
 		gridup = GameObject.FindGameObjectsWithTag("placementgridup");
@@ -76,6 +109,9 @@ public class PlaceWeapon : MonoBehaviour {
 					//grid has no content, snap weapon on Update
 					gameObject.transform.position = quad.transform.position;
 					searchTag = "zombieup";
+					gameObject.AddComponent<BoxCollider2D>();
+					gameObject.GetComponent<BoxCollider2D>().size = new Vector2(1,1);
+					gameObject.GetComponent<BoxCollider2D>().center = new Vector2(0,0);
 					quad.GetComponent<PlacementGridDisp>().isHaveContent = true;
 					isMustDelete = false;
 				}
@@ -95,15 +131,18 @@ public class PlaceWeapon : MonoBehaviour {
 				else{
 					//grid has no content, snap weapon on Update
 					gameObject.transform.position = quad.transform.position;
+					quad.GetComponent<MeshCollider>().collider.enabled = false;	
 					searchTag = "zombieback";
 					//rotate pad
 					SpriteRenderer[] renderers =  gameObject.GetComponentsInChildren<SpriteRenderer>();
 					foreach(SpriteRenderer s in renderers){
 						if(s.name == "Pad"){
-							Debug.Log("rotating pad");
 							s.transform.Rotate(new Vector3(0f,0f,90f));
 						}
 					}
+					gameObject.AddComponent<BoxCollider2D>();
+					gameObject.GetComponent<BoxCollider2D>().size = new Vector2(1,1);
+					gameObject.GetComponent<BoxCollider2D>().center = new Vector2(0,0);
 					quad.GetComponent<PlacementGridDisp>().isHaveContent = true;
 					isMustDelete = false;
 				}
@@ -123,6 +162,7 @@ public class PlaceWeapon : MonoBehaviour {
 				else{
 					//grid has no content, snap weapon on Update
 					gameObject.transform.position = quad.transform.position;
+					quad.GetComponent<MeshCollider>().collider.enabled = false;	
 					searchTag = "zombieside";
 					//rotate pad
 					SpriteRenderer[] renderers =  gameObject.GetComponentsInChildren<SpriteRenderer>();
@@ -140,6 +180,9 @@ public class PlaceWeapon : MonoBehaviour {
 							s.sortingOrder = 1;
 						}
 					}
+					gameObject.AddComponent<BoxCollider2D>();
+					gameObject.GetComponent<BoxCollider2D>().size = new Vector2(1,1);
+					gameObject.GetComponent<BoxCollider2D>().center = new Vector2(0,0);
 					quad.GetComponent<PlacementGridDisp>().isHaveContent = true;
 					isMustDelete = false;
 				}

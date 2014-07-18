@@ -6,10 +6,14 @@ public class PlacementGridDisp : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		renderer.enabled = false;		
+		renderer.enabled = false;	
 	}
 
-	public void OnMouseDrag () {
-		renderer.enabled = true;	
+	public void hideGrid(){
+		renderer.enabled = false;
+	}
+
+	public void showGrid(){
+		renderer.enabled = true;
 	}
 }
