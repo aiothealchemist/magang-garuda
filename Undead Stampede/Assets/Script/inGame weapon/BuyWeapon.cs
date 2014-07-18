@@ -13,6 +13,7 @@ public class BuyWeapon : MonoBehaviour {
 	void OnMouseDown() {
 		draggedWeapon = Instantiate (selectedWeapon, transform.position, Quaternion.identity) as GameObject;
 		draggedWeapon.GetComponent<PlaceWeapon> ().OnMouseDown ();
+		draggedWeapon.GetComponent<PlaceWeapon> ().deleteAllSellUpgradeButton ();
 	}
 	
 	void OnMouseDrag()
@@ -22,15 +23,15 @@ public class BuyWeapon : MonoBehaviour {
 		//show placement grid, to be multiplied
 		GameObject[] PGUp = GameObject.FindGameObjectsWithTag("placementgridup");
 		foreach (GameObject quad in PGUp) {
-						quad.GetComponent<PlacementGridDisp> ().OnMouseDrag ();
+			quad.GetComponent<PlacementGridDisp> ().showGrid();
 				}
 		GameObject[] PGBack = GameObject.FindGameObjectsWithTag("placementgridback");
 		foreach (GameObject quad in PGBack) {
-			quad.GetComponent<PlacementGridDisp> ().OnMouseDrag ();
+			quad.GetComponent<PlacementGridDisp> ().showGrid();
 		}
 		GameObject[] PGSide = GameObject.FindGameObjectsWithTag("placementgridside");
 		foreach (GameObject quad in PGSide) {
-			quad.GetComponent<PlacementGridDisp> ().OnMouseDrag ();
+			quad.GetComponent<PlacementGridDisp> ().showGrid();
 		}
 	}
 

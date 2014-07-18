@@ -1001,6 +1001,14 @@ Prefab:
       propertyPath: m_LocalScale.y
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 6100000, guid: 46569211ca96d644ca8ce76f372ec403, type: 2}
+      propertyPath: m_Size.x
+      value: 28
+      objectReference: {fileID: 0}
+    - target: {fileID: 6100000, guid: 46569211ca96d644ca8ce76f372ec403, type: 2}
+      propertyPath: m_Size.y
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 46569211ca96d644ca8ce76f372ec403, type: 2}
   m_RootGameObject: {fileID: 1843088734}
@@ -1320,7 +1328,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 1243098699}
   - 33: {fileID: 1243098703}
-  - 64: {fileID: 1243098702}
   - 23: {fileID: 1243098701}
   - 114: {fileID: 1243098700}
   m_Layer: 9
@@ -1376,20 +1383,6 @@ Renderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_SortingLayerID: 0
---- !u!64 &1243098702
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6400000, guid: 0b85daf600eef9e46a7bf4c515a24c7a,
-    type: 2}
-  m_PrefabInternal: {fileID: 374655057}
-  m_GameObject: {fileID: 1243098698}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_SmoothSphereCollisions: 0
-  m_Convex: 0
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!33 &1243098703
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1756,7 +1749,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 1650778523}
   - 33: {fileID: 1650778527}
-  - 64: {fileID: 1650778526}
   - 23: {fileID: 1650778525}
   - 114: {fileID: 1650778524}
   m_Layer: 9
@@ -1812,20 +1804,6 @@ Renderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_SortingLayerID: 0
---- !u!64 &1650778526
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6400000, guid: 0b85daf600eef9e46a7bf4c515a24c7a,
-    type: 2}
-  m_PrefabInternal: {fileID: 1564808359}
-  m_GameObject: {fileID: 1650778522}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_SmoothSphereCollisions: 0
-  m_Convex: 0
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!33 &1650778527
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1999,7 +1977,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Size: {x: 30, y: 10}
+  m_Size: {x: 28, y: 7}
   m_Center: {x: 0, y: -4}
 --- !u!114 &1843088738
 MonoBehaviour:
