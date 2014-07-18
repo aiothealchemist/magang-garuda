@@ -85,7 +85,7 @@ public class Shop : BaseMenu {
 			LoadableContent.currency.realMoney : LoadableContent.currency.gem;
 		contentButtons = new Texture2D[content.Length];
 		for (int i = 0; i < content.Length; i++) {
-			contentButtons[i] = content[i].textures[LoadableContent.textureTypes.button];
+			contentButtons[i] = content[i].sprites[LoadableContent.textureTypes.button];
 		}
 	}
 	

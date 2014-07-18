@@ -32,7 +32,7 @@ public abstract class BaseMenu : MonoBehaviour {
 		bgRect = new Rect (0, 0, width, height);
 		if (buttonSkin == null){
 			buttonSkin = new GUIStyle(GUI.skin.button);
-			buttonSkin
+			//buttonSkin
 		}
 		loadResources ();
 	}
