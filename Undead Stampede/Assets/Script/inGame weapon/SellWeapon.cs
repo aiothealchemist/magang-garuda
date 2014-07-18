@@ -19,35 +19,35 @@ public class SellWeapon : MonoBehaviour {
 
 	void OnMouseUp(){
 		//sell weapon
-		sellWeapon ();
+		sellWeapon (selectedWeapon);
 	}
 
-	void sellWeapon(){
-		Transform selectedWeapon = gameObject.transform.parent;
-		setGridContent (false);
+	void sellWeapon(Transform _selectedWeapon){
+		_selectedWeapon = gameObject.transform.parent;
+		setGridContent (_selectedWeapon, false);
 		DestroyObject (gameObject);
-		DestroyObject (selectedWeapon.gameObject);
+		DestroyObject (_selectedWeapon.gameObject);
 		
 	}
 
-	void setGridContent(bool toggle){
-		Transform selectedWeapon = gameObject.transform.parent;
+	void setGridContent(Transform _selectedWeapon, bool toggle){
+		_selectedWeapon = gameObject.transform.parent;
 		gridup = GameObject.FindGameObjectsWithTag("placementgridup");
 		gridback = GameObject.FindGameObjectsWithTag("placementgridback");
 		gridside = GameObject.FindGameObjectsWithTag("placementgridside");
 		foreach (GameObject quad in gridup) {
-			if	(selectedWeapon.renderer.bounds.Intersects(quad.renderer.bounds)){
+			if	(_selectedWeapon.renderer.bounds.Intersects(quad.renderer.bounds)){
 				quad.GetComponent<PlacementGridDisp>().isHaveContent = toggle;
 
 			}
 		}
 		foreach (GameObject quad in gridback) {
-			if	(selectedWeapon.renderer.bounds.Intersects(quad.renderer.bounds)){
+			if	(_selectedWeapon.renderer.bounds.Intersects(quad.renderer.bounds)){
 				quad.GetComponent<PlacementGridDisp>().isHaveContent = toggle;
 			}
 		}
 		foreach (GameObject quad in gridside) {
-			if	(selectedWeapon.renderer.bounds.Intersects(quad.renderer.bounds)){
+			if	(_selectedWeapon.renderer.bounds.Intersects(quad.renderer.bounds)){
 				quad.GetComponent<PlacementGridDisp>().isHaveContent = toggle;
 			}
 		}
