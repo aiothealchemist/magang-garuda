@@ -16,9 +16,9 @@ public class PlayMenu : BaseMenu {
 
 	protected override void loadResources () {
 		menuType = type.menu;
-		menuBG = Resources.Load<Texture2D>("background/mainmenu");
-		backButton = Resources.Load<Texture2D>("button/back 1");
-		shopButton = Resources.Load<Texture2D>("button/shop");
+		menuBG = Resources.Load<Texture2D>("menu/background/mainmenu");
+		backButton = Resources.Load<Texture2D>("menu/button/back 1");
+		shopButton = Resources.Load<Texture2D>("menu/button/shop");
 	}
 
 	protected override void updateGUI () { }

@@ -19,6 +19,8 @@ public abstract class BaseMenu : MonoBehaviour {
 	protected BaseMenu window, parent;
 	protected PopUp popup;
 
+	static protected GUIStyle buttonSkin;
+
 	protected abstract void loadResources ();	//resources and menuType
 	protected abstract void updateGUI ();
 	protected virtual void updateBlockableGUI () {}
@@ -26,9 +28,12 @@ public abstract class BaseMenu : MonoBehaviour {
 	
 	// Use this for initialization
 	protected virtual void Start () {
-		width = Screen.width;
-		height = Screen.height;
+		width = Screen.width; height = Screen.height;
 		bgRect = new Rect (0, 0, width, height);
+		if (buttonSkin == null){
+			buttonSkin = new GUIStyle(GUI.skin.button);
+			buttonSkin
+		}
 		loadResources ();
 	}
 
