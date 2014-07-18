@@ -30,6 +30,7 @@ public class PlaceWeapon : MonoBehaviour {
 	//variables for sell button
 	public GameObject sellButtonPrefab;
 	private GameObject sellButton;
+	private bool isSellUpgradeOn = false;
 
 	public void Start(){
 		//invoke searching target for turret
@@ -47,9 +48,14 @@ public class PlaceWeapon : MonoBehaviour {
 	}
 
 	public void OnMouseUp(){
-		//show sell button
-		showSellButton ();
-		//show upgrade button
+		//show sell/upgrade button if button is off
+		if (isSellUpgradeOn) {
+						deleteAllSellUpgradeButton ();	
+						isSellUpgradeOn = false;
+				} else {
+						showSellButton ();
+						//show upgrade button
+				}
 	}
 	
 	public void OnMouseDrag()
@@ -75,6 +81,7 @@ public class PlaceWeapon : MonoBehaviour {
 			Vector3 sellButtonPos = new Vector3(gameObject.transform.position.x + 0.5f,gameObject.transform.position.y,gameObject.transform.position.z);
 			sellButton = Instantiate(sellButtonPrefab, sellButtonPos, gameObject.transform.rotation) as GameObject;
 			sellButton.transform.parent = gameObject.transform;
+			isSellUpgradeOn = true;
 		}
 	}
 
