@@ -7,7 +7,6 @@ public class Shop : BaseMenu {
 	LoadableContent.currency currency;
 	LoadableContent.loadedContentType contentType;
 	Texture2D[] contentButtons, shopButtons;
-	string[] tempButtonStrings;
 
 	Texture2D buyButton;
 	int chosenContent, chosenShop;
@@ -17,16 +16,16 @@ public class Shop : BaseMenu {
 		base.Start ();
 		viewVector = Vector2.zero;
 //		loadShop (LoadableContent.loadedContentType.Weapon);
-		tempButtonStrings = new string[]{ "Weapons", "Parts", "Vehicles", "Gems" };
 	}
 
 	protected override void loadResources ()
 	{
 		menuType = type.window;
-		buyButton = Resources.Load<Texture2D>("button/buy");
-		backButton = Resources.Load<Texture2D>("button/back");
-		menuBG = Resources.Load<Texture2D>("background/window");
-		shopButtons = Resources.LoadAll<Texture2D>("button/shopmenu");
+		buyButton = Resources.Load<Texture2D>("menu/button/buy");
+		backButton = Resources.Load<Texture2D>("menu/button/back");
+		menuBG = Resources.Load<Texture2D>("menu/background/window");
+		shopButtons = Resources.LoadAll<Texture2D>("menu/button/shopmenu");
+		contentButtons = Resources.LoadAll<Texture2D>("weapons/button");
 		bgRect = new Rect (width / 30, height / 18, width * 14 / 15, height * 8 / 9);
 	}
 
@@ -45,26 +44,26 @@ public class Shop : BaseMenu {
 
 		// ScrollView
 		viewVector = GUI.BeginScrollView (new Rect (width / 12, height / 3.3f, width * 12.1f / 15, height / 2.6f), 
-			viewVector, new Rect (0, 0, tempButtonStrings.Length * width * 12.3f / 15, height / 3f));
+			viewVector, new Rect (0, 0, (contentButtons.Length + 1) *  width / 4, height / 3f));
 		chosenContent = GUI.Toolbar(
-			new Rect (0, 0,(tempButtonStrings.Length) *  width / 4, height / 3f), 
-			chosenContent, /*contentButtons ?? */tempButtonStrings);
+			new Rect (0, 0,(contentButtons.Length + 1) *  width / 4, height / 3f), 
+			chosenContent, contentButtons, GUIStyle.none);
 		GUI.EndScrollView();
 
 		GUI.Box (new Rect (width / 13, height / 1.4f, width / 3, height / 8),"Content name");
 		GUI.Box (new Rect (width * 16.5f / 39, height / 1.4f, width / 3.2f, height / 8),"content price");
 
-		if (GUI.changed) {
-			if (changeShop != chosenShop){
-				chosenShop = changeShop;
-				loadShop (
-					chosenShop == 0 ? LoadableContent.loadedContentType.Weapon :
-					chosenShop == 1 ? LoadableContent.loadedContentType.Part :
-					chosenShop == 2 ? LoadableContent.loadedContentType.Gem :
-					LoadableContent.loadedContentType.Vehicle
-				);
-			}
-		}
+//		if (GUI.changed) {
+//			if (changeShop != chosenShop){
+//				chosenShop = changeShop;
+//				loadShop (
+//					chosenShop == 0 ? LoadableContent.loadedContentType.Weapon :
+//					chosenShop == 1 ? LoadableContent.loadedContentType.Part :
+//					chosenShop == 2 ? LoadableContent.loadedContentType.Gem :
+//					LoadableContent.loadedContentType.Vehicle
+//				);
+//			}
+//		}
 
 		if (GUI.Button (new Rect (width * 26 / 30, height / 20, width * 2 / 26, height / 10), backButton, GUIStyle.none)) { 
 			//back

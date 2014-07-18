@@ -20,10 +20,10 @@ public abstract class LoadableContent {
 	public string name { get; set; }
 	public string description  { get; set; }
 	public System.Collections.Generic.Dictionary<currency, int> pricing { get; private set; }
-	public System.Collections.Generic.Dictionary<textureTypes, Texture2D> textures { get; private set; }
+	public System.Collections.Generic.Dictionary<textureTypes, Texture2D> sprites { get; private set; }
 
 	public LoadableContent () {
-		textures = new System.Collections.Generic.Dictionary<textureTypes, Texture2D> ();
+		sprites = new System.Collections.Generic.Dictionary<textureTypes, Texture2D> ();
 		pricing = new System.Collections.Generic.Dictionary<currency, int> ();
 	}
 
@@ -48,7 +48,7 @@ public abstract class LoadableContent {
 		           (Texture2D)Resources.LoadAssetAtPath(sprite, typeof(Texture)));	//parse sprite path: 
 	}
 	public void setSprite(textureTypes tipe, Texture2D sprite){
-		textures [tipe] = sprite;
+		sprites [tipe] = sprite;
 	}
 
 	//construct child
@@ -122,10 +122,17 @@ class VehicleXML : LoadableContent {
 }
 
 class PowerupXML : LoadableContent {
+	public bool isMultiplier { get; set; }	//sesuatu berapa kali lebih besar di akhir, atau ditambah berapa di awal
+	public int coinFactor { get; set; } 
+	public int healthFactor { get; set; } 
+	public int speedFactor { get; set; } 
+	public int damageFactor { get; set; }	//force needed to push the projectile
 	public PowerupXML() : base() { }
 }
 
 class PartXML : LoadableContent {
+	public int baseSpeed { get; set; } 
+	public int baseHealth { get; set; }
 	public PartXML() : base() { }
 }
 

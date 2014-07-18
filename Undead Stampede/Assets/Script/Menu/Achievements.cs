@@ -18,8 +18,8 @@ public class Achievements : BaseMenu {
 
 	protected override void loadResources () {
 		menuType = type.window;
-		backButton = Resources.Load<Texture2D>("button/back");
-		menuBG = Resources.Load<Texture2D>("background/window");
+		backButton = Resources.Load<Texture2D>("menu/button/back");
+		menuBG = Resources.Load<Texture2D>("menu/background/window");
 		bgRect = new Rect (width / 30, height / 18, width * 14 / 15, height * 13 / 18);
 	}
 

@@ -6,7 +6,6 @@ public class EquipWeapon : BaseMenu {
 	WeaponXML[] contents;
 	System.Collections.Generic.List<WeaponXML> equipped;
 	Texture2D[] contentButtons;
-	string[] tempButtonStrings;
 
 	Texture2D playButton;
 	int chosenWeapon, equippedWeapon, maxAvailableEquip = 3, maxEquip = 6;
@@ -24,14 +23,14 @@ public class EquipWeapon : BaseMenu {
 //		for (int i = 0; i < contents.Length; i++) {
 //			contentButtons[i] = contents[i].textures[LoadableContent.textureTypes.button];
 //		}
-		tempButtonStrings = new string[]{ "Weapons", "Parts", "Vehicles", "Gems" };
 	}
 
 	protected override void loadResources () {
 		menuType = type.window;
-		backButton = Resources.Load<Texture2D>("button/back");
-		menuBG = Resources.Load<Texture2D>("background/window");
-		playButton = Resources.Load<Texture2D>("button/mainmenu/mainmenu_1");
+		backButton = Resources.Load<Texture2D>("menu/button/back");
+		menuBG = Resources.Load<Texture2D>("menu/background/window");
+		contentButtons = Resources.LoadAll<Texture2D>("weapons/button");
+		playButton = Resources.Load<Texture2D>("menu/button/mainmenu/mainmenu_1");
 		bgRect = new Rect (width / 30, height / 18, width * 14 / 15, height * 8 / 9);
 	}
 	
@@ -49,10 +48,9 @@ public class EquipWeapon : BaseMenu {
 		GUI.Box (new Rect (width / 13, height / 4.8f, width * 12.3f / 15, height * 2.5f / 9), "Available Weapons");
 		// ScrollView
 		viewVector = GUI.BeginScrollView (new Rect (width / 12, height / 4f, width * 12.1f / 15, height * 2.5f / 10.8f), 
-		                                  viewVector, new Rect (0, 0, tempButtonStrings.Length * width * 12.3f / 15, height * 2.4f / 12f));
+			viewVector, new Rect (0, 0, (contentButtons.Length + 1) * width / 6, height * 2.4f / 12f));
 		chosenWeapon = GUI.Toolbar(
-			new Rect (0, 0,(tempButtonStrings.Length) *  width / 6, height * 2.4f / 12f), 
-			-1, /*contentButtons ?? */tempButtonStrings);
+			new Rect (0, 0,(contentButtons.Length + 1) *  width / 6, height * 2.4f / 12f), -1, contentButtons, GUIStyle.none);
 		GUI.EndScrollView();
 
 		for (int i = 0; i < maxEquip; i++){
@@ -61,12 +59,14 @@ public class EquipWeapon : BaseMenu {
 				if (equipped[i] != null) equipped.RemoveAt (i);
 		}
 
-		if (chosenWeapon != -1 && !equipped.Contains (contents[chosenWeapon])){
-			if (equippedWeapon < maxAvailableEquip ) {
-				equipped[equippedWeapon++] = contents[chosenWeapon];
-			} else {
-				createPrompt (new Utils.delegateVoidWithZeroParam[2], 
+		if (GUI.changed){
+			if (chosenWeapon != -1 && !equipped.Contains (contents[chosenWeapon])){
+				if (equippedWeapon < maxAvailableEquip ) {
+					equipped[equippedWeapon++] = contents[chosenWeapon];
+				} else {
+					createPrompt (new Utils.delegateVoidWithZeroParam[2], 
 						new string[] {"Please buy more slot to equip weapon", "okay", "okay"});
+				}
 			}
 		}
 

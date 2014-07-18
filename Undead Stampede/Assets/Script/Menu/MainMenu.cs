@@ -23,9 +23,9 @@ public class MainMenu : BaseMenu {
 
 	protected override void loadResources () {
 		menuType = type.menu;
-		menuBG = Resources.Load<Texture2D> ("background/mainmenu");
-		menuButtons = Resources.LoadAll<Texture2D> ("button/mainmenu");
-		gameTitle = Resources.Load<Texture2D> ("background/mainmenu_title");
+		menuBG = Resources.Load<Texture2D> ("menu/background/mainmenu");
+		menuButtons = Resources.LoadAll<Texture2D> ("menu/button/mainmenu");
+		gameTitle = Resources.Load<Texture2D> ("menu/background/mainmenu_title");
 	}
 
 	void Update () {
