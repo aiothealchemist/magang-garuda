@@ -6,31 +6,29 @@ public abstract class BaseMenu : MonoBehaviour {
 	//menu type
 	protected enum type {popup, window, menu};
 	protected type menuType;
+	protected BaseMenu window, parent;
+	protected PopUp popup;
 
 	//punyaan anak
+	protected AudioSource bgm, sfx;
 	protected Texture2D backButton;
 	protected Vector2 viewVector;
 	protected int height, width;
 	protected Texture menuBG;
 	protected Rect bgRect;
 
-	public AudioSource bgm, sfx;
-
-	protected BaseMenu window, parent;
-	protected PopUp popup;
-	
+	//abstracts and virtuals
 	protected abstract void loadResources ();	//resources and menuType
 	protected abstract void updateGUI ();
 	protected virtual void updateBlockableGUI () {}
 	protected virtual void onPopupWindow () {}
 	
-	// Use this for initialization
+	//built-in
 	protected virtual void Start () {
 		width = Screen.width; height = Screen.height;
 		bgRect = new Rect (0, 0, width, height);
 		loadResources ();
 	}
-
 	void OnGUI () {
 		GUI.depth = (int) menuType;
 		GUI.DrawTexture (bgRect, menuBG, ScaleMode.StretchToFill);
@@ -39,12 +37,12 @@ public abstract class BaseMenu : MonoBehaviour {
 			updateGUI ();
 		}
 	}
-
 	void OnDestroy () {
 		Destroy (window);
 		Destroy (popup);
 	}
 
+	//menu flow
 	protected void createPrompt (Utils.delegateVoidWithZeroParam[] method, string[] dialog) {
 		if (menuType == type.window) {
 			parent.createPrompt (method, dialog);
@@ -53,10 +51,18 @@ public abstract class BaseMenu : MonoBehaviour {
 			popup.setVar (dialog, method);
 		}
 	}
-
 	protected void setWindow(BaseMenu newSC){
 		Destroy (this.window);
 		this.window = newSC;
 		newSC.parent = this;
+	}
+
+	//buttonGUI
+	protected bool ButtonGUI(Rect rect, Texture2D[] textures){
+		GUI.skin.button.normal.background = textures[0];
+		GUI.skin.button.hover.background = textures[1];
+		GUI.skin.button.active.background = textures[2];
+
+		return GUI.Button (rect,"");
 	}
 }
