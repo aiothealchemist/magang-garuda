@@ -43,15 +43,15 @@ public class BuyWeapon : MonoBehaviour {
 		//hide placement grid, to be multiplied
 		GameObject[] PGUp = GameObject.FindGameObjectsWithTag("placementgridup");
 		foreach (GameObject quad in PGUp) {
-						quad.GetComponent<PlacementGridDisp> ().renderer.enabled = false;
+			quad.GetComponent<PlacementGridDisp> ().hideGrid();
 				}
 		GameObject[] PGBack = GameObject.FindGameObjectsWithTag("placementgridback");
 		foreach (GameObject quad in PGBack) {
-			quad.GetComponent<PlacementGridDisp> ().renderer.enabled = false;
+			quad.GetComponent<PlacementGridDisp> ().hideGrid();
 		}
 		GameObject[] PGSide = GameObject.FindGameObjectsWithTag("placementgridside");
 		foreach (GameObject quad in PGSide) {
-			quad.GetComponent<PlacementGridDisp> ().renderer.enabled = false;
+			quad.GetComponent<PlacementGridDisp> ().hideGrid();
 		}
 	}
 }

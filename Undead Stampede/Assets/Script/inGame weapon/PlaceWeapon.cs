@@ -27,9 +27,10 @@ public class PlaceWeapon : MonoBehaviour {
 	//variables for sprite change to side weapon sprite
 	public Sprite sidePad;
 	public Sprite sideBarrel;
-	//variables for sell button
+	//variables for sell/upgrade button
 	public GameObject sellButtonPrefab;
 	private GameObject sellButton;
+	public bool isSellUpgradeOn = false;
 
 	public void Start(){
 		//invoke searching target for turret
@@ -47,10 +48,13 @@ public class PlaceWeapon : MonoBehaviour {
 	}
 
 	public void OnMouseUp(){
-		Debug.Log("weapon clicked");
-		//show sell button
-		showSellButton ();
-		//show upgrade button
+		//show sell/upgrade button if button is off
+		if (isSellUpgradeOn) {	
+					deleteAllSellUpgradeButton ();
+		} else {
+			showSellButton ();
+			//show upgrade button
+		}
 	}
 	
 	public void OnMouseDrag()
@@ -73,18 +77,21 @@ public class PlaceWeapon : MonoBehaviour {
 			//remove all sell and upgrade button of other weapons
 			deleteAllSellUpgradeButton();
 			//show sell and upgrade button for this weapon
-			Debug.Log("weapon clicked");
 			Vector3 sellButtonPos = new Vector3(gameObject.transform.position.x + 0.5f,gameObject.transform.position.y,gameObject.transform.position.z);
 			sellButton = Instantiate(sellButtonPrefab, sellButtonPos, gameObject.transform.rotation) as GameObject;
 			sellButton.transform.parent = gameObject.transform;
+			isSellUpgradeOn = true;
 		}
 	}
 
 	public void deleteAllSellUpgradeButton(){
 		GameObject[] delete = GameObject.FindGameObjectsWithTag("sellupgradebutton");
+		GameObject[] weapon = GameObject.FindGameObjectsWithTag("weapon");
 		foreach (GameObject d in delete){
-			DestroyObject(d);
-			Debug.Log("sell button deleted");
+			d.GetComponent<SellWeapon>().isDestroying = true;
+		}
+		foreach (GameObject w in weapon) {
+			w.GetComponent<PlaceWeapon>	().isSellUpgradeOn = false;	
 		}
 	}
 	
@@ -94,6 +101,7 @@ public class PlaceWeapon : MonoBehaviour {
 		gridback = GameObject.FindGameObjectsWithTag("placementgridback");
 		gridside = GameObject.FindGameObjectsWithTag("placementgridside");
 
+		enableAllQuadCollider ();
 		foreach (GameObject quad in gridup) {
 			if	(!gameObject.renderer.bounds.Intersects(quad.renderer.bounds)){
 				//object not intersect, delete turret
@@ -109,9 +117,7 @@ public class PlaceWeapon : MonoBehaviour {
 					//grid has no content, snap weapon on Update
 					gameObject.transform.position = quad.transform.position;
 					searchTag = "zombieup";
-					gameObject.AddComponent<BoxCollider2D>();
-					gameObject.GetComponent<BoxCollider2D>().size = new Vector2(1,1);
-					gameObject.GetComponent<BoxCollider2D>().center = new Vector2(0,0);
+					addColliderToWeapon();
 					quad.GetComponent<PlacementGridDisp>().isHaveContent = true;
 					isMustDelete = false;
 				}
@@ -131,7 +137,6 @@ public class PlaceWeapon : MonoBehaviour {
 				else{
 					//grid has no content, snap weapon on Update
 					gameObject.transform.position = quad.transform.position;
-					quad.GetComponent<MeshCollider>().collider.enabled = false;	
 					searchTag = "zombieback";
 					//rotate pad
 					SpriteRenderer[] renderers =  gameObject.GetComponentsInChildren<SpriteRenderer>();
@@ -140,9 +145,7 @@ public class PlaceWeapon : MonoBehaviour {
 							s.transform.Rotate(new Vector3(0f,0f,90f));
 						}
 					}
-					gameObject.AddComponent<BoxCollider2D>();
-					gameObject.GetComponent<BoxCollider2D>().size = new Vector2(1,1);
-					gameObject.GetComponent<BoxCollider2D>().center = new Vector2(0,0);
+					addColliderToWeapon();
 					quad.GetComponent<PlacementGridDisp>().isHaveContent = true;
 					isMustDelete = false;
 				}
@@ -162,7 +165,6 @@ public class PlaceWeapon : MonoBehaviour {
 				else{
 					//grid has no content, snap weapon on Update
 					gameObject.transform.position = quad.transform.position;
-					quad.GetComponent<MeshCollider>().collider.enabled = false;	
 					searchTag = "zombieside";
 					//rotate pad
 					SpriteRenderer[] renderers =  gameObject.GetComponentsInChildren<SpriteRenderer>();
@@ -180,12 +182,51 @@ public class PlaceWeapon : MonoBehaviour {
 							s.sortingOrder = 1;
 						}
 					}
-					gameObject.AddComponent<BoxCollider2D>();
-					gameObject.GetComponent<BoxCollider2D>().size = new Vector2(1,1);
-					gameObject.GetComponent<BoxCollider2D>().center = new Vector2(0,0);
+					addColliderToWeapon();
 					quad.GetComponent<PlacementGridDisp>().isHaveContent = true;
 					isMustDelete = false;
 				}
+			}
+		}
+		disableAllQuadCollider ();
+	}
+
+	void addColliderToWeapon(){
+		gameObject.AddComponent<BoxCollider2D>();
+		gameObject.GetComponent<BoxCollider2D>().size = new Vector2(1,1);
+		gameObject.GetComponent<BoxCollider2D>().center = new Vector2(0,0);
+	}
+
+	void disableAllQuadCollider(){
+		foreach (GameObject quad in gridup) {
+			quad.GetComponent<MeshCollider>().enabled = false;	
+		}
+		foreach (GameObject quad in gridback) {
+			quad.GetComponent<MeshCollider>().enabled = false;	
+		}
+		foreach (GameObject quad in gridside) {
+			if(quad.name == "Sidequad Indicator"){
+				
+			}else
+			{
+				quad.GetComponent<MeshCollider>().enabled = false;	
+			}
+		}
+	}
+
+	void enableAllQuadCollider(){
+		foreach (GameObject quad in gridup) {
+			quad.GetComponent<MeshCollider>().enabled = true;	
+		}
+		foreach (GameObject quad in gridback) {
+			quad.GetComponent<MeshCollider>().enabled = true;	
+		}
+		foreach (GameObject quad in gridside) {
+			if(quad.name == "Sidequad Indicator"){
+
+			}else
+			{
+			   quad.GetComponent<MeshCollider>().enabled = true;	
 			}
 		}
 	}
