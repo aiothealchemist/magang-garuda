@@ -27,10 +27,10 @@ public class PlaceWeapon : MonoBehaviour {
 	//variables for sprite change to side weapon sprite
 	public Sprite sidePad;
 	public Sprite sideBarrel;
-	//variables for sell button
+	//variables for sell/upgrade button
 	public GameObject sellButtonPrefab;
 	private GameObject sellButton;
-	private bool isSellUpgradeOn = false;
+	public bool isSellUpgradeOn = false;
 
 	public void Start(){
 		//invoke searching target for turret
@@ -49,13 +49,12 @@ public class PlaceWeapon : MonoBehaviour {
 
 	public void OnMouseUp(){
 		//show sell/upgrade button if button is off
-		if (isSellUpgradeOn) {
-						deleteAllSellUpgradeButton ();	
-						isSellUpgradeOn = false;
-				} else {
-						showSellButton ();
-						//show upgrade button
-				}
+		if (isSellUpgradeOn) {	
+					deleteAllSellUpgradeButton ();
+		} else {
+			showSellButton ();
+			//show upgrade button
+		}
 	}
 	
 	public void OnMouseDrag()
@@ -87,8 +86,12 @@ public class PlaceWeapon : MonoBehaviour {
 
 	public void deleteAllSellUpgradeButton(){
 		GameObject[] delete = GameObject.FindGameObjectsWithTag("sellupgradebutton");
+		GameObject[] weapon = GameObject.FindGameObjectsWithTag("weapon");
 		foreach (GameObject d in delete){
-			DestroyObject(d);
+			d.GetComponent<SellWeapon>().isDestroying = true;
+		}
+		foreach (GameObject w in weapon) {
+			w.GetComponent<PlaceWeapon>	().isSellUpgradeOn = false;	
 		}
 	}
 	
