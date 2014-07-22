@@ -34,32 +34,11 @@ public class SellWeapon : MonoBehaviour {
 
 	void sellWeapon(Transform _selectedWeapon){
 		_selectedWeapon = gameObject.transform.parent;
-		setGridContent (_selectedWeapon, false);
+		_selectedWeapon.GetComponent<PlaceWeapon>().setGridContent (false);
 		DestroyObject(_selectedWeapon.gameObject);
 	}
 
-	void setGridContent(Transform _selectedWeapon, bool toggle){
-		_selectedWeapon = gameObject.transform.parent;
-		gridup = GameObject.FindGameObjectsWithTag("placementgridup");
-		gridback = GameObject.FindGameObjectsWithTag("placementgridback");
-		gridside = GameObject.FindGameObjectsWithTag("placementgridside");
-		foreach (GameObject quad in gridup) {
-			if	(_selectedWeapon.renderer.bounds.Intersects(quad.renderer.bounds)){
-				quad.GetComponent<PlacementGridDisp>().isHaveContent = toggle;
 
-			}
-		}
-		foreach (GameObject quad in gridback) {
-			if	(_selectedWeapon.renderer.bounds.Intersects(quad.renderer.bounds)){
-				quad.GetComponent<PlacementGridDisp>().isHaveContent = toggle;
-			}
-		}
-		foreach (GameObject quad in gridside) {
-			if	(_selectedWeapon.renderer.bounds.Intersects(quad.renderer.bounds)){
-				quad.GetComponent<PlacementGridDisp>().isHaveContent = toggle;
-			}
-		}
-	}
 
 	void animateInstantiation(){
 		sizeTimer += (Time.deltaTime * frameRate);
