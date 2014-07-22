@@ -22,7 +22,7 @@ public class Shop : BaseMenu {
 	{
 		menuType = type.window;
 		buyButton = Resources.Load<Texture2D>("menu/button/buy");
-		backButton = Resources.Load<Texture2D>("menu/button/back");
+		backButton = loadButtonTexture("menu/button/back");
 		menuBG = Resources.Load<Texture2D>("menu/background/window");
 		shopButtons = Resources.LoadAll<Texture2D>("menu/button/shopmenu");
 		contentButtons = Resources.LoadAll<Texture2D>("weapons/button");
@@ -65,7 +65,7 @@ public class Shop : BaseMenu {
 //			}
 //		}
 
-		if (GUI.Button (new Rect (width * 26 / 30, height / 20, width * 2 / 26, height / 10), backButton, GUIStyle.none)) { 
+		if (ButtonGUI (new Rect (width * 26 / 30, height / 20, width * 2 / 26, height / 10), backButton)) { 
 			//back
 			Destroy (this);
 		} else if (GUI.Button (new Rect (width * 3.75f / 5, height / 1.4f, width / 6, height / 8), buyButton, GUIStyle.none)) {
