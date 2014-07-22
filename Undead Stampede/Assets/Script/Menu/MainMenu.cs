@@ -12,15 +12,15 @@ public class MainMenu : BaseMenu {
 	float credButtX, achiButtX, playButtY, audiButtY;
 	bool credits, creditText;
 
-	Texture2D[] menuButtons;
+	buttonTexture[] menuButtons;
 	Texture2D gameTitle;
 
 	//built-in
 	protected override void Start () {
-		base.Start ();
-		resetCredits ();
 		wiggleTimer = new System.Timers.Timer(timerInterval);
 		wiggleTimer.Elapsed += (sender, e) => wiggleTimer.Stop ();
+		base.Start ();
+		resetCredits ();
 	}
 	void Update () {
 		if (credits) {
@@ -38,20 +38,23 @@ public class MainMenu : BaseMenu {
 	protected override void loadResources () {
 		menuType = type.menu;
 		menuBG = Resources.Load<Texture2D> ("menu/background/mainmenu");
-		menuButtons = Resources.LoadAll<Texture2D> ("menu/button/mainmenu");
 		gameTitle = Resources.Load<Texture2D> ("menu/background/mainmenu_title");
+		menuButtons = new buttonTexture[]{
+			loadButtonTexture ("menu/button/mainmenu/mainmenu_0"),
+			loadButtonTexture ("menu/button/mainmenu/mainmenu_1"),
+			loadButtonTexture ("menu/button/mainmenu/mainmenu_2"),
+			loadToggleTexture ("menu/button/mainmenu/mainmenu_3"),
+			loadToggleTexture ("menu/button/mainmenu/mainmenu_4"),
+		};
 	}
 	protected override void updateGUI () {
-		if (ButtonGUI (new Rect (width * 2.38f / 7, playButtY, width / 3, height  / 5), 
-				new Texture2D[] {menuButtons[0], menuButtons[1], menuButtons[2]})) {
+		if (ButtonGUI (new Rect (width * 2.38f / 7, playButtY, width / 3.1f, height  / 5), menuButtons[0])) {
 			//play
 			gameObject.AddComponent<PlayMenu>();	Destroy (this);
-		} else if (ButtonGUI (new Rect (achiButtX, height * 3.1f / 4, width * 3.2f / 10, height), 
-				new Texture2D[] {menuButtons [1], menuButtons [1], menuButtons [1]})) {
+		} else if (ButtonGUI (new Rect (achiButtX, height * 3.1f / 4, width * 3.3f / 10, height/6), menuButtons[1])) {
 			//achievement
 			setWindow (gameObject.AddComponent<Achievements>());
-		} else if (ButtonGUI (new Rect (credButtX, height * 3.1f / 4, width * 3.3f / 10, height),
-				new Texture2D[] {menuButtons [2], menuButtons [2], menuButtons [2]})) {
+		} else if (ButtonGUI (new Rect (credButtX, height * 3.1f / 4, width * 3.3f / 10, height/6), menuButtons[2])) {
 			//credits
 			Destroy (window);
 			credits = true;
@@ -67,10 +70,10 @@ public class MainMenu : BaseMenu {
 		}
 	}
 	protected override void updateBlockableGUI () {
-		Utils.PrefsAccess.persistenceBGM = (GUI.Toggle (new Rect (width * 12 / 15, audiButtY, width / 10.9f, height / 8), 
-				Utils.PrefsAccess.persistenceBGM, menuButtons [Utils.PrefsAccess.persistenceBGM ? 3 : 4], GUIStyle.none));
-		Utils.PrefsAccess.persistenceSFX = (GUI.Toggle (new Rect (width * 13.5f / 15, audiButtY, width / 8, height / 8), 
-				Utils.PrefsAccess.persistenceSFX, menuButtons [Utils.PrefsAccess.persistenceSFX ? 5 : 6], GUIStyle.none));
+		Utils.PrefsAccess.persistenceBGM = ToggleGUI( new Rect (width * 12 / 15, audiButtY, width / 11f, height / 8), 
+				menuButtons [3], Utils.PrefsAccess.persistenceBGM );
+		Utils.PrefsAccess.persistenceSFX = ToggleGUI (new Rect (width * 13.5f / 15, audiButtY, width / 11, height / 8), 
+				menuButtons [4], Utils.PrefsAccess.persistenceSFX );
 	}
 
 	//credits

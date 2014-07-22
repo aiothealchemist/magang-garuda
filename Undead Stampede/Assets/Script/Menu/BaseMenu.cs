@@ -11,7 +11,7 @@ public abstract class BaseMenu : MonoBehaviour {
 
 	//punyaan anak
 	protected AudioSource bgm, sfx;
-	protected Texture2D backButton;
+	protected buttonTexture backButton;
 	protected Vector2 viewVector;
 	protected int height, width;
 	protected Texture menuBG;
@@ -58,11 +58,48 @@ public abstract class BaseMenu : MonoBehaviour {
 	}
 
 	//buttonGUI
-	protected bool ButtonGUI(Rect rect, Texture2D[] textures){
-		GUI.skin.button.normal.background = textures[0];
-		GUI.skin.button.hover.background = textures[1];
-		GUI.skin.button.active.background = textures[2];
+	protected struct buttonTexture {
+		public Texture2D inactive, active;
+	}
+	protected buttonTexture loadButtonTexture(string texturePath){
+		buttonTexture temp;
+		temp.inactive = Resources.Load<Texture2D>(texturePath);
+		temp.active = new Texture2D(temp.inactive.width, temp.inactive.height);
+		Color[] color = temp.inactive.GetPixels ();
+		for (int i = 0; i < color.Length; i++) {
+			if (color[i].a != 0 || (color[i].r != 0 && color[i].g != 0 && color[i].b != 0)) {
+				color[i].r += 0.06f; color[i].g += 0.06f; color[i].b += 0.06f;
+			}
+		}
+		temp.active.SetPixels (color);
+		temp.active.Apply ();
+		return temp;
+	}
+	protected buttonTexture loadToggleTexture(string texturePath){
+		buttonTexture temp;
+		temp.inactive = Resources.Load<Texture2D>(texturePath+"_off");
+		temp.active = Resources.Load<Texture2D>(texturePath+"_on");
+		return temp;
+	}
+	protected bool ButtonGUI(Rect rect, buttonTexture textures, string text = null){
+		GUIStyle buttonStyle = new GUIStyle(GUI.skin.button);
+		buttonStyle.normal.background = textures.inactive;
+		buttonStyle.hover.background = textures.inactive;
+		buttonStyle.active.background = textures.active;
+		
+		return GUI.Button (rect, text ?? string.Empty, buttonStyle);
+	}
+	protected bool ToggleGUI(Rect rect, buttonTexture textures, bool active, string text = null){
+		GUIStyle buttonStyle = new GUIStyle(GUI.skin.toggle);
 
-		return GUI.Button (rect,"");
+		buttonStyle.active.background = textures.active;
+		buttonStyle.hover.background = textures.inactive;
+		buttonStyle.normal.background = textures.inactive;
+
+		buttonStyle.onActive.background = textures.inactive;
+		buttonStyle.onHover.background = textures.active;
+		buttonStyle.onNormal.background = textures.active;
+
+		return GUI.Toggle (rect, active, text ?? string.Empty, buttonStyle);
 	}
 }

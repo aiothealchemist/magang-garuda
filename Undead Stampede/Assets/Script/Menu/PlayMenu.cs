@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayMenu : BaseMenu {
 
-	Texture2D shopButton;
+	buttonTexture shopButton;
 
 	System.Collections.Generic.List<Rect> levelButtons;
 	level levelConstructor;
@@ -17,17 +17,17 @@ public class PlayMenu : BaseMenu {
 	protected override void loadResources () {
 		menuType = type.menu;
 		menuBG = Resources.Load<Texture2D>("menu/background/mainmenu");
-		backButton = Resources.Load<Texture2D>("menu/button/back 1");
-		shopButton = Resources.Load<Texture2D>("menu/button/shop");
+		backButton = loadButtonTexture("menu/button/back 1");
+		shopButton = loadButtonTexture("menu/button/shop");
 	}
 
 	protected override void updateGUI () { }
 	protected override void updateBlockableGUI () {
-		if (GUI.Button(new Rect (width * 12 / 15, height / 100, width / 10.9f, height / 8),backButton, GUIStyle.none)){
+		if (ButtonGUI (new Rect (width * 12 / 15, height / 100, width / 10.9f, height / 8), backButton)){
 			//back
 			gameObject.AddComponent<MainMenu>();
 			Destroy(this);
-		} else if (GUI.Button(new Rect (width * 13.5f / 15, height / 100, width / 10.9f, height / 8),shopButton, GUIStyle.none)) {
+		} else if (ButtonGUI (new Rect (width * 13.5f / 15, height / 100, width / 10.9f, height / 8), shopButton)) {
 			//shop
 			setWindow (gameObject.AddComponent<Shop>());
 		} else if (GUI.Button(new Rect (width * 10.5f / 15, height / 100, width / 10.9f, height / 8),"Play")) {

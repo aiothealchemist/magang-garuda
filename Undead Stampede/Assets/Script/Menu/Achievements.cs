@@ -18,9 +18,9 @@ public class Achievements : BaseMenu {
 
 	protected override void loadResources () {
 		menuType = type.window;
-		backButton = Resources.Load<Texture2D>("menu/button/back");
-		menuBG = Resources.Load<Texture2D>("menu/background/window");
 		bgRect = new Rect (width / 30, height / 18, width * 14 / 15, height * 13 / 18);
+		menuBG = Resources.Load<Texture2D>("menu/background/window");
+		backButton = loadButtonTexture("menu/button/back");
 	}
 
 	protected override void updateGUI () {
@@ -37,7 +37,7 @@ public class Achievements : BaseMenu {
 		}
 		GUI.EndScrollView();
 
-		if (GUI.Button (new Rect (width * 26 / 30, height / 20, width * 2 / 26, height / 10), backButton, GUIStyle.none)) { 
+		if (ButtonGUI (new Rect (width * 26 / 30, height / 20, width * 2 / 26, height / 10), backButton)) { 
 			//back
 			Destroy (this);
 		}

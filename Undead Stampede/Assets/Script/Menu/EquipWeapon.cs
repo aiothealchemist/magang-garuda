@@ -7,7 +7,7 @@ public class EquipWeapon : BaseMenu {
 	System.Collections.Generic.List<WeaponXML> equipped;
 	Texture2D[] contentButtons;
 
-	Texture2D playButton;
+	buttonTexture playButton;
 	int chosenWeapon, equippedWeapon, maxAvailableEquip = 3, maxEquip = 6;
 
 	// Use this for initialization
@@ -27,10 +27,10 @@ public class EquipWeapon : BaseMenu {
 
 	protected override void loadResources () {
 		menuType = type.window;
-		backButton = Resources.Load<Texture2D>("menu/button/back");
+		backButton = loadButtonTexture("menu/button/back");
 		menuBG = Resources.Load<Texture2D>("menu/background/window");
 		contentButtons = Resources.LoadAll<Texture2D>("weapons/button");
-		playButton = Resources.Load<Texture2D>("menu/button/mainmenu/mainmenu_1");
+		playButton = loadButtonTexture("menu/button/mainmenu/mainmenu_0");
 		bgRect = new Rect (width / 30, height / 18, width * 14 / 15, height * 8 / 9);
 	}
 	
@@ -70,10 +70,10 @@ public class EquipWeapon : BaseMenu {
 			}
 		}
 
-		if (GUI.Button (new Rect (width * 26 / 30, height / 20, width * 2 / 26, height / 10), backButton, GUIStyle.none)) { 
+		if (ButtonGUI (new Rect (width * 26 / 30, height / 20, width * 2 / 26, height / 10), backButton)) { 
 			//back
 			Destroy (this);
-		} else if (GUI.Button (new Rect (width * 3.35f / 5, height / 1.65f, width / 6, height / 8), playButton, GUIStyle.none)) {
+		} else if (ButtonGUI (new Rect (width * 3.35f / 5, height / 1.65f, width / 6, height / 8), playButton)) {
 
 		}
 	}
