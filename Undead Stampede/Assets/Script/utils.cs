@@ -16,7 +16,7 @@ namespace Utils {
 		public enum enumeratedBooleanKey {
 			UnlockedWeapon, UnlockedVehicle, UnlockedPart,
 			EquippedWeapon, EquippedVehicle, EquippedPart,
-			UnlockedAchievement
+			UnlockedAchievement, MasteredLevel
 		};
 		//unlockables
 		public enum Parts{Engine, Armor};

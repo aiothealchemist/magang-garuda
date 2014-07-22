@@ -10,8 +10,7 @@ public class Achievements : BaseMenu {
 
 	protected override void Start () {
 		base.Start ();
-//		achievementList = System.Array.ConvertAll<LoadableContent, AchievementXML> 
-//			( utils.loadSpecificXML(LoadableContent.loadedContentType.Achievement), item => (AchievementXML)item );
+//		achievementList = Utils.XMLLoader.loadSpecificXML(LoadableContent.loadedContentType.Achievement).Cast<AchievementXML> ().ToArray ();
 //		unlockedAchievement = Utils.PrefsAccess.getEnumeratedBooleanPrefs (Utils.PrefsAccess.enumeratedBooleanKey.UnlockedAchievement);
 		achievementCount = /*achievementList.Length ?? */ 20;
 	}

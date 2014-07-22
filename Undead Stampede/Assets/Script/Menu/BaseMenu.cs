@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Linq;
 
 public abstract class BaseMenu : MonoBehaviour {
 
@@ -61,16 +62,19 @@ public abstract class BaseMenu : MonoBehaviour {
 	protected struct buttonTexture {
 		public Texture2D inactive, active;
 	}
+	buttonTexture baseButton;
 	protected buttonTexture loadButtonTexture(string texturePath){
 		buttonTexture temp;
 		temp.inactive = Resources.Load<Texture2D>(texturePath);
 		temp.active = new Texture2D(temp.inactive.width, temp.inactive.height);
-		Color[] color = temp.inactive.GetPixels ();
-		for (int i = 0; i < color.Length; i++) {
-			if (color[i].a != 0 || (color[i].r != 0 && color[i].g != 0 && color[i].b != 0)) {
-				color[i].r += 0.06f; color[i].g += 0.06f; color[i].b += 0.06f;
+		Color[] color = temp.inactive.GetPixels ()
+			.Select (item => {
+				if (item.a != 0 || (item.r != 0 && item.g != 0 && item.b != 0)) {
+					item.r += 0.06f; item.g += 0.06f; item.b += 0.06f;
+				}
+				return item;
 			}
-		}
+		).ToArray ();
 		temp.active.SetPixels (color);
 		temp.active.Apply ();
 		return temp;
@@ -88,6 +92,14 @@ public abstract class BaseMenu : MonoBehaviour {
 		buttonStyle.active.background = textures.active;
 		
 		return GUI.Button (rect, text ?? string.Empty, buttonStyle);
+	}
+	protected bool ButtonGUI(Rect rect, string text){
+		GUIStyle buttonStyle = new GUIStyle(GUI.skin.button);
+		buttonStyle.normal.background = baseButton.inactive;
+		buttonStyle.hover.background = baseButton.inactive;
+		buttonStyle.active.background = baseButton.active;
+		
+		return GUI.Button (rect, text, buttonStyle);
 	}
 	protected bool ToggleGUI(Rect rect, buttonTexture textures, bool active, string text = null){
 		GUIStyle buttonStyle = new GUIStyle(GUI.skin.toggle);
