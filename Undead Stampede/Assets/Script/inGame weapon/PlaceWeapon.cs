@@ -32,10 +32,24 @@ public class PlaceWeapon : MonoBehaviour {
 	private GameObject sellButton;
 	public bool isSellUpgradeOn = false;
 
-	public void Start(){
+	void Start(){
 		//invoke searching target for turret
 		findBarrel ();
 		InvokeRepeating ("ScanForTarget", 0, searchFrequency);
+	}
+
+	void Update(){
+		//shoot a bullet while placed
+		if (!isPlaced && isNotChosen) {
+			//do nothing		
+		} else if (isPlaced && !isNotChosen) {
+			if(isMustDelete){
+				DestroyObject(gameObject);
+			}
+			else{
+				shootTarget();
+			}
+		}
 	}
 
 	public void OnMouseDown() {
@@ -94,9 +108,9 @@ public class PlaceWeapon : MonoBehaviour {
 			w.GetComponent<PlaceWeapon>	().isSellUpgradeOn = false;	
 		}
 	}
-	
-	//set the turret position to snap to selected position
+
 	public void SetPosition(){
+		//set the turret position to snap to selected position
 		gridup = GameObject.FindGameObjectsWithTag("placementgridup");
 		gridback = GameObject.FindGameObjectsWithTag("placementgridback");
 		gridside = GameObject.FindGameObjectsWithTag("placementgridside");
@@ -191,6 +205,28 @@ public class PlaceWeapon : MonoBehaviour {
 		disableAllQuadCollider ();
 	}
 
+	public void setGridContent(bool toggle){
+		gridup = GameObject.FindGameObjectsWithTag("placementgridup");
+		gridback = GameObject.FindGameObjectsWithTag("placementgridback");
+		gridside = GameObject.FindGameObjectsWithTag("placementgridside");
+		foreach (GameObject quad in gridup) {
+			if	(gameObject.renderer.bounds.Intersects(quad.renderer.bounds)){
+				quad.GetComponent<PlacementGridDisp>().isHaveContent = toggle;
+				
+			}
+		}
+		foreach (GameObject quad in gridback) {
+			if	(gameObject.renderer.bounds.Intersects(quad.renderer.bounds)){
+				quad.GetComponent<PlacementGridDisp>().isHaveContent = toggle;
+			}
+		}
+		foreach (GameObject quad in gridside) {
+			if	(gameObject.renderer.bounds.Intersects(quad.renderer.bounds)){
+				quad.GetComponent<PlacementGridDisp>().isHaveContent = toggle;
+			}
+		}
+	}
+
 	void addColliderToWeapon(){
 		gameObject.AddComponent<BoxCollider2D>();
 		gameObject.GetComponent<BoxCollider2D>().size = new Vector2(1,1);
@@ -231,20 +267,11 @@ public class PlaceWeapon : MonoBehaviour {
 		}
 	}
 
-	public void ScanForTarget(){
+	void ScanForTarget(){
 		target = GetNearestTargetObject ();
 	}
 
-	public void findBarrel(){
-		barrelFinder = GameObject.FindObjectsOfType<GameObject>();
-		foreach(GameObject g in barrelFinder){
-			if (g.transform.IsChildOf(gameObject.transform) && g.name == "Barrel"){
-				barrel = g;
-			}
-		}
-	}
-
-	public Transform GetNearestTargetObject(){
+	Transform GetNearestTargetObject(){
 		//find the nearest target with certain tag
 		float nearestDistanceSqr = Mathf.Infinity;
 		GameObject[] taggedGameObject = GameObject.FindGameObjectsWithTag (searchTag);
@@ -263,6 +290,15 @@ public class PlaceWeapon : MonoBehaviour {
 		}
 
 		return nearestObject;
+	}
+
+	void findBarrel(){
+		barrelFinder = GameObject.FindObjectsOfType<GameObject>();
+		foreach(GameObject g in barrelFinder){
+			if (g.transform.IsChildOf(gameObject.transform) && g.name == "Barrel"){
+				barrel = g;
+			}
+		}
 	}
 
 	void shootTarget(){
@@ -290,19 +326,5 @@ public class PlaceWeapon : MonoBehaviour {
 		else{
 			//do nothing
 		}
-	}
-
-	public void Update(){
-		//shoot a bullet while placed
-		if (!isPlaced && isNotChosen) {
-			//do nothing		
-			} else if (isPlaced && !isNotChosen) {
-				if(isMustDelete){
-					DestroyObject(gameObject);
-				}
-				else{
-					shootTarget();
-				}
-		}
-	}
+	}	
 }

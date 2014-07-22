@@ -11,6 +11,7 @@ GameObject:
   - 212: {fileID: 21200000}
   - 61: {fileID: 6100000}
   - 114: {fileID: 11400000}
+  - 114: {fileID: 11400002}
   m_Layer: 8
   m_Name: GLauncher
   m_TagString: Untagged
@@ -81,6 +82,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sensitivity: .0199999996
   selectedWeapon: {fileID: 100004, guid: 95c42b28600034747bc3f91d0649728b, type: 2}
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f40f7cb035f684443932bdadad740c30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  priceText: $250
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
