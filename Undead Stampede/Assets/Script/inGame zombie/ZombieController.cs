@@ -9,6 +9,7 @@ public class ZombieController : MonoBehaviour {
 	private Vector3 target_pos;
 	private Vector3 object_pos;
 	private float attackFreq = 3.0f;
+	float ufukBus;
 
 	//bikinan cahyo
 	public ZombieXML attributes { get; set; }
@@ -19,6 +20,7 @@ public class ZombieController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		moveDirection = Vector3.right;
+		ufukBus = Random.Range (0.5f, 6);
 	}
 
 	void setAttribute(ZombieXML xml){
@@ -40,7 +42,7 @@ public class ZombieController : MonoBehaviour {
 		object_pos = transform.position;
 		target_pos.x = GameObject.Find("vehicle").transform.position.x - object_pos.x;
 		target_pos.y = GameObject.Find("vehicle").transform.position.y - object_pos.y;
-		Vector3 moveToward = new Vector3(target_pos.x, target_pos.y, target_pos.z);
+		Vector3 moveToward = new Vector3(target_pos.x+ufukBus, target_pos.y-0.75f, target_pos.z);
 		moveDirection = moveToward - object_pos;
 		moveDirection.z = 0; 
 		moveDirection.Normalize();
