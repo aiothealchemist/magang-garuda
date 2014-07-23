@@ -1,9 +1,10 @@
 using UnityEngine;
 using System.Collections;
+using System.Linq;
 
 public class PlayMenu : BaseMenu {
 
-	buttonTexture shopButton;
+	buttonTexture shopButton, lockedLevelButton, unlockedLevelButton, masteredLevelButton;
 
 	System.Collections.Generic.List<Rect> levelButtons;
 	level levelConstructor;
@@ -33,20 +34,18 @@ public class PlayMenu : BaseMenu {
 		} else if (GUI.Button(new Rect (width * 10.5f / 15, height / 100, width / 10.9f, height / 8),"Play")) {
 			setWindow (gameObject.AddComponent<EquipWeapon>());
 		}
-		// ScrollView
-//			viewVector = GUI.BeginScrollView (new Rect (width / 30, height / 18, width * 14 / 15, height * 8 / 9), 
-//					viewVector, new Rect (0, 0, width * 14 / 15, height * 8 / 9));
-//			for (int i = 0; i < levelButtons.Count; i++) {
-//				if (GUI.Button (levelButtons[i], i.ToString())) {
-//					levelChosen (i);
-//				}
-//			}
-//			GUI.EndScrollView();
+
+//		int unlockedLvl = Utils.PrefsAccess.getIntegerPrefs (Utils.PrefsAccess.integerKey.UnlockedLevel);
+//		BitArray masteredLvl = Utils.PrefsAccess.getEnumeratedBooleanPrefs (Utils.PrefsAccess.enumeratedBooleanKey.MasteredLevel);
+//		for (int i = 0; i < /*unlockedLvl*/ levelButtons.Count; i++)
+//			if (ButtonGUI (levelButtons[i], masteredLvl[i] ? masteredLevelButton : unlockedLevelButton))
+//				levelChosen (i);
+//		levelButtons.Skip (unlockedLvl).ToList ().ForEach (item => {if (ButtonGUI (item, lockedLevelButton));});
 	}
 
 	void initLevelButtons(){	//level buttons position
 		levelButtons = new System.Collections.Generic.List<Rect> ();
-		levelButtons.Add(new Rect(0,0,0,0));
+		levelButtons.Add (new Rect(0,0,0,0));
 	}
 
 	void levelChosen (int levelNum) {

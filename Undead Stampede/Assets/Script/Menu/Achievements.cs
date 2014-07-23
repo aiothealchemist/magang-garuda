@@ -10,8 +10,7 @@ public class Achievements : BaseMenu {
 
 	protected override void Start () {
 		base.Start ();
-//		achievementList = System.Array.ConvertAll<LoadableContent, AchievementXML> 
-//			( utils.loadSpecificXML(LoadableContent.loadedContentType.Achievement), item => (AchievementXML)item );
+//		achievementList = Utils.XMLLoader.loadSpecificXML(LoadableContent.loadedContentType.Achievement).Cast<AchievementXML> ().ToArray ();
 //		unlockedAchievement = Utils.PrefsAccess.getEnumeratedBooleanPrefs (Utils.PrefsAccess.enumeratedBooleanKey.UnlockedAchievement);
 		achievementCount = /*achievementList.Length ?? */ 20;
 	}
@@ -22,7 +21,15 @@ public class Achievements : BaseMenu {
 		menuBG = Resources.Load<Texture2D>("menu/background/window");
 		backButton = loadButtonTexture("menu/button/back");
 	}
-
+	
+	void Update () {
+		if (Input.touchCount > 0) {
+			Touch touch = Input.touches[0];
+			if (touch.phase == TouchPhase.Moved)
+				viewVector.x -= touch.deltaPosition.x;
+		}
+	}
+	
 	protected override void updateGUI () {
 		// ScrollView
 		viewVector = GUI.BeginScrollView (new Rect (width * 8 / 90, height * 11 / 90, width * 12.3f / 15, height * 13 / 24),
