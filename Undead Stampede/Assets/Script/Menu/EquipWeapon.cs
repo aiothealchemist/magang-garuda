@@ -79,7 +79,7 @@ public class EquipWeapon : BaseMenu {
 			//back
 			Destroy (this);
 		} else if (ButtonGUI (new Rect (width * 3.35f / 5, height / 1.65f, width / 6, height / 8), playButton)) {
-			Application.LoadLevel ("Play Screen");
+			Application.LoadLevel (1);
 		}
 	}
 }

@@ -80,7 +80,7 @@ public class MainMenu : BaseMenu {
 	void startCredits(){
 		wiggleTimer.Stop ();
 		credButtX = Mathf.Lerp (credButtX, width, 0.1f);
-		achiButtX = Mathf.Lerp (achiButtX, -width * 3.2f / 10, 0.1f);
+		achiButtX = Mathf.Lerp (achiButtX, -width * 3.3f / 10, 0.1f);
 		playButtY = Mathf.Lerp (playButtY, height, 0.1f);
 		audiButtY = Mathf.Lerp (audiButtY, -height / 8, 0.1f);
 		if (playButtY == height) creditText = true;
@@ -109,12 +109,12 @@ public class MainMenu : BaseMenu {
 			wiggleTimer.Start ();
 			wigglePhase = 0;
 		} else if (wigglePhase%2 == 0){
-			rotationAngle = Mathf.LerpAngle (rotationAngle, maxRotation, 0.3f);
+			rotationAngle = Mathf.LerpAngle (rotationAngle, maxRotation, 0.4f);
 			if (Mathf.RoundToInt(rotationAngle)== Mathf.RoundToInt(maxRotation)) {
 				++wigglePhase;
 			}
 		} else if (wigglePhase%2 == 1) {
-			rotationAngle = Mathf.LerpAngle (rotationAngle, -maxRotation, 0.4f);
+			rotationAngle = Mathf.LerpAngle (rotationAngle, -maxRotation, 0.5f);
 			if (Mathf.RoundToInt(rotationAngle)== Mathf.RoundToInt(-maxRotation)) {
 				++wigglePhase;
 			}

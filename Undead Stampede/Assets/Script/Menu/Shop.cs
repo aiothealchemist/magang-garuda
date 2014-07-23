@@ -33,7 +33,7 @@ public class Shop : BaseMenu {
 		if (Input.touchCount > 0) {
 			Touch touch = Input.touches[0];
 			if (touch.phase == TouchPhase.Moved)
-				viewVector.x += touch.deltaPosition.x;
+				viewVector.x -= touch.deltaPosition.x;
 		}
 	}
 
