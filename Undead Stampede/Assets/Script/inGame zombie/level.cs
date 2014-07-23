@@ -40,7 +40,7 @@ public class level : MonoBehaviour
 			break;
 		case 1:
 			//insert all wave for level 1
-			CreateWave(new int[8]{1,1,1,1,1,1,1,1});
+			CreateWave(new int[8]{2,2,2,2,2,2,2,2});
 			break;
 		case 2:
 			//insert all wave for level 1
