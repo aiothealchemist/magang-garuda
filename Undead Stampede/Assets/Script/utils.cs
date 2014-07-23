@@ -94,7 +94,7 @@ namespace Utils {
 		}
 		
 		//bitarray 
-		static BitArray ToBinary(int numeral){
+		public static BitArray ToBinary(int numeral){
 			return new BitArray(new[] { numeral });
 		}
 		static int ToNumeral(BitArray binary){

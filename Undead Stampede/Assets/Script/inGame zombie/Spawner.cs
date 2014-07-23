@@ -11,12 +11,14 @@ public class Spawner : MonoBehaviour {
 	public Stack waves;
 
 	private int countdown;
+	level roosterHolder;
 
 	// Use this for initialization
 	void Start () {
 		koreksiPosisiAwal = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth, Camera.main.pixelHeight, 0)).y;
 		Random.seed = (int)System.DateTime.Now.Ticks;
 		zombiePrefabs = new System.Collections.Generic.List<Transform> ();
+		roosterHolder = GameObject.FindObjectOfType<level>();
 		startTick ();
 	}
 	
@@ -37,7 +39,7 @@ public class Spawner : MonoBehaviour {
 			if (enemyCheckerUp.Length == 0 && enemyCheckerBack.Length == 0 && enemyCheckerSide.Length == 0) {
 				//win signal
 				//Debug.Log("no zombie");
-				zombiePrefabs = GameObject.FindObjectOfType<level>().pop();
+				zombiePrefabs = roosterHolder.pop();
 			}
 		}
 	}
