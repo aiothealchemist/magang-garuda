@@ -24,9 +24,13 @@ public class PlaceWeapon : MonoBehaviour {
 	//variables for rotating barrel
 	GameObject barrel;
 	GameObject[] barrelFinder;
+	//burst effects variables
+	public GameObject burstPrefab;
+	private GameObject burst;
 	//variables for sprite change to side weapon sprite
 	public Sprite sidePad;
 	public Sprite sideBarrel;
+	public bool isOnSide;
 	//variables for sell/upgrade button
 	public GameObject sellButtonPrefab;
 	private GameObject sellButton;
@@ -180,6 +184,7 @@ public class PlaceWeapon : MonoBehaviour {
 					//grid has no content, snap weapon on Update
 					gameObject.transform.position = quad.transform.position;
 					searchTag = "zombieside";
+					isOnSide = true;
 					//rotate pad
 					SpriteRenderer[] renderers =  gameObject.GetComponentsInChildren<SpriteRenderer>();
 					foreach(SpriteRenderer s in renderers){
@@ -194,7 +199,7 @@ public class PlaceWeapon : MonoBehaviour {
 							Vector3 newAngle = new Vector3(0,0,60);
 							s.transform.rotation = Quaternion.Euler(newAngle);
 							s.sortingOrder = 1;
-						}
+						}	
 					}
 					addColliderToWeapon();
 					quad.GetComponent<PlacementGridDisp>().isHaveContent = true;
@@ -315,7 +320,19 @@ public class PlaceWeapon : MonoBehaviour {
 				
 				// Fire a bullet.	
 				if(Time.time > lastFireTime + burstDelay){
-					bullet = Instantiate(ammo, barrel.transform.position, barrel.transform.rotation) as GameObject;
+					Vector3 bulletPos;
+					Quaternion bulletRot;
+					if(!isOnSide){
+						bulletPos = barrel.transform.position - 0.6f*barrel.transform.right;
+						bulletRot = barrel.transform.rotation;
+					}else{
+						bulletPos = barrel.transform.position - 0.7f*barrel.transform.right - 0.1f*barrel.transform.up;
+						bulletRot = barrel.transform.rotation;
+					}
+					bullet = Instantiate(ammo, bulletPos, bulletRot) as GameObject;
+					burst = Instantiate(burstPrefab, bulletPos, bulletRot) as GameObject;
+					bullet.transform.parent = gameObject.transform;
+					burst.transform.parent = gameObject.transform;
 					bullet.rigidbody2D.AddForce(bullet.transform.right * bulletSpeed * -1);
 					lastFireTime = Time.time;
 				}

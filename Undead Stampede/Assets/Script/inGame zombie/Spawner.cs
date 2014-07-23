@@ -50,7 +50,7 @@ public class Spawner : MonoBehaviour {
 		if (zombiePrefabs.Count > 0) {
 			int i = Random.Range (0,zombiePrefabs.Count);
 			//Transform zombieInstance = (Transform)
-				Instantiate (zombiePrefabs [i], new Vector3( Random.value * -9 , -5, 0 ), Quaternion.identity);
+				Instantiate (zombiePrefabs [i], new Vector3( Random.value * -9 , 5, 0 ), Quaternion.identity);
 
 			//ini berisi posisi zombie yg benar, depend on sisi tertentu
 			//		if (zombieInstance.GetComponent<ZombieController>().sisi == ZombieController.zombieSide.belakang) {
