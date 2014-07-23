@@ -27,21 +27,17 @@ public class EquipWeapon : BaseMenu {
 //		BitArray unlockedWeapon = 
 //			Utils.PrefsAccess.getEnumeratedBooleanPrefs 
 //				(Utils.PrefsAccess.enumeratedBooleanKey.UnlockedWeapon);
-//		contents = Utils.XMLLoader.loadSpecificXML (LoadableContent.loadedContentType.Weapon)
-//			.Select ((Value, Index) => new {Value, Index})
-//				.Where (item => unlockedWeapon[item.Index])
-//					.Select (result => (WeaponXML) result.Value)
-//						.ToArray ();
+//		contents = System.Array.ConvertAll(
+//			Utils.XMLLoader.loadSpecificXML (
+//					LoadableContent.loadedContentType.Weapon)
+//				.Where ((Value, Index) => unlockedWeapon[Index]),
+//			item => (WeaponXML)item);
 		contentButtons = Resources.LoadAll<Texture2D>("weapons/button");
 //		contentButtons = contents.Select (item => item.sprites[LoadableContent.textureTypes.button]);
 	}
 	
 	void Update () {
-		if (Input.touchCount > 0) {
-			Touch touch = Input.touches[0];
-			if (touch.phase == TouchPhase.Moved)
-				viewVector.x += touch.deltaPosition.x;
-		}
+		touchScrollView (true, viewVector);
 	}
 
 	protected override void updateGUI () {
@@ -50,15 +46,13 @@ public class EquipWeapon : BaseMenu {
 		// ScrollView
 		viewVector = GUI.BeginScrollView (new Rect (width / 12, height / 4f, width * 12.1f / 15, height * 2.5f / 10.8f), 
 			viewVector, new Rect (0, 0, (contentButtons.Length + 1) * width / 6, height * 2.4f / 12f));
-		chosenWeapon = GUI.Toolbar(
-			new Rect (0, 0,(contentButtons.Length + 1) *  width / 6, height * 2.4f / 12f), -1, contentButtons, GUIStyle.none);
+		chosenWeapon = GUI.Toolbar (new Rect (0, 0,(contentButtons.Length + 1) *  width / 6, height * 2.4f / 12f),
+			-1, contentButtons, GUIStyle.none);
 		GUI.EndScrollView();
 
-		equipped.Select ((Value, Index) => new {Value, Index})
-			.Where( item => ! GUI.Button (
-				new Rect (width *(item.Index%3 /5.8f + 1 /9f), height *(1 /2f + item.Index /3 /6f), width /6, height *5.6f /36f),
-				item.Value.sprites[LoadableContent.textureTypes.button]))
-			.Select(item => item.Value);
+		equipped.Where ((Value, Index) => !GUI.Button (
+				new Rect (width *(Index%3 /5.8f + 1 /9f), height *(1 /2f + Index /3 /6f), width /6, height *5.6f /36f),
+			Value.sprites[LoadableContent.textureTypes.button]));
 		for (int i = equipped.Count; i < maxEquip; ++i){
 			GUI.Button (new Rect (width *(i%3 /5.8f + 1 /9f), height *(1 /2f + i /3 /6f), width /6,height *5.6f /36f),
 				"No data.");

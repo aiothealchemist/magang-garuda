@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Linq;
 
 public class Shop : BaseMenu {
 	
@@ -30,11 +31,7 @@ public class Shop : BaseMenu {
 	}
 
 	void Update () {
-		if (Input.touchCount > 0) {
-			Touch touch = Input.touches[0];
-			if (touch.phase == TouchPhase.Moved)
-				viewVector.x -= touch.deltaPosition.x;
-		}
+		touchScrollView(true, viewVector);
 	}
 
 	protected override void updateGUI () {
@@ -53,27 +50,21 @@ public class Shop : BaseMenu {
 		GUI.Box (new Rect (width / 13, height / 1.4f, width / 3, height / 8),"Content name");
 		GUI.Box (new Rect (width * 16.5f / 39, height / 1.4f, width / 3.2f, height / 8),"content price");
 
-//		if (GUI.changed) {
-//			if (changeShop != chosenShop){
-//				chosenShop = changeShop;
-//				loadShop (
-//					chosenShop == 0 ? LoadableContent.loadedContentType.Weapon :
-//					chosenShop == 1 ? LoadableContent.loadedContentType.Part :
-//					chosenShop == 2 ? LoadableContent.loadedContentType.Gem :
-//					LoadableContent.loadedContentType.Vehicle
-//				);
-//			}
+//		if (changeShop != chosenShop){
+//			chosenShop = changeShop;
+//			loadShop (
+//				chosenShop == 0 ? LoadableContent.loadedContentType.Weapon :
+//				chosenShop == 1 ? LoadableContent.loadedContentType.Part :
+//				chosenShop == 2 ? LoadableContent.loadedContentType.Gem :
+//				LoadableContent.loadedContentType.Vehicle
+//			);
 //		}
 
-		if (ButtonGUI (new Rect (width * 26 / 30, height / 20, width * 2 / 26, height / 10), backButton)) { 
-			//back
+		if (ButtonGUI (new Rect (width * 26 / 30, height / 20, width * 2 / 26, height / 10), backButton)) { //back
 			Destroy (this);
-		} else if (GUI.Button (new Rect (width * 3.75f / 5, height / 1.4f, width / 6, height / 8), buyButton, GUIStyle.none)) {
-			//buy
+		} else if (GUI.Button (new Rect (width * 3.75f / 5, height / 1.4f, width / 6, height / 8), buyButton, GUIStyle.none)) { //buy
 			createPrompt(new Utils.delegateVoidWithZeroParam[] { buy, null }, new string[] {
-				"Do you want to buy ", 
-//				+content[chosenContent].name +
-//				" for "+content[chosenContent].pricing[currency]+" "+currency+"?", 
+				"Do you want to buy " /*+content[chosenContent].name+" for "+content[chosenContent].pricing[currency]+" "+currency*/+"?", 
 				"Accept", "Decline" });
 		}
 	}
@@ -83,10 +74,7 @@ public class Shop : BaseMenu {
 		content = Utils.XMLLoader.loadSpecificXML (tipe);
 		currency = tipe == LoadableContent.loadedContentType.Gem ? 
 			LoadableContent.currency.realMoney : LoadableContent.currency.gem;
-		contentButtons = new Texture2D[content.Length];
-		for (int i = 0; i < content.Length; i++) {
-			contentButtons[i] = content[i].sprites[LoadableContent.textureTypes.button];
-		}
+		contentButtons = (Texture2D[]) content.Select (item => item.sprites[LoadableContent.textureTypes.button]);
 	}
 	
 	void buy () {

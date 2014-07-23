@@ -59,6 +59,7 @@ public abstract class BaseMenu : MonoBehaviour {
 	}
 
 	//buttonGUI
+	//author: rPrwk
 	protected struct buttonTexture {
 		public Texture2D inactive, active;
 	}
@@ -67,20 +68,16 @@ public abstract class BaseMenu : MonoBehaviour {
 		buttonTexture temp;
 		temp.inactive = Resources.Load<Texture2D>(texturePath);
 		temp.active = new Texture2D(temp.inactive.width, temp.inactive.height);
-//		Color[] color = temp.inactive.GetPixels ()
-//			.Select (item => {
-//				if (item.a != 0 || (item.r != 0 && item.g != 0 && item.b != 0)) {
-//					item.r += 0.06f; item.g += 0.06f; item.b += 0.06f;
-//				}
-//				return item;
+		Color[] color = new System.Collections.Generic.List<Color>(temp.inactive.GetPixels ())
+			.Select (item => (item.a != 0 || (item.r != 0 && item.g != 0 && item.b != 0) ? 
+					new Color(item.r += 0.06f, item.g += 0.06f, item.b += 0.06f) : item)).ToArray ();
+//		Color[] color = temp.inactive.GetPixels ();
+//		for (int i = 0; i < color.Length; ++i) {
+//			if (color[i].a != 0 || (color[i].r != 0 && color[i].g != 0 && color[i].b != 0)) {
+//				color[i].r += 0.06f; color[i].g += 0.06f; color[i].b += 0.06f;
 //			}
-//		).ToArray ();
-		Color[] color = temp.inactive.GetPixels ();
-		for (int i = 0; i < color.Length; ++i) {
-			if (color[i].a != 0 || (color[i].r != 0 && color[i].g != 0 && color[i].b != 0)) {
-				color[i].r += 0.06f; color[i].g += 0.06f; color[i].b += 0.06f;
-			}
-		}
+//			color[i] -= 0.6f;
+//		}
 		temp.active.SetPixels (color);
 		temp.active.Apply ();
 		return temp;
@@ -119,5 +116,19 @@ public abstract class BaseMenu : MonoBehaviour {
 		buttonStyle.onNormal.background = textures.active;
 
 		return GUI.Toggle (rect, active, text ?? string.Empty, buttonStyle);
+	}
+
+	//scrollView by touch
+	//author: rPrwk
+	protected void touchScrollView(bool isHorizontal, Vector2 viewVector){
+		if (Input.touchCount > 0) {
+			Touch touch = Input.touches[0];
+			if (touch.phase == TouchPhase.Moved)
+				if (isHorizontal) {
+					viewVector.x -= touch.deltaPosition.x;
+				} else {
+					viewVector.y -= touch.deltaPosition.y;
+				}
+		}
 	}
 }

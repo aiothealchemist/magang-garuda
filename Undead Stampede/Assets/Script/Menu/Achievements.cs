@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using System.Linq;
 
 public class Achievements : BaseMenu {
 
@@ -10,7 +9,9 @@ public class Achievements : BaseMenu {
 
 	protected override void Start () {
 		base.Start ();
-//		achievementList = Utils.XMLLoader.loadSpecificXML(LoadableContent.loadedContentType.Achievement).Cast<AchievementXML> ().ToArray ();
+//		achievementList = System.Array.ConvertAll (
+//			Utils.XMLLoader.loadSpecificXML(LoadableContent.loadedContentType.Achievement),
+//			item => (AchievementXML) item);
 //		unlockedAchievement = Utils.PrefsAccess.getEnumeratedBooleanPrefs (Utils.PrefsAccess.enumeratedBooleanKey.UnlockedAchievement);
 		achievementCount = /*achievementList.Length ?? */ 20;
 	}
@@ -23,11 +24,7 @@ public class Achievements : BaseMenu {
 	}
 	
 	void Update () {
-		if (Input.touchCount > 0) {
-			Touch touch = Input.touches[0];
-			if (touch.phase == TouchPhase.Moved)
-				viewVector.x -= touch.deltaPosition.x;
-		}
+		touchScrollView (false, viewVector);
 	}
 	
 	protected override void updateGUI () {
