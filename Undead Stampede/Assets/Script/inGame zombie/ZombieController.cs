@@ -20,7 +20,7 @@ public class ZombieController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		moveDirection = Vector3.right;
-		ufukBus = Random.Range (0.5f, 6);
+		ufukBus = Random.Range (0.5f, 7);
 	}
 
 	void setAttribute(ZombieXML xml){
