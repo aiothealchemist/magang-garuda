@@ -26,37 +26,27 @@ public class PlayMenu : BaseMenu {
 
 	protected override void updateGUI () {
 		GUI.Box (new Rect(0, height * 7 / 8, width / 5, height / 8), "");
-		if (ButtonGUI (new Rect (0, height * 7 / 8, width / 10.9f, height / 8), backButton)){
-			//back
-			gameObject.AddComponent<MainMenu>();
-			Destroy(this);
-		} else if (ButtonGUI (new Rect (width * 1.5f / 15, height * 7 / 8, width / 10.9f, height / 8), shopButton)) {
-			//shop
-			setWindow (gameObject.AddComponent<Shop>());
-		}
+
+		ButtonGUI (new Rect (0, height * 7 / 8, width / 10.9f, height / 8), backButton, string.Empty, 
+			() => {gameObject.AddComponent<MainMenu>(); Destroy(this);});
+		ButtonGUI (new Rect (width * 1.5f / 15, height * 7 / 8, width / 10.9f, height / 8), shopButton, string.Empty, 
+			() => setWindow (gameObject.AddComponent<Shop>()));
 	}
 	protected override void updateBlockableGUI () {
-		if (GUI.Button(new Rect (width * 1.5f / 15, height / 8, width / 22, height / 16),"Play")) {
-			setWindow (gameObject.AddComponent<EquipWeapon>());
-		} else if (GUI.Button(new Rect (width * (1.5f / 15 + 3 / 21f), height * (1 / 8f + 1 / 8f - 1 / 32f), width / 22, height / 16),"Play")) {
-			setWindow (gameObject.AddComponent<EquipWeapon>());
-		} else if (GUI.Button(new Rect (width * (1.5f / 15 + 1 / 40f), height * (1 / 8f + 1 / 8f), width / 22, height / 16),"Play")) {
-			setWindow (gameObject.AddComponent<EquipWeapon>());
-		}
-
 		int unlockedLvl = 3; //Utils.PrefsAccess.getIntegerPrefs (Utils.PrefsAccess.integerKey.UnlockedLevel);
-		BitArray masteredLvl = Utils.PrefsAccess.ToBinary (1); //Utils.PrefsAccess.getEnumeratedBooleanPrefs (Utils.PrefsAccess.enumeratedBooleanKey.MasteredLevel);
-		for (int i = 0; i < unlockedLvl; i++)
-			if (ButtonGUI (levelButtons[i], masteredLvl[i] ? masteredLevelButton : unlockedLevelButton))
-				levelChosen (i);
-//		System.Array.ForEach(levelButtons.Skip (unlockedLvl),item => {if (ButtonGUI (item, lockedLevelButton));});
+		BitArray masteredLvl = Utils.PrefsAccess.ToBinary (3); //Utils.PrefsAccess.getEnumeratedBooleanPrefs (Utils.PrefsAccess.enumeratedBooleanKey.MasteredLevel);
+		for (int i = 0; i < unlockedLvl; i++){
+			GUI.Box (levelButtons[i], string.Empty);
+			ButtonGUI (levelButtons[i], masteredLvl[i] ? masteredLevelButton : unlockedLevelButton, string.Empty,
+				() => levelChosen (i));
+		}
 	}
 
 	void initLevelButtons(){	//level buttons position
 		levelButtons = new System.Collections.Generic.List<Rect> ();
-		levelButtons.Add (new Rect (width * 1.5f / 15, height / 8, width / 22, height / 16));
-		levelButtons.Add (new Rect (width * (1.5f / 15 + 3 / 21f), height * (1 / 8f + 1 / 8f - 1 / 32f), width / 22, height / 16));
-		levelButtons.Add (new Rect (width * (1.5f / 15 + 1 / 40f), height * (1 / 8f + 1 / 8f), width / 22, height / 16));
+		levelButtons.Add (new Rect (width * 1.5f / 15, height / 8.1f, width / 18, height / 13));
+		levelButtons.Add (new Rect (width * (1.5f / 15 + 1 / 40f), height * (1 / 9f + 1 / 8f), width / 18, height / 13));
+		levelButtons.Add (new Rect (width * (1.35f / 15 + 3 / 21f), height * (1 / 9f + 1 / 8f - 1 / 32f), width / 18, height / 13));
 	}
 
 	void levelChosen (int levelNum) {

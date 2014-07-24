@@ -27,13 +27,14 @@ public class EquipWeapon : BaseMenu {
 //		BitArray unlockedWeapon = 
 //			Utils.PrefsAccess.getEnumeratedBooleanPrefs 
 //				(Utils.PrefsAccess.enumeratedBooleanKey.UnlockedWeapon);
-//		contents = System.Array.ConvertAll(
+		contents = new WeaponXML[0];
+//		contents = System.Array.ConvertAll (
 //			Utils.XMLLoader.loadSpecificXML (
 //					LoadableContent.loadedContentType.Weapon)
 //				.Where ((Value, Index) => unlockedWeapon[Index]),
 //			item => (WeaponXML)item);
 		contentButtons = Resources.LoadAll<Texture2D>("weapons/button");
-//		contentButtons = contents.Select (item => item.sprites[LoadableContent.textureTypes.button]);
+//		contentButtons = (Texture2D[]) contents.Select (item => item.sprites[LoadableContent.textureTypes.button]);
 	}
 	
 	void Update () {
@@ -63,7 +64,7 @@ public class EquipWeapon : BaseMenu {
 				if (equippedWeapon < maxAvailableEquip ) {
 					equipped[equippedWeapon++] = contents[chosenWeapon];
 				} else {
-					createPrompt (new Utils.delegateVoidWithZeroParam[2], 
+					createPrompt (new Utils.voidNoParams[2], 
 						new string[] {"Please buy more slot to equip weapon", "okay", "okay"});
 				}
 			}

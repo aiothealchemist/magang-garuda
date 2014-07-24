@@ -2,7 +2,6 @@
 using System.Collections;
 
 public class SellWeapon : MonoBehaviour {
-	private Transform selectedWeapon;
 
 	//size animation variables
 	private float sizeTimer = 0;
@@ -26,11 +25,11 @@ public class SellWeapon : MonoBehaviour {
 
 	void OnMouseUp(){
 		//sell weapon
-		sellWeapon (selectedWeapon);
+		sellWeapon ();
 	}
 
-	void sellWeapon(Transform _selectedWeapon){
-		_selectedWeapon = gameObject.transform.parent;
+	void sellWeapon(){
+		Transform _selectedWeapon = gameObject.transform.parent;
 		_selectedWeapon.GetComponent<PlaceWeapon>().setGridContent (false);
 		addCash ((int)_selectedWeapon.GetComponent<PlaceWeapon> ().price/2);
 		DestroyObject(_selectedWeapon.gameObject);

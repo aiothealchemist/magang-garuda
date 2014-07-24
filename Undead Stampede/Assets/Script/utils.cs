@@ -6,8 +6,8 @@ using System.Collections.Generic;
 using PlayerPrefs = PreviewLabs.PlayerPrefs;
 
 namespace Utils {
-	public delegate void delegateVoidWithZeroParam();
-	public delegate void delegateVoidWithTwoParams_String_String(string a, string b);
+	public delegate void voidNoParams();
+	public delegate void voidStringString(string a, string b);
 
 	class PrefsAccess {
 		//player preferences indices
@@ -153,11 +153,11 @@ namespace Utils {
 					temp.setSisi (xmlReader.content);
 			} else if (propertyCalled.PropertyType is IDictionary) {
 				string dictionaryTag = xmlReader.tagName;
-				delegateVoidWithTwoParams_String_String dictMethod = 
+				voidStringString dictMethod = 
 					(dictionaryTag == "pricing") ? 
-						new delegateVoidWithTwoParams_String_String(temp.setPrice) : 
+						new voidStringString(temp.setPrice) : 
 						(dictionaryTag == "sprites") ? 
-						new delegateVoidWithTwoParams_String_String(temp.setSprite) : null;
+						new voidStringString(temp.setSprite) : null;
 				while (dictMethod != null && xmlReader.Read (dictionaryTag))
 					if (xmlReader.isOpeningTag)
 						dictMethod(xmlReader.tagName, xmlReader.content);

@@ -12,7 +12,7 @@ public class ProjectileEffect : MonoBehaviour {
 	}
 
 	void instantiateExplosion(){
-		explosion = Instantiate (explosionPrefab, transform.position, transform.rotation) as GameObject;
+		Instantiate (explosionPrefab, transform.position, transform.rotation);
 	}
 
 	//Define the state when this object collide
