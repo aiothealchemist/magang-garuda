@@ -343,6 +343,6 @@ public class PlaceWeapon : MonoBehaviour {
 	}	
 
 	void substractCash(int amount){
-		GameObject.Find ("playerStatus").GetComponent<PlayerStatus> ().cash -= amount;
+		GameObject.Find ("PlayerStatus").GetComponent<PlayerStatus> ().cash -= amount;
 	}
 }

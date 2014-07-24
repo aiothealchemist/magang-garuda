@@ -39,7 +39,7 @@ public class ZombieAnimator : MonoBehaviour {
 	}
 
 	void substractHealth(int amount){
-		GameObject.Find ("playerStatus").GetComponent<PlayerStatus> ().maxHealth -= amount;
+		GameObject.Find ("PlayerStatus").GetComponent<PlayerStatus> ().maxHealth -= amount;
 	}
 	
 	// Update is called once per frame

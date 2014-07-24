@@ -78,6 +78,6 @@ public class ZombieController : MonoBehaviour {
 	}
 
 	void addCash(int amount){
-		GameObject.Find ("playerStatus").GetComponent<PlayerStatus> ().cash += amount;
+		GameObject.Find ("PlayerStatus").GetComponent<PlayerStatus> ().cash += amount;
 	}
 }

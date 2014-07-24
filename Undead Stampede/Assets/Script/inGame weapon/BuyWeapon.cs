@@ -63,6 +63,6 @@ public class BuyWeapon : MonoBehaviour {
 	}
 
 	bool isAffordable(){
-		return !(GameObject.Find ("playerStatus").GetComponent<PlayerStatus> ().cash - price < 0);
+		return !(GameObject.Find ("PlayerStatus").GetComponent<PlayerStatus> ().cash - price < 0);
 	}
 }

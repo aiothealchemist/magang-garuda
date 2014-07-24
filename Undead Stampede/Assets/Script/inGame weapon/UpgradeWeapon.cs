@@ -62,10 +62,10 @@ public class UpgradeWeapon : MonoBehaviour {
 	}
 	
 	void substractCash(int amount){
-		GameObject.Find ("playerStatus").GetComponent<PlayerStatus> ().cash -= amount;
+		GameObject.Find ("PlayerStatus").GetComponent<PlayerStatus> ().cash -= amount;
 	}
 
 	bool isAffordable(){
-		return !(GameObject.Find ("playerStatus").GetComponent<PlayerStatus> ().cash - price < 0);
+		return !(GameObject.Find ("PlayerStatus").GetComponent<PlayerStatus> ().cash - price < 0);
 	}
 }
