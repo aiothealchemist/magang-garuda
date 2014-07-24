@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class ZombieAnimator : MonoBehaviour {
-
+	public int damage;
 	public Sprite[] runningSprites;
 	public Sprite[] attackingSprites;
 	public float framesPerSecond;
@@ -33,8 +33,13 @@ public class ZombieAnimator : MonoBehaviour {
 		//set back to chasing after finished attacking
 		if (index == attackingSprites.Length - 1){
 			state = "chasing";
+			substractHealth(damage);
 			attackTimer = 0;
 		}
+	}
+
+	void substractHealth(int amount){
+		GameObject.Find ("playerStatus").GetComponent<PlayerStatus> ().maxHealth -= amount;
 	}
 	
 	// Update is called once per frame

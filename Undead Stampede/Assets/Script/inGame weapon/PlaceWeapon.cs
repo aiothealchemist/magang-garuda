@@ -2,6 +2,8 @@
 using System.Collections;
 
 public class PlaceWeapon : MonoBehaviour {
+	public int price;
+	public int damage;
 	private Vector3 screenPoint;
 	private Vector3 offset;
 	public bool isPlaced = false;
@@ -34,6 +36,8 @@ public class PlaceWeapon : MonoBehaviour {
 	//variables for sell/upgrade button
 	public GameObject sellButtonPrefab;
 	private GameObject sellButton;
+	public GameObject upgButtonPrefab;
+	private GameObject upgButton;
 	public bool isSellUpgradeOn = false;
 
 	void Start(){
@@ -68,9 +72,9 @@ public class PlaceWeapon : MonoBehaviour {
 	public void OnMouseUp(){
 		//show sell/upgrade button if button is off
 		if (isSellUpgradeOn) {	
-					deleteAllSellUpgradeButton ();
+			deleteAllSellUpgradeButton ();
 		} else {
-			showSellButton ();
+			showSellUpgButton ();
 			//show upgrade button
 		}
 	}
@@ -87,7 +91,7 @@ public class PlaceWeapon : MonoBehaviour {
 		}
 	}
 
-	void showSellButton(){
+	void showSellUpgButton(){
 		//show sell button when weapon is tapped
 		if (!isPlaced && isNotChosen) {
 			//do nothing		
@@ -98,15 +102,22 @@ public class PlaceWeapon : MonoBehaviour {
 			Vector3 sellButtonPos = new Vector3(gameObject.transform.position.x + 0.5f,gameObject.transform.position.y,gameObject.transform.position.z);
 			sellButton = Instantiate(sellButtonPrefab, sellButtonPos, gameObject.transform.rotation) as GameObject;
 			sellButton.transform.parent = gameObject.transform;
+			Vector3 upgButtonPos = new Vector3(gameObject.transform.position.x + 0.25f,gameObject.transform.position.y + 0.4f,gameObject.transform.position.z);
+			upgButton = Instantiate(upgButtonPrefab, upgButtonPos, gameObject.transform.rotation) as GameObject;
+			upgButton.transform.parent = gameObject.transform;
 			isSellUpgradeOn = true;
 		}
 	}
 
 	public void deleteAllSellUpgradeButton(){
-		GameObject[] delete = GameObject.FindGameObjectsWithTag("sellupgradebutton");
+		GameObject[] selldeletion = GameObject.FindGameObjectsWithTag("sellbutton");
+		GameObject[] upgradedeletion = GameObject.FindGameObjectsWithTag("upgradebutton");
 		GameObject[] weapon = GameObject.FindGameObjectsWithTag("weapon");
-		foreach (GameObject d in delete){
+		foreach (GameObject d in selldeletion){
 			d.GetComponent<SellWeapon>().isDestroying = true;
+		}
+		foreach (GameObject d in upgradedeletion){
+			d.GetComponent<UpgradeWeapon>().isDestroying = true;
 		}
 		foreach (GameObject w in weapon) {
 			w.GetComponent<PlaceWeapon>	().isSellUpgradeOn = false;	
@@ -124,87 +135,73 @@ public class PlaceWeapon : MonoBehaviour {
 			if	(!gameObject.renderer.bounds.Intersects(quad.renderer.bounds)){
 				//object not intersect, delete turret
 			}
-			else{
-				//snap turret position to the selected one
-
-				//check if grid already has content
-				if (quad.GetComponent<PlacementGridDisp>().isHaveContent){
-					//grid has content, delete turret on Update
-				}
-				else{
-					//grid has no content, snap weapon on Update
-					gameObject.transform.position = quad.transform.position;
-					searchTag = "zombieup";
-					addColliderToWeapon();
-					quad.GetComponent<PlacementGridDisp>().isHaveContent = true;
-					isMustDelete = false;
-				}
+			//check if grid already has content
+			else if (quad.GetComponent<PlacementGridDisp>().isHaveContent){
+				//grid has content, delete turret on Update
+			}else {
+				//grid has no content, snap weapon on Update if affordable
+				gameObject.transform.position = quad.transform.position;
+				searchTag = "zombieup";
+				addColliderToWeapon();
+				quad.GetComponent<PlacementGridDisp>().isHaveContent = true;
+				substractCash(price);
+				isMustDelete = false;
 			}
 		}
 		foreach (GameObject quad in gridback) {
 			if	(!gameObject.renderer.bounds.Intersects(quad.renderer.bounds)){
 				//object not intersect, delete turret
 			}
-			else{
-				//snap turret position to the selected one
-				
-				//check if grid already has content
-				if (quad.GetComponent<PlacementGridDisp>().isHaveContent){
-					//grid has content, delete turret on Update
-				}
-				else{
-					//grid has no content, snap weapon on Update
-					gameObject.transform.position = quad.transform.position;
-					searchTag = "zombieback";
-					//rotate pad
-					SpriteRenderer[] renderers =  gameObject.GetComponentsInChildren<SpriteRenderer>();
-					foreach(SpriteRenderer s in renderers){
-						if(s.name == "Pad"){
-							s.transform.Rotate(new Vector3(0f,0f,90f));
-						}
+			else if (quad.GetComponent<PlacementGridDisp>().isHaveContent){
+				//grid has content, delete turret on Update
+			}
+			else {
+				//grid has no content, snap weapon on Update if affordable
+				gameObject.transform.position = quad.transform.position;
+				searchTag = "zombieback";
+				//rotate pad
+				SpriteRenderer[] renderers =  gameObject.GetComponentsInChildren<SpriteRenderer>();
+				foreach(SpriteRenderer s in renderers){
+					if(s.name == "Pad"){
+						s.transform.Rotate(new Vector3(0f,0f,90f));
 					}
-					addColliderToWeapon();
-					quad.GetComponent<PlacementGridDisp>().isHaveContent = true;
-					isMustDelete = false;
 				}
+				addColliderToWeapon();
+				quad.GetComponent<PlacementGridDisp>().isHaveContent = true;
+				isMustDelete = false;
 			}
 		}
 		foreach (GameObject quad in gridside) {
 			if	(!gameObject.renderer.bounds.Intersects(quad.renderer.bounds)){
 				//object not intersect, delete turret
 			}
+			else if (quad.GetComponent<PlacementGridDisp>().isHaveContent){
+				//grid has content, delete turret on Update
+			}
 			else{
-				//snap turret position to the selected one
-				
-				//check if grid already has content
-				if (quad.GetComponent<PlacementGridDisp>().isHaveContent){
-					//grid has content, delete turret on Update
-				}
-				else{
-					//grid has no content, snap weapon on Update
-					gameObject.transform.position = quad.transform.position;
-					searchTag = "zombieside";
-					isOnSide = true;
-					//rotate pad
-					SpriteRenderer[] renderers =  gameObject.GetComponentsInChildren<SpriteRenderer>();
-					foreach(SpriteRenderer s in renderers){
-						if(s.name == "Pad"){
-							s.sprite = sidePad;
-							s.transform.localScale = new Vector3(0.1f, 0.1f, 1f);
-						}
-						else if(s.name == "Barrel"){
-							s.sprite = sideBarrel;
-							s.transform.localScale = new Vector3(0.07f, 0.07f, 1f);
-							s.transform.position = new Vector3(s.transform.position.x,s.transform.position.y + 0.3f, s.transform.position.z);
-							Vector3 newAngle = new Vector3(0,0,60);
-							s.transform.rotation = Quaternion.Euler(newAngle);
-							s.sortingOrder = 1;
-						}	
+				//grid has no content, snap weapon on Update if affordable
+				gameObject.transform.position = quad.transform.position;
+				searchTag = "zombieside";
+				isOnSide = true;
+				//rotate pad
+				SpriteRenderer[] renderers =  gameObject.GetComponentsInChildren<SpriteRenderer>();
+				foreach(SpriteRenderer s in renderers){
+					if(s.name == "Pad"){
+						s.sprite = sidePad;
+						s.transform.localScale = new Vector3(0.1f, 0.1f, 1f);
 					}
-					addColliderToWeapon();
-					quad.GetComponent<PlacementGridDisp>().isHaveContent = true;
-					isMustDelete = false;
+					else if(s.name == "Barrel"){
+						s.sprite = sideBarrel;
+						s.transform.localScale = new Vector3(0.07f, 0.07f, 1f);
+						s.transform.position = new Vector3(s.transform.position.x,s.transform.position.y + 0.3f, s.transform.position.z);
+						Vector3 newAngle = new Vector3(0,0,60);
+						s.transform.rotation = Quaternion.Euler(newAngle);
+						s.sortingOrder = 1;
+					}	
 				}
+				addColliderToWeapon();
+				quad.GetComponent<PlacementGridDisp>().isHaveContent = true;
+				isMustDelete = false;
 			}
 		}
 		disableAllQuadCollider ();
@@ -344,4 +341,8 @@ public class PlaceWeapon : MonoBehaviour {
 			//do nothing
 		}
 	}	
+
+	void substractCash(int amount){
+		GameObject.Find ("playerStatus").GetComponent<PlayerStatus> ().cash -= amount;
+	}
 }

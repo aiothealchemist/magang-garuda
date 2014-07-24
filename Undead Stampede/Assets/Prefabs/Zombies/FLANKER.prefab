@@ -38,7 +38,7 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Mass: 1
+  m_Mass: 100000
   m_LinearDrag: 0
   m_AngularDrag: .0500000007
   m_GravityScale: 0
@@ -69,6 +69,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0faf71a10d323d47b60a5de200092b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 3
   runningSprites:
   - {fileID: 21300000, guid: d9af9799129edcc45aa40cf51e557850, type: 3}
   - {fileID: 21300002, guid: d9af9799129edcc45aa40cf51e557850, type: 3}
@@ -113,6 +114,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15be35d42d3bc3e40bfc003f5348fb45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 100
+  cashReward: 3
   moveSpeed: 1
   turnSpeed: 0
 --- !u!114 &11400004

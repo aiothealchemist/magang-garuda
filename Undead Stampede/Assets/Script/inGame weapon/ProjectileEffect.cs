@@ -4,7 +4,12 @@ using System.Collections;
 public class ProjectileEffect : MonoBehaviour {
 	//damage animation variables
 	public GameObject explosionPrefab;
+	public int healthDmg;
 	private GameObject explosion;
+
+	void Start(){
+		healthDmg = gameObject.transform.parent.GetComponent<PlaceWeapon> ().damage;
+	}
 
 	void instantiateExplosion(){
 		explosion = Instantiate (explosionPrefab, transform.position, transform.rotation) as GameObject;

@@ -12,8 +12,8 @@ TagManager:
   - zombieback
   - zombieup
   - zombieside
-  - sellupgradebutton
-  - 
+  - sellbutton
+  - upgradebutton
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

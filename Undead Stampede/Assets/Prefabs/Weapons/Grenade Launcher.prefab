@@ -95,6 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c11481bebf0eeed4abc715617999ab8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  price: 25
   isPlaced: 0
   isNotChosen: 1
   ammo: {fileID: 100000, guid: b090332ea9762134a8b0d784e42549a9, type: 2}
@@ -104,6 +105,7 @@ MonoBehaviour:
   sideBarrel: {fileID: 21300000, guid: 1a8528dafa358a04fa9302c332131b52, type: 3}
   isOnSide: 0
   sellButtonPrefab: {fileID: 100000, guid: ce1217d9ae6d97247b86cacb81f08d8d, type: 2}
+  upgButtonPrefab: {fileID: 100000, guid: 989d2c32824db254aa9ee95f4adaf46a, type: 2}
   isSellUpgradeOn: 0
 --- !u!212 &21200000
 SpriteRenderer:

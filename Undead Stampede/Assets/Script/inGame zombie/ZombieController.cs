@@ -3,6 +3,8 @@ using System.Collections;
 using PlayerPrefs = PreviewLabs.PlayerPrefs;
 
 public class ZombieController : MonoBehaviour {
+	public int maxHealth;
+	public int cashReward;
 	public float moveSpeed = 5.0f;
 	private Vector3 moveDirection;
 	public float turnSpeed;
@@ -30,8 +32,9 @@ public class ZombieController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//check zombie's health point
-		if (health < 0) {
+		if (maxHealth < 0) {
 			//destroy zombie
+			addCash(cashReward);
 			DestroyObject(gameObject);
 		}
 		MoveTowardVehicle ();
@@ -70,7 +73,11 @@ public class ZombieController : MonoBehaviour {
 				} 
 		else if (coll.gameObject.tag == "bullet") {//zombie is hit by bullet
 			//add bullet damage
-			health -= 3;
+			maxHealth -= coll.gameObject.GetComponent<ProjectileEffect>().healthDmg;
 		}
+	}
+
+	void addCash(int amount){
+		GameObject.Find ("playerStatus").GetComponent<PlayerStatus> ().cash += amount;
 	}
 }

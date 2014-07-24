@@ -95,15 +95,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c11481bebf0eeed4abc715617999ab8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  price: 20
   isPlaced: 0
   isNotChosen: 1
   ammo: {fileID: 100000, guid: d4f4aebeece9b5342ada36346fabde16, type: 2}
   burstDelay: .300000012
   burstPrefab: {fileID: 100000, guid: 5beef1e09558adc46a901c4e4fc3eeec, type: 2}
   sidePad: {fileID: 21300000, guid: 4a12e1e9c3415f74cac8120c496ded4e, type: 3}
-  sideBarrel: {fileID: 21300000, guid: 682271fcde924c2429632ba1d042bffd, type: 3}
+  sideBarrel: {fileID: 21300000, guid: ca7486741701c134fbbf425db55f45b7, type: 3}
   isOnSide: 0
   sellButtonPrefab: {fileID: 100000, guid: ce1217d9ae6d97247b86cacb81f08d8d, type: 2}
+  upgButtonPrefab: {fileID: 100000, guid: 989d2c32824db254aa9ee95f4adaf46a, type: 2}
   isSellUpgradeOn: 0
 --- !u!212 &21200000
 SpriteRenderer:
