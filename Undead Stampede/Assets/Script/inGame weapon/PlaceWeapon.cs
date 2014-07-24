@@ -13,7 +13,7 @@ public class PlaceWeapon : MonoBehaviour {
 	private float angle;
 	private float bulletSpeed = 10;
 	private float lastFireTime = 0;	
-	private float burstDelay = 0.5f;
+	public float burstDelay = 0.5f;
 	private GameObject[] gridup;
 	private GameObject[] gridback;
 	private GameObject[] gridside;

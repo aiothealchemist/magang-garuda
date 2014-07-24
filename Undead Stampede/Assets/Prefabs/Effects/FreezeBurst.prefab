@@ -9,12 +9,10 @@ GameObject:
   m_Component:
   - 4: {fileID: 400000}
   - 212: {fileID: 21200000}
-  - 61: {fileID: 6100000}
   - 114: {fileID: 11400000}
-  - 114: {fileID: 11400002}
-  m_Layer: 8
-  m_Name: GLauncher
-  m_TagString: Untagged
+  m_Layer: 12
+  m_Name: FreezeBurst
+  m_TagString: bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26,21 +24,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .935711265, y: -1.45300555, z: 0}
-  m_LocalScale: {x: .260115623, y: .264705896, z: 1}
+  m_LocalPosition: {x: -.998636961, y: -.853904068, z: 0}
+  m_LocalScale: {x: .100000001, y: .100000001, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
---- !u!61 &6100000
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Size: {x: 14.46, y: 14.46}
-  m_Center: {x: -2.38418579e-07, y: -3.81469727e-06}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -49,24 +36,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7791dcd0336e11b45839801a675e3a6f, type: 3}
+  m_Script: {fileID: 11500000, guid: a413fa828aa5c3945b0ea0c4a3e36693, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensitivity: .0199999996
-  selectedWeapon: {fileID: 100004, guid: 95c42b28600034747bc3f91d0649728b, type: 2}
---- !u!114 &11400002
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f40f7cb035f684443932bdadad740c30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  priceText: $25
-  guiFont: {fileID: 12800000, guid: 7491b20b69c08404288506202d3265e1, type: 3}
+  burstingSprites:
+  - {fileID: 21300000, guid: a71efae8decb6a44a81e2f6c489eed4e, type: 3}
+  - {fileID: 21300000, guid: afbe08810e79de846b5da32fee40b658, type: 3}
+  - {fileID: 21300000, guid: 88949ada98099b540bcf28bab97ca8fe, type: 3}
+  framesPerSecond: 25
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -85,10 +62,10 @@ SpriteRenderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayer: 3
+  m_SortingLayer: 2
   m_SortingOrder: 1
-  m_SortingLayerID: 1846189751
-  m_Sprite: {fileID: 21300000, guid: 92d424645b89d7a40a0274ba87038b55, type: 3}
+  m_SortingLayerID: 53497509
+  m_Sprite: {fileID: 21300000, guid: a71efae8decb6a44a81e2f6c489eed4e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
