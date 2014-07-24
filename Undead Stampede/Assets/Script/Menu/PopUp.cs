@@ -5,7 +5,7 @@ public class PopUp : MonoBehaviour {
 
 	int height, width;
 	string dialog, yes, no;
-	Utils.delegateVoidWithZeroParam rmiYes, rmiNo;
+	Utils.voidNoParams rmiYes, rmiNo;
 
 	// Use this for initialization
 	void Start () {
@@ -23,7 +23,7 @@ public class PopUp : MonoBehaviour {
 		}
 	}
 
-	public void setVar(string[] dialogStrings, Utils.delegateVoidWithZeroParam[] method){
+	public void setVar(string[] dialogStrings, Utils.voidNoParams[] method){
 		if (dialogStrings.Length != 3) {
 			Debug.Log ("Wrong string array size (3: dialog box, yes button, no button).");
 		} else if (method == null ||  method.Length != 2) {

@@ -4,10 +4,9 @@ using System.Collections;
 public class ProjectileEffect : MonoBehaviour {
 	//damage animation variables
 	public GameObject explosionPrefab;
-	private GameObject explosion;
 
 	void instantiateExplosion(){
-		explosion = Instantiate (explosionPrefab, transform.position, transform.rotation) as GameObject;
+		Instantiate (explosionPrefab, transform.position, transform.rotation);
 	}
 
 	//Define the state when this object collide

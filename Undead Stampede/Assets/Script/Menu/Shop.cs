@@ -9,12 +9,13 @@ public class Shop : BaseMenu {
 	LoadableContent.loadedContentType contentType;
 	Texture2D[] contentButtons, shopButtons;
 
-	Texture2D buyButton;
+	buttonTexture buyButton;
 	int chosenContent, chosenShop;
 	
 	// Use this for initialization
 	protected override void Start () {
 		base.Start ();
+		chosenShop = 0;
 		viewVector = Vector2.zero;
 //		loadShop (LoadableContent.loadedContentType.Weapon);
 	}
@@ -22,11 +23,11 @@ public class Shop : BaseMenu {
 	protected override void loadResources ()
 	{
 		menuType = type.window;
-		buyButton = Resources.Load<Texture2D>("menu/button/buy");
+		buyButton = loadButtonTexture("menu/button/buy");
 		backButton = loadButtonTexture("menu/button/back");
 		menuBG = Resources.Load<Texture2D>("menu/background/window");
-		shopButtons = Resources.LoadAll<Texture2D>("menu/button/shopmenu");
 		contentButtons = Resources.LoadAll<Texture2D>("weapons/button");
+		shopButtons = Resources.LoadAll<Texture2D>("menu/button/shopmenu");
 		bgRect = new Rect (width / 30, height / 18, width * 14 / 15, height * 8 / 9);
 	}
 
@@ -50,7 +51,7 @@ public class Shop : BaseMenu {
 		GUI.Box (new Rect (width / 13, height / 1.4f, width / 3, height / 8),"Content name");
 		GUI.Box (new Rect (width * 16.5f / 39, height / 1.4f, width / 3.2f, height / 8),"content price");
 
-//		if (changeShop != chosenShop){
+		if (changeShop != chosenShop){
 //			chosenShop = changeShop;
 //			loadShop (
 //				chosenShop == 0 ? LoadableContent.loadedContentType.Weapon :
@@ -58,15 +59,15 @@ public class Shop : BaseMenu {
 //				chosenShop == 2 ? LoadableContent.loadedContentType.Gem :
 //				LoadableContent.loadedContentType.Vehicle
 //			);
-//		}
-
-		if (ButtonGUI (new Rect (width * 26 / 30, height / 20, width * 2 / 26, height / 10), backButton)) { //back
-			Destroy (this);
-		} else if (GUI.Button (new Rect (width * 3.75f / 5, height / 1.4f, width / 6, height / 8), buyButton, GUIStyle.none)) { //buy
-			createPrompt(new Utils.delegateVoidWithZeroParam[] { buy, null }, new string[] {
-				"Do you want to buy " /*+content[chosenContent].name+" for "+content[chosenContent].pricing[currency]+" "+currency*/+"?", 
-				"Accept", "Decline" });
 		}
+
+		ButtonGUI (new Rect (width * 26 / 30, height / 20, width * 2 / 26, height / 10), backButton, string.Empty,
+			() => Destroy (this));
+		ButtonGUI(new Rect (width * 3.75f / 5, height / 1.4f, width / 6, height / 8), buyButton, string.Empty,
+			() => createPrompt(new Utils.voidNoParams[] { buy, null }, new string[] {
+				"Do you want to buy " /*+content[chosenContent].name+" for "+
+				 content[chosenContent].pricing[currency]+" "+currency*/+"?", 
+				"Accept", "Decline" }));
 	}
 
 	public void loadShop(LoadableContent.loadedContentType tipe){
@@ -80,7 +81,7 @@ public class Shop : BaseMenu {
 	void buy () {
 		// TODO shop for gem
 		if (content[chosenContent].pricing[currency] > Utils.PrefsAccess.Gem) {
-			createPrompt (new Utils.delegateVoidWithZeroParam[] { null, null },
+			createPrompt (new Utils.voidNoParams[] { null, null },
 					new string[] { "Susdulu, duitnya ga cukup coy", "okay", "okay" });
 		} else {
 			Utils.PrefsAccess.substractGems (content[chosenContent].pricing[currency]);

@@ -25,7 +25,7 @@ public class MainMenu : BaseMenu {
 		if (credits) {
 			if (Input.GetMouseButtonDown(0)) {
 				resetCredits ();
-			} else {
+			} else if (!creditText) {
 				startCredits ();
 			}
 		} else if (!wiggleTimer.Enabled) {
@@ -47,26 +47,20 @@ public class MainMenu : BaseMenu {
 		};
 	}
 	protected override void updateGUI () {
-		if (ButtonGUI (new Rect (width * 2.38f / 7, playButtY, width / 3.1f, height  / 5), menuButtons[0])) {
-			//play
-			gameObject.AddComponent<PlayMenu>();	Destroy (this);
-		} else if (ButtonGUI (new Rect (achiButtX, height * 3.1f / 4, width * 3.3f / 10, height/6), menuButtons[1])) {
-			//achievement
-			setWindow (gameObject.AddComponent<Achievements>());
-		} else if (ButtonGUI (new Rect (credButtX, height * 3.1f / 4, width * 3.3f / 10, height/6), menuButtons[2])) {
-			//credits
-			Destroy (window);
-			credits = true;
-		}
-
-		GUI.BeginGroup (new Rect(0,0, width, height));
-		GUIUtility.RotateAroundPivot (rotationAngle, new Vector2(width/2,height/2));
-		GUI.DrawTexture (new Rect(width * 1.1f / 5, height / 4, width / 2, height / 3f), gameTitle, ScaleMode.ScaleToFit);
-		GUI.EndGroup ();
+		ButtonGUI (new Rect (width * 2.38f / 7, playButtY, width / 3.1f, height  / 5), menuButtons[0], string.Empty,
+			() => {gameObject.AddComponent<PlayMenu>(); Destroy (this);});
+		ButtonGUI (new Rect (achiButtX, height * 3.1f / 4, width * 3.3f / 10, height/6), menuButtons[1], string.Empty,
+			() => setWindow (gameObject.AddComponent<Achievements>()));
+		ButtonGUI (new Rect (credButtX, height * 3.1f / 4, width * 3.3f / 10, height/6), menuButtons[2], string.Empty,
+			() => {Destroy (window); credits = true;});
 
 		if (creditText){
 			creditsGUI ();
 		}
+
+		//wiggle title
+		GUIUtility.RotateAroundPivot (rotationAngle, new Vector2(width/2,height/2));
+		GUI.DrawTexture (new Rect(width * 1.1f / 5, height / 4, width / 2, height / 3f), gameTitle, ScaleMode.ScaleToFit);
 	}
 	protected override void updateBlockableGUI () {
 		Utils.PrefsAccess.persistenceBGM = ToggleGUI( new Rect (width * 12 / 15, audiButtY, width / 11f, height / 8), 
@@ -82,7 +76,7 @@ public class MainMenu : BaseMenu {
 		achiButtX = Mathf.Lerp (achiButtX, -width * 3.3f / 10, 0.1f);
 		playButtY = Mathf.Lerp (playButtY, height, 0.1f);
 		audiButtY = Mathf.Lerp (audiButtY, -height / 8, 0.1f);
-		if (playButtY == height) creditText = true;
+		if (Mathf.RoundToInt (playButtY) == height) creditText = true;
 	}
 	void resetCredits(){
 		creditText = false;
@@ -94,7 +88,17 @@ public class MainMenu : BaseMenu {
 		rotationAngle = 0;
 	}
 	void creditsGUI(){
-		// TODO credit text
+		// TODO credit text using gui label, and move upward as time goes by
+		GUI.skin.label.alignment = TextAnchor.MiddleCenter;
+		GUI.Label (new Rect(width / 3, height / 1.8f, width / 3, height / 2), 
+				"Game Designers & Programmers:\n" +
+					"Purwoko C. Nugroho\n(rprwk.nugroho@hotmail.com),\n" +
+					"Tino E. K. Sambora\n(krisnasambora@gmail.com)\n" +
+				"\nArtists:\n" + 
+					"Aditiyo Dwi Putro\n(dwibeowulfz@gmail.com) @dwibeowulfz\n" + 
+					"Adimas F.\n(d.dimazzz@yahoo.com) @dimas_ef\n" +
+				"\nSpecial Thanks to:\n" +
+					"Garuda Studio as Incubator");
 	}
 
 	void titleGUI(){

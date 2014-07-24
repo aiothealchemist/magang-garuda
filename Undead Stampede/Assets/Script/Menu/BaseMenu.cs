@@ -44,7 +44,7 @@ public abstract class BaseMenu : MonoBehaviour {
 	}
 
 	//menu flow
-	protected void createPrompt (Utils.delegateVoidWithZeroParam[] method, string[] dialog) {
+	protected void createPrompt (Utils.voidNoParams[] method, string[] dialog) {
 		if (menuType == type.window) {
 			parent.createPrompt (method, dialog);
 		} else {
@@ -95,6 +95,16 @@ public abstract class BaseMenu : MonoBehaviour {
 		buttonStyle.active.background = textures.active;
 		
 		return GUI.Button (rect, text ?? string.Empty, buttonStyle);
+	}
+	protected void ButtonGUI(Rect rect, buttonTexture textures, string text, Utils.voidNoParams method){
+		GUIStyle buttonStyle = new GUIStyle(GUI.skin.button);
+		buttonStyle.normal.background = textures.inactive;
+		buttonStyle.hover.background = textures.inactive;
+		buttonStyle.active.background = textures.active;
+		
+		if (GUI.Button (rect, text ?? string.Empty, buttonStyle)){
+			method();
+		}
 	}
 	protected bool ButtonGUI(Rect rect, string text){
 		GUIStyle buttonStyle = new GUIStyle(GUI.skin.button);
