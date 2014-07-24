@@ -9,13 +9,12 @@ GameObject:
   m_Component:
   - 4: {fileID: 400000}
   - 212: {fileID: 21200000}
-  - 50: {fileID: 5000000}
-  - 58: {fileID: 5800000}
-  - 114: {fileID: 11400000}
+  - 61: {fileID: 6100000}
   - 114: {fileID: 11400002}
-  m_Layer: 12
-  m_Name: Projectile01
-  m_TagString: bullet
+  - 114: {fileID: 11400000}
+  m_Layer: 8
+  m_Name: FreezeCannon
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27,27 +26,12 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -2.74832511, y: -4.89591026, z: 0}
+  m_LocalScale: {x: .0614697188, y: .0625545904, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
---- !u!50 &5000000
-Rigidbody2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Mass: .100000001
-  m_LinearDrag: 0
-  m_AngularDrag: 0
-  m_GravityScale: 0
-  m_FixedAngle: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
---- !u!58 &5800000
-CircleCollider2D:
+--- !u!61 &6100000
+BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -55,8 +39,8 @@ CircleCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Radius: .0500000007
-  m_Center: {x: 0, y: 0}
+  m_Size: {x: 14.46, y: 14.46}
+  m_Center: {x: -2.38418579e-07, y: -3.81469727e-06}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -65,9 +49,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e11afa4154f4dd4cb7a17cf98a9c4f2, type: 3}
+  m_Script: {fileID: 11500000, guid: f40f7cb035f684443932bdadad740c30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  priceText: $20
+  guiFont: {fileID: 12800000, guid: 7491b20b69c08404288506202d3265e1, type: 3}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -76,10 +62,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 933b7a233bafc2041a9fd6c66d41e34f, type: 3}
+  m_Script: {fileID: 11500000, guid: 7791dcd0336e11b45839801a675e3a6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionPrefab: {fileID: 100000, guid: 7f8c50d179cbb28498ee39afe69542e7, type: 2}
+  sensitivity: .0199999996
+  selectedWeapon: {fileID: 100004, guid: a8838394e5ab6644298924316a6f3c3c, type: 2}
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -98,10 +85,10 @@ SpriteRenderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayer: 2
-  m_SortingOrder: 0
-  m_SortingLayerID: 53497509
-  m_Sprite: {fileID: 21300000, guid: 660d146052009cc4e832b6470265d385, type: 3}
+  m_SortingLayer: 3
+  m_SortingOrder: 1
+  m_SortingLayerID: 1846189751
+  m_Sprite: {fileID: 21300000, guid: a214ee4a8e09c0a4c8f7e67e1a02010f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
